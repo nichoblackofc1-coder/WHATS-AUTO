@@ -23,6 +23,8 @@ export function initScheduler() {
             });
 
             if (pendingMessages.length === 0) return;
+            const config = await prisma.systemConfig.findUnique({ where: { id: "default" } });
+            const timezone = config?.timezone || process.env.TZ || "Asia/Jakarta";
 
             // Only log if we're actually processing things to reduce noise
             logger.info("Cron", `Found ${pendingMessages.length} messages to send`);
@@ -65,7 +67,7 @@ export function initScheduler() {
 
                     // Update status or compute next sendAt if recurring
                     if (msg.cronExpression) {
-                        const interval = cronParser.parse(msg.cronExpression, { tz: "Asia/Jakarta" });
+                        const interval = cronParser.parse(msg.cronExpression, { tz: timezone });
                         const nextDate = interval.next().toDate();
                         await prisma.scheduledMessage.update({
                             where: { id: msg.id },
@@ -86,7 +88,7 @@ export function initScheduler() {
                             data: { status: "FAILED" } // Failed to send
                         });
                     } else {
-                        const interval = cronParser.parse(msg.cronExpression, { tz: "Asia/Jakarta" });
+                        const interval = cronParser.parse(msg.cronExpression, { tz: timezone });
                         await prisma.scheduledMessage.update({
                             where: { id: msg.id },
                             data: { sendAt: interval.next().toDate() }
@@ -98,7 +100,7 @@ export function initScheduler() {
         } catch (error) {
             logger.error("Cron", "Scheduler error:", error);
         }
-    });
+    }, { noOverlap: true });
     
     logger.info("Cron", "Scheduler initialized");
 }

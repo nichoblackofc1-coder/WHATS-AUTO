@@ -1,6 +1,4 @@
-import { loadEnvConfig } from "@next/env";
-// Load environment variables before any other imports/logic
-loadEnvConfig(process.cwd());
+import "./env";
 
 import { createServer } from "http";
 import { parse } from "url";
@@ -15,11 +13,7 @@ const dev = process.env.NODE_ENV !== "production";
 const hostname = process.env.HOSTNAME || "localhost";
 const port = parseInt(process.env.PORT || "3030", 10);
 
-if (!process.env.AUTH_SECRET) {
-  process.env.AUTH_SECRET = "yxxogJBzWHtO2HgabR5JAb02jt7lB6YJtmu+0w8FfGw=";
-}
-
-const app = next({ dev, hostname, port });
+const app = next({ dev, hostname, port, webpack: true });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
@@ -50,16 +44,18 @@ app.prepare().then(() => {
 
   // Initialize WhatsApp Manager
   waManager.setup(io);
-  waManager.loadSessions().catch(err => {
-    logger.warn("Manager", "Database offline, skipping session preloading: " + (err?.message || err));
-  });
-
-  // Start Scheduler
-  import("../modules/whatsapp/scheduler")
-    .then(m => m.startScheduler())
-    .catch(err => {
-      logger.warn("Scheduler", "Database offline, skipping scheduler startup: " + (err?.message || err));
+  if (process.env.WHATSAPP_ENABLED !== "false") {
+    waManager.loadSessions().catch(err => {
+      logger.warn("Manager", "Database offline, skipping session preloading: " + (err?.message || err));
     });
+
+    // Start Scheduler only in the server process, never during page builds.
+    import("../lib/cron")
+      .then(m => m.initScheduler())
+      .catch(err => {
+        logger.warn("Scheduler", "Database offline, skipping scheduler startup: " + (err?.message || err));
+      });
+  }
 
   // Cloudflare 520 Fix: increase keep-alive timeout so Node doesn't kill idle connections that Cloudflare expects to reuse
   // See: https://github.com/vercel/next.js/issues/48962
@@ -69,40 +65,5 @@ app.prepare().then(() => {
   server.listen(port, () => {
     logger.banner(pkg.name.toUpperCase(), pkg.version, port);
 
-    // --- WA-AKG Monitor Heartbeat ---
-    // Sends a ping every 30 seconds to the monitoring server
-    // Hanya untuk dokumentasi ada berapa layanan WA-AKG yang aktif. 
-    // Hanya untuk memantau tidak bermaksud lain. Semakin banyak WA-AKG yang aktif = semakin semangat saya mengembangkan WA-AKG ini.
-    // Terima kasih telah menggunakan WA-AKG.
-    const MONITOR_URL = "https://api-wa-akg.aikeigroup.net/api/ping";
-    const APP_URL = process.env.BASE_URL || `http://${hostname}:${port}`; // Kamu bisa mengganti ini untuk keamanan WA-AKG kamu. Tapi jangan menghapus semua Heartbeat nya. Terima Kasih.
-    const APP_NAME = process.env.APP_NAME || "WA-AKG";
-
-    const sendHeartbeat = async () => {
-      try {
-        await fetch(MONITOR_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            appUrl: APP_URL,
-            appName: APP_NAME,
-            isBackend: true,
-            systemInfo: {
-              platform: process.platform,
-              nodeVersion: process.version,
-              memoryUsage: Math.round(process.memoryUsage().rss / 1024 / 1024) + "MB"
-            }
-          }),
-        });
-      } catch (error) {
-        // Silently fail to not disturb the main application
-      }
-    };
-
-    // Initial ping
-    sendHeartbeat();
-    // Interval ping
-    setInterval(sendHeartbeat, 30000);
-    // --------------------------------
   });
 });

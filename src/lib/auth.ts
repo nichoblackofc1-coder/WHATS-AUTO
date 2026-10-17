@@ -34,5 +34,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  secret: process.env.AUTH_SECRET || "yxxogJBzWHtO2HgabR5JAb02jt7lB6YJtmu+0w8FfGw=",
+  secret: process.env.AUTH_SECRET,
 });

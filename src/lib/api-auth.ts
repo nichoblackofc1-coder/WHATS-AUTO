@@ -2,6 +2,7 @@ import { prisma } from "./prisma";
 import { NextRequest } from "next/server";
 import { auth } from "./auth";
 import { logger } from "./logger";
+import { randomBytes } from "node:crypto";
 
 // Role hierarchy for permission checks
 const ROLE_HIERARCHY = {
@@ -85,47 +86,7 @@ export function isAdmin(userRole: string): boolean {
  * - SUPERADMIN can access all sessions
  * - Other users can access their own sessions OR sessions shared with them
  */
-export async function canAccessSession(userId: string, userRole: string, sessionId: string): Promise<boolean> {
-    if (isAdmin(userRole)) {
-        return true;
-    }
-
-    // Check if session belongs to user (ownership)
-    const session = await prisma.session.findFirst({
-        where: {
-            OR: [
-                { id: sessionId, userId },
-                { sessionId: sessionId, userId }
-            ]
-        }
-    });
-
-    if (session) return true;
-
-    // Check if user has shared access
-    const dbSession = await prisma.session.findFirst({
-        where: {
-            OR: [
-                { id: sessionId },
-                { sessionId: sessionId }
-            ]
-        },
-        select: { id: true }
-    });
-
-    if (!dbSession) return false;
-
-    const sharedAccess = await prisma.sessionAccess.findUnique({
-        where: {
-            sessionId_userId: {
-                sessionId: dbSession.id,
-                userId
-            }
-        }
-    });
-
-    return !!sharedAccess;
-}
+export { canAccessSession } from './session-access';
 
 /**
  * Check if user is the actual owner of a session (not just shared access)
@@ -249,10 +210,5 @@ export async function getAccessibleSessions(userId: string, userRole: string) {
  * Generate a new API key
  */
 export function generateApiKey(): string {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let result = "wag_"; // Prefix for easy identification
-    for (let i = 0; i < 32; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
+    return `wag_${randomBytes(32).toString("hex")}`;
 }

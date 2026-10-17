@@ -5,6 +5,9 @@
 
 # Node
 node_modules
+data
+uploads
+sessions
 npm-debug.log*
 .yarn
 
@@ -23,6 +26,8 @@ fix_test.js
 
 # Environment
 .env
+.env.*
+!.env.example
 .env.local
 .env.production
 .env.*.local

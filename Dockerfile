@@ -1,5 +1,5 @@
-FROM node:26-alpine AS builder
-RUN apk add --no-cache openssl ca-certificates
+FROM node:22-bookworm-slim AS builder
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Dependency layer — cache-friendly: only rerun when package*.json changes
@@ -12,13 +12,11 @@ RUN npm ci --legacy-peer-deps && npm cache clean --force
 COPY . .
 RUN npx prisma generate && npm run build
 
-# Strip devDeps from node_modules after build
-# tsx needed at runtime, kept explicitly
-RUN npm prune --omit=dev && npm install --no-save tsx typescript
+# Keep Prisma CLI, tsx and TypeScript for schema setup and the custom server.
 
 # Production image
-FROM node:26-alpine AS runner
-RUN apk add --no-cache openssl ca-certificates
+FROM node:22-bookworm-slim AS runner
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 COPY --from=builder /app/package*.json ./
@@ -28,6 +26,8 @@ COPY --from=builder /app/src ./src
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/tsconfig.json ./
+COPY --from=builder /app/next.config.ts ./
+COPY --from=builder /app/docs ./docs
 COPY --from=builder /app/scripts ./scripts
 
 ENV NODE_ENV=production
