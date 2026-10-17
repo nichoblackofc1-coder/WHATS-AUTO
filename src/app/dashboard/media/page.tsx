@@ -89,7 +89,7 @@ function getTypeIcon(type: string) {
 }
 
 function getSenderDisplay(file: MediaFile): string {
-    if (file.fromMe) return "Me (Sent)";
+    if (file.fromMe) return "Eu (enviado)";
     if (file.fromName) return file.fromName;
     if (file.from && file.from !== "Unknown") return file.from.split("@")[0];
     return "Unknown";
@@ -133,15 +133,15 @@ export default function MediaPage() {
         setLoading(true);
         try {
             const res = await fetch("/api/media");
-            if (!res.ok) throw new Error("Failed to fetch");
+            if (!res.ok) throw new Error("Não foi possível carregar");
             const responseData = await res.json();
             const mediaData = responseData?.data || {};
             setFiles(mediaData.files || []);
             setTotalSize(mediaData.totalSize || 0);
             setTotalCount(mediaData.totalCount || 0);
         } catch (error) {
-            console.error("Failed to load media:", error);
-            toast.error("Failed to load media files");
+            console.error("Não foi possível carregar mídia:", error);
+            toast.error("Não foi possível carregar arquivos de mídia");
         } finally {
             setLoading(false);
         }
@@ -271,14 +271,14 @@ export default function MediaPage() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ filenames: Array.from(selected) }),
             });
-            if (!res.ok) throw new Error("Failed to delete");
+            if (!res.ok) throw new Error("Não foi possível excluir");
             const responseData = await res.json();
             const data = responseData?.data;
             toast.success(`Deleted ${data?.deleted || 0} file(s)`);
             if (data?.failed > 0) toast.warning(`Failed to delete ${data.failed} file(s)`);
             setSelected(new Set());
             fetchMedia();
-        } catch { toast.error("Failed to delete files"); }
+        } catch { toast.error("Não foi possível excluir arquivos"); }
         finally { setDeleting(false); }
     };
 
@@ -296,19 +296,19 @@ export default function MediaPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
-                    <h1 className="text-xl font-bold text-foreground">Media Manager</h1>
-                    <p className="text-sm text-muted-foreground mt-0.5">Manage downloaded media files</p>
+                    <h1 className="text-xl font-bold text-foreground">Gerenciador de mídias</h1>
+                    <p className="text-sm text-muted-foreground mt-0.5">Gerencie os arquivos de mídia baixados</p>
                 </div>
                 <Button variant="outline" size="sm" className="gap-2 self-start" onClick={fetchMedia} disabled={loading}>
-                    <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> Refresh
+                    <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> Atualizar
                 </Button>
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {[
-                    { icon: <HardDrive className="h-4 w-4 text-primary" />, bg: "bg-primary/10", value: formatFileSize(totalSize), label: "Total Size" },
-                    { icon: <Files className="h-4 w-4 text-blue-500" />, bg: "bg-blue-500/10", value: totalCount, label: "Total Files" },
+                    { icon: <HardDrive className="h-4 w-4 text-primary" />, bg: "bg-primary/10", value: formatFileSize(totalSize), label: "Tamanho total" },
+                    { icon: <Files className="h-4 w-4 text-blue-500" />, bg: "bg-blue-500/10", value: totalCount, label: "Total de arquivos" },
                     { icon: <ImageIcon className="h-4 w-4 text-blue-500" />, bg: "bg-blue-500/10", value: stats.image, label: "Images" },
                     { icon: <Video className="h-4 w-4 text-purple-500" />, bg: "bg-purple-500/10", value: stats.video + stats.audio + stats.document, label: "Other" },
                 ].map((s) => (
@@ -328,7 +328,7 @@ export default function MediaPage() {
             <div className="flex flex-col sm:flex-row gap-2">
                 <div className="relative flex-1">
                     <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                    <Input placeholder="Search by filename, session, user, or sender..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="h-9 pl-8 text-sm" />
+                    <Input placeholder="Busque por arquivo, sessão, usuário ou remetente..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="h-9 pl-8 text-sm" />
                 </div>
                 <div className="flex gap-1.5 flex-wrap">
                     {["all", "image", "video", "audio", "document"].map((t) => (
@@ -340,11 +340,11 @@ export default function MediaPage() {
             {/* Selection Bar */}
             {selected.size > 0 && (
                 <div className="flex items-center gap-3 p-2.5 bg-destructive/5 border border-destructive/20 rounded-lg">
-                    <span className="text-sm font-medium">{selected.size} selected</span>
+                    <span className="text-sm font-medium">{selected.size} selecionado(s)</span>
                     <Button variant="destructive" size="sm" className="gap-1.5 h-8" onClick={() => setShowDeleteConfirm(true)} disabled={deleting}>
-                        <Trash2 className="h-3.5 w-3.5" /> {deleting ? "Deleting..." : "Delete"}
+                        <Trash2 className="h-3.5 w-3.5" /> {deleting ? "Deleting..." : "Excluir"}
                     </Button>
-                    <Button variant="ghost" size="sm" className="h-8" onClick={() => setSelected(new Set())}><X className="h-3.5 w-3.5 mr-1" /> Clear</Button>
+                    <Button variant="ghost" size="sm" className="h-8" onClick={() => setSelected(new Set())}><X className="h-3.5 w-3.5 mr-1" /> Limpar</Button>
                 </div>
             )}
 
@@ -366,7 +366,7 @@ export default function MediaPage() {
                         <FolderOpen className="h-7 w-7 text-muted-foreground/40" />
                     </div>
                     <p className="text-sm text-muted-foreground">
-                        {searchQuery || filterType !== "all" ? "No media files match your filters" : "No media files downloaded yet"}
+                        {searchQuery || filterType !== "all" ? "Nenhum arquivo corresponde aos filtros" : "Nenhum arquivo de mídia baixado ainda"}
                     </p>
                 </div>
             ) : (
@@ -387,13 +387,13 @@ export default function MediaPage() {
                                         </div>
                                         <div>
                                             <h2 className="text-sm font-bold text-foreground leading-tight text-left">{userGroup.ownerName}</h2>
-                                            <p className="text-[10px] text-muted-foreground text-left">User Account</p>
+                                            <p className="text-[10px] text-muted-foreground text-left">Conta do usuário</p>
                                         </div>
                                     </button>
                                     <div className="flex items-center gap-3 text-xs text-muted-foreground bg-muted/30 px-3 py-1 rounded-full">
-                                        <span>{userGroup.sessions.length} Session{userGroup.sessions.length !== 1 ? "s" : ""}</span>
+                                        <span>{userGroup.sessions.length} Sessão{userGroup.sessions.length !== 1 ? "s" : ""}</span>
                                         <span className="w-1 h-1 rounded-full bg-border"></span>
-                                        <span>{userFileCount} Media</span>
+                                        <span>{userFileCount} Mídia</span>
                                         <span className="w-1 h-1 rounded-full bg-border"></span>
                                         <span className="font-semibold">{formatFileSize(userGroup.totalSize)}</span>
                                     </div>
@@ -421,7 +421,7 @@ export default function MediaPage() {
                                                             </div>
                                                         </button>
                                                         <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                                                            <span>{sessionFileCount} Media</span>
+                                                            <span>{sessionFileCount} Mídia</span>
                                                             <span className="w-1 h-1 rounded-full bg-border"></span>
                                                             <span className="font-medium text-foreground">{formatFileSize(sessionGroup.totalSize)}</span>
                                                         </div>
@@ -447,7 +447,7 @@ export default function MediaPage() {
                                                                                     {sender.files.length} • {formatFileSize(sender.totalSize)}
                                                                                 </span>
                                                                             </button>
-                                                                            <button onClick={() => selectAllInGroup(sender.files)} className="p-1 hover:bg-muted rounded transition-colors" title={allSelected ? "Deselect All" : "Select All"}>
+                                                                            <button onClick={() => selectAllInGroup(sender.files)} className="p-1 hover:bg-muted rounded transition-colors" title={allSelected ? "Desmarcar todos" : "Selecionar todos"}>
                                                                                 {allSelected ? <CheckSquare className="h-4 w-4 text-primary" /> : <Square className="h-4 w-4 text-muted-foreground/40" />}
                                                                             </button>
                                                                         </div>
@@ -487,7 +487,7 @@ export default function MediaPage() {
                                                                                                     <p className="text-[10px] font-medium text-foreground truncate" title={file.name}>{file.name}</p>
                                                                                                     <div className="flex items-center justify-between mt-1">
                                                                                                         <span className="text-[9px] text-muted-foreground font-medium">{formatFileSize(file.size)}</span>
-                                                                                                        <span className="text-[8px] text-muted-foreground">{new Date(file.createdAt).toLocaleDateString([], { month: "short", day: "numeric" })}</span>
+                                                                                                        <span className="text-[8px] text-muted-foreground">{new Date(file.createdAt).toLocaleDateString("pt-BR", { month: "short", day: "numeric" })}</span>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </CardContent>
@@ -533,14 +533,14 @@ export default function MediaPage() {
             <AlertDialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Delete {selected.size} file(s)?</AlertDialogTitle>
+                        <AlertDialogTitle>Excluir {selected.size} arquivo(s)?</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. The selected files will be permanently removed from the server.
+                            Esta ação não pode ser desfeita. Os arquivos selecionados serão excluídos permanentemente do servidor.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={handleDelete} className="bg-red-600 hover:bg-red-700">Delete</AlertDialogAction>
+                        <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleDelete} className="bg-red-600 hover:bg-red-700">Excluir</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

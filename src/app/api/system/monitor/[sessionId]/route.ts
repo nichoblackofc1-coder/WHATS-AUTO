@@ -16,12 +16,12 @@ export async function GET(
 
         const auth = await getAuthenticatedUser(req);
         if (!auth) {
-            return NextResponse.json({ status: false, message: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado" }, { status: 401 });
         }
 
         const hasAccess = await canAccessSession(auth.id, auth.role, sessionId);
         if (!hasAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -33,7 +33,7 @@ export async function GET(
         });
 
         if (!dbSession) {
-            return NextResponse.json({ status: false, message: "Session not found" }, { status: 404 });
+            return NextResponse.json({ status: false, message: "Sessão não encontrada" }, { status: 404 });
         }
 
         const dbSessionId = dbSession.id;
@@ -49,15 +49,15 @@ export async function GET(
             return NextResponse.json({
                 status: true,
                 message: "Session is not connected",
-                data: { 
-                    status: instance?.status || "DISCONNECTED", 
-                    uptime: 0, 
-                    ping: "Offline", 
-                    store: { 
-                        contacts: contactsCount, 
-                        chats: groupsCount + contactsCount, 
-                        messages: messagesCount 
-                    } 
+                data: {
+                    status: instance?.status || "DISCONNECTED",
+                    uptime: 0,
+                    ping: "Offline",
+                    store: {
+                        contacts: contactsCount,
+                        chats: groupsCount + contactsCount,
+                        messages: messagesCount
+                    }
                 }
             });
         }
@@ -84,11 +84,11 @@ export async function GET(
                 status: instance.status,
                 uptimeMs: uptime,
                 ping: pingStatus,
-                store: { 
-                    contacts: contactsCount, 
+                store: {
+                    contacts: contactsCount,
                     chats: groupsCount + contactsCount, // Approximation of total chats
-                    messages: messagesCount 
-                } 
+                    messages: messagesCount
+                }
             }
         });
 

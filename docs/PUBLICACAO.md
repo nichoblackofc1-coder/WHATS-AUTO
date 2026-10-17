@@ -2,6 +2,16 @@
 
 Este sistema precisa de um processo Node.js permanente, PostgreSQL e disco persistente para `data/`. GitHub hospeda o código; GitHub Pages não executa este servidor, WebSockets ou as sessões WhatsApp.
 
+## Vercel com serviço contínuo
+
+O `vercel.json` publica o painel Next.js e um Daemon chamado `whatsapp`, construído pelo `Dockerfile.worker`. Configure `DATABASE_URL` e `AUTH_SECRET` como segredos do ambiente Production. O processo contínuo recebe as mesmas variáveis de produção.
+
+O worker cria apenas as tabelas auxiliares `GatewayJob` e `GatewayMedia`, sem alterar usuários, mensagens ou credenciais existentes. Uma reserva no banco impede duas instâncias de manter a mesma conta conectada durante atualizações. O painel encaminha operações para uma fila criptografada; as rotas continuam verificando o usuário e o acesso à sessão. Conversas e notificações são atualizadas por consultas periódicas.
+
+As mídias novas ficam no PostgreSQL para sobreviver a reinícios. Arquivos antigos que existiam somente na máquina local não são enviados automaticamente. Arquivos enviados pela Vercel devem ficar abaixo de 4 MB. O processamento e o armazenamento usam as cotas da conta; consulte o painel do provedor para acompanhar o consumo.
+
+Depois de publicar, verifique se o Daemon está ativo e se `/api/gateway/status`, com uma sessão autenticada, retorna `online: true`. Sessões anteriormente conectadas são retomadas. Sessões paradas ou desconectadas manualmente exigem iniciar novamente pelo painel. Agendamentos existentes podem ser enviados quando suas sessões estiverem conectadas.
+
 ## Servidor com Docker
 
 1. Clone o repositório e copie `.env.example` para `.env`.

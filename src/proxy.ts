@@ -1,6 +1,8 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { forwardGateway, needsGateway, usesGatewayWorker } from "@/lib/gateway-queue";
+import { validateApiKey } from "@/lib/api-auth";
 
 export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
@@ -35,6 +37,10 @@ export async function proxy(request: NextRequest) {
         // Check for API key in header
         const apiKey = request.headers.get("x-api-key");
         if (apiKey) {
+            if (usesGatewayWorker() && needsGateway(pathname, request.method)) {
+                if (!await validateApiKey(request)) return NextResponse.json({ error: "Chave de API inválida" }, { status: 401 });
+                return forwardGateway(request);
+            }
             // API key auth will be validated in the route handler
             return NextResponse.next();
         }
@@ -42,8 +48,10 @@ export async function proxy(request: NextRequest) {
         // Check for session auth
         const session = await auth();
         if (!session?.user) {
-            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ error: "Não autenticado" }, { status: 401 });
         }
+
+        if (usesGatewayWorker() && needsGateway(pathname, request.method)) return forwardGateway(request);
 
         return NextResponse.next();
     }

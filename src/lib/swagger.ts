@@ -7,7 +7,7 @@ export const getApiDocs = () => {
         definition: {
             openapi: "3.0.0",
             info: {
-                title: "WA-AKG API Documentation",
+                title: "Documentação da API WA-AKG",
                 version: "1.6.1",
                 description: `
 # WhatsApp AI Gateway - Complete API Reference
@@ -66,7 +66,7 @@ All endpoints require authentication via:
                         type: "object",
                         properties: {
                             status: { type: "boolean", example: true },
-                            message: { type: "string", example: "Operation successful" },
+                            message: { type: "string", example: "Operação concluída" },
                             data: { type: "object", nullable: true }
                         }
                     },
@@ -76,7 +76,7 @@ All endpoints require authentication via:
                             id: { type: "string", example: "clx123abc" },
                             name: { type: "string", example: "Marketing Bot" },
                             sessionId: { type: "string", example: "marketing-1" },
-                            status: { type: "string", enum: ["Connected", "Disconnected", "Connecting"], example: "Connected" },
+                            status: { type: "string", enum: ["Conectado", "Desconectado", "Conectando"], example: "Conectado" },
                             userId: { type: "string" },
                             botConfig: { type: "object", nullable: true },
                             webhooks: { type: "array", items: { type: "object" }, nullable: true },
@@ -105,7 +105,7 @@ All endpoints require authentication via:
                         type: "object",
                         properties: {
                             jid: { type: "string", example: "628123456789@s.whatsapp.net" },
-                            name: { type: "string", example: "John Doe" },
+                            name: { type: "string", example: "João da Silva" },
                             notify: { type: "string" },
                             profilePic: { type: "string", nullable: true }
                         }
@@ -127,10 +127,10 @@ All endpoints require authentication via:
                             id: { type: "string" },
                             sessionId: { type: "string" },
                             url: { type: "string" },
-                            events: { 
-                                type: "array", 
+                            events: {
+                                type: "array",
                                 items: { type: "string" },
-                                description: "Events to subscribe to: message.received, message.sent, message.status, connection.update, group.update, contact.update, status.update, group.participant, message.deleted, message.edited or '*'" 
+                                description: "Events to subscribe to: message.received, message.sent, message.status, connection.update, group.update, contact.update, status.update, group.participant, message.deleted, message.edited or '*'"
                             },
                             secret: { type: "string" }
                         }
@@ -228,7 +228,7 @@ All endpoints require authentication via:
                         content: {
                             "application/json": {
                                 schema: { $ref: "#/components/schemas/Error" },
-                                example: { status: false, message: "Unauthorized", error: "Unauthorized" }
+                                example: { status: false, message: "Não autenticado", error: "Não autenticado" }
                             }
                         }
                     },
@@ -237,7 +237,7 @@ All endpoints require authentication via:
                         content: {
                             "application/json": {
                                 schema: { $ref: "#/components/schemas/Error" },
-                                example: { status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }
+                                example: { status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }
                             }
                         }
                     },
@@ -246,7 +246,7 @@ All endpoints require authentication via:
                         content: {
                             "application/json": {
                                 schema: { $ref: "#/components/schemas/Error" },
-                                example: { status: false, message: "Session not found", error: "Session not found" }
+                                example: { status: false, message: "Sessão não encontrada", error: "Sessão não encontrada" }
                             }
                         }
                     },
@@ -269,11 +269,11 @@ All endpoints require authentication via:
                         }
                     },
                     ServerError: {
-                        description: "Internal Server Error",
+                        description: "Erro interno do servidor",
                         content: {
                             "application/json": {
                                 schema: { $ref: "#/components/schemas/Error" },
-                                example: { status: false, message: "Internal Server Error", error: "Internal Server Error" }
+                                example: { status: false, message: "Erro interno do servidor", error: "Erro interno do servidor" }
                             }
                         }
                     }
@@ -284,7 +284,7 @@ All endpoints require authentication via:
                 "/media/{filename}": {
                     "get": {
                         "tags": [
-                            "Media"
+                            "Mídia"
                         ],
                         "summary": "Get uploaded media file",
                         "parameters": [
@@ -307,7 +307,7 @@ All endpoints require authentication via:
                 "/groups/{sessionId}/{jid}/leave": {
                     "post": {
                         "tags": [
-                            "Groups"
+                            "Grupos"
                         ],
                         "summary": "Leave a group",
                         "parameters": [
@@ -338,7 +338,7 @@ All endpoints require authentication via:
                 "/docs": {
                     "get": {
                         "tags": [
-                            "Documentation"
+                            "Documentação"
                         ],
                         "summary": "Get Swagger JSON specification",
                         "responses": {
@@ -351,7 +351,7 @@ All endpoints require authentication via:
                 "/chats/by-label/{labelId}": {
                     "get": {
                         "tags": [
-                            "Chats"
+                            "Conversas"
                         ],
                         "summary": "Get chats by label ID",
                         "parameters": [
@@ -392,7 +392,7 @@ All endpoints require authentication via:
                                         "properties": {
                                             "name": {
                                                 "type": "string",
-                                                "example": "John Doe"
+                                                "example": "João da Silva"
                                             },
                                             "email": {
                                                 "type": "string",
@@ -470,7 +470,7 @@ All endpoints require authentication via:
                 // ==================== SESSIONS ====================
                 "/sessions": {
                     get: {
-                        tags: ["Sessions"],
+                        tags: ["Sessões"],
                         summary: "List all accessible sessions",
                         description: "Get all sessions accessible to the authenticated user (role-based filtering)",
                         responses: {
@@ -489,7 +489,7 @@ All endpoints require authentication via:
                         }
                     },
                     post: {
-                        tags: ["Sessions"],
+                        tags: ["Sessões"],
                         summary: "Create new WhatsApp session",
                         description: "Creates a new WhatsApp session for QR code pairing",
                         requestBody: {
@@ -513,7 +513,7 @@ All endpoints require authentication via:
                         },
                         responses: {
                             200: {
-                                description: "Session created successfully",
+                                description: "Sessão criada com sucesso",
                                 content: {
                                     "application/json": {
                                         schema: { $ref: "#/components/schemas/Session" }
@@ -528,7 +528,7 @@ All endpoints require authentication via:
 
                 "/sessions/{id}/qr": {
                     get: {
-                        tags: ["Sessions"],
+                        tags: ["Sessões"],
                         summary: "Get QR code for pairing",
                         description: "Retrieve QR code (string and base64 image) for WhatsApp pairing",
                         parameters: [
@@ -566,13 +566,13 @@ All endpoints require authentication via:
 
                 "/sessions/{id}/bot-config": {
                     get: {
-                        tags: ["Sessions"],
+                        tags: ["Sessões"],
                         summary: "Get bot configuration",
                         parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }],
                         responses: { 200: { description: "Bot configuration retrieved" } }
                     },
                     post: {
-                        tags: ["Sessions"],
+                        tags: ["Sessões"],
                         summary: "Update bot configuration",
                         parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }],
                         requestBody: {
@@ -640,15 +640,15 @@ All endpoints require authentication via:
                             },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            404: { description: "Session not found" },
-                            500: { description: "Internal Server Error" }
+                            404: { description: "Sessão não encontrada" },
+                            500: { description: "Erro interno do servidor" }
                         }
                     }
                 },
                 "/sessions/{id}": {
                     get: {
-                        tags: ["Sessions"],
-                        summary: "Get session details",
+                        tags: ["Sessões"],
+                        summary: "Consultar detalhes da sessão",
                         description: "Get detailed information about a specific session including uptime and status",
                         parameters: [
                             { name: "id", in: "path", required: true, schema: { type: "string" } }
@@ -675,13 +675,13 @@ All endpoints require authentication via:
                                     }
                                 }
                             },
-                            404: { description: "Session not found" }
+                            404: { description: "Sessão não encontrada" }
                         }
                     }
                 },
                 "/sessions/{id}/{action}": {
                     post: {
-                        tags: ["Sessions"],
+                        tags: ["Sessões"],
                         summary: "Perform session action",
                         description: "Start, stop, restart, or logout a session",
                         parameters: [
@@ -698,15 +698,15 @@ All endpoints require authentication via:
                                 }
                             },
                             400: { description: "Invalid action" },
-                            500: { description: "Action failed" }
+                            500: { description: "Não foi possível concluir a ação" }
                         }
                     }
                 },
 
                 "/sessions/{id}/settings": {
                     patch: {
-                        tags: ["Sessions"],
-                        summary: "Update session settings",
+                        tags: ["Sessões"],
+                        summary: "Atualizar configurações da sessão",
                         parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }],
                         requestBody: {
                             content: {
@@ -729,13 +729,13 @@ All endpoints require authentication via:
                         responses: { 200: { description: "Settings updated" } }
                     },
                     delete: {
-                        tags: ["Sessions"],
+                        tags: ["Sessões"],
                         summary: "Delete session and logout",
                         description: "Permanently deletes session and logs out from WhatsApp",
                         parameters: [{ name: "id", in: "path", required: true, schema: { type: "string" } }],
                         responses: {
                             200: {
-                                description: "Session deleted",
+                                description: "Sessão excluída",
                                 content: {
                                     "application/json": {
                                         schema: { $ref: "#/components/schemas/Success" }
@@ -749,7 +749,7 @@ All endpoints require authentication via:
                 // ==================== SESSION ACCESS ====================
                 "/sessions/{sessionId}/access": {
                     get: {
-                        tags: ["Session Access"],
+                        tags: ["Acesso às sessões"],
                         summary: "List users with shared access",
                         description: "Get all users who have been granted access to the specified session. Only the session owner or SUPERADMIN can use this endpoint.",
                         parameters: [
@@ -793,11 +793,11 @@ All endpoints require authentication via:
                             },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { description: "Forbidden - Only session owner can manage access" },
-                            404: { description: "Session not found" }
+                            404: { description: "Sessão não encontrada" }
                         }
                     },
                     post: {
-                        tags: ["Session Access"],
+                        tags: ["Acesso às sessões"],
                         summary: "Grant access to another user",
                         description: "Grant session access to another registered user by email. Only the session owner or SUPERADMIN can use this endpoint. Cannot grant access to the session owner or SUPERADMINs.",
                         parameters: [
@@ -819,7 +819,7 @@ All endpoints require authentication via:
                         },
                         responses: {
                             201: {
-                                description: "Access granted successfully",
+                                description: "Acesso concedido com sucesso",
                                 content: {
                                     "application/json": {
                                         schema: {
@@ -858,7 +858,7 @@ All endpoints require authentication via:
                         }
                     },
                     delete: {
-                        tags: ["Session Access"],
+                        tags: ["Acesso às sessões"],
                         summary: "Revoke user access",
                         description: "Remove shared access for a user from the specified session. Only the session owner or SUPERADMIN can use this endpoint.",
                         parameters: [
@@ -880,7 +880,7 @@ All endpoints require authentication via:
                         },
                         responses: {
                             200: {
-                                description: "Access revoked successfully",
+                                description: "Acesso revogado com sucesso",
                                 content: {
                                     "application/json": {
                                         schema: { $ref: "#/components/schemas/Success" }
@@ -899,7 +899,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/{jid}/send": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Send message (text/media/sticker)",
                         description: "Universal endpoint for sending text, images, videos, documents, and stickers. Supports mentions and all WhatsApp message types.",
                         parameters: [
@@ -916,7 +916,7 @@ All endpoints require authentication via:
                                 in: "path",
                                 required: true,
                                 schema: { type: "string" },
-                                description: "Recipient JID",
+                                description: "JID do destinatário",
                                 example: "628123456789@s.whatsapp.net"
                             }
                         ],
@@ -934,7 +934,7 @@ All endpoints require authentication via:
                                                 oneOf: [
                                                     {
                                                         properties: {
-                                                            text: { type: "string", example: "Hello!" }
+                                                            text: { type: "string", example: "Olá!" }
                                                         }
                                                     },
                                                     {
@@ -1020,13 +1020,13 @@ All endpoints require authentication via:
                         },
                         responses: {
                             200: {
-                                description: "Message sent successfully",
+                                description: "Mensagem enviada",
                                 content: {
                                     "application/json": {
                                         schema: { $ref: "#/components/schemas/Success" },
                                         example: {
                                             status: true,
-                                            message: "Message sent successfully",
+                                            message: "Mensagem enviada",
                                             data: {
                                                 key: {
                                                     remoteJid: "628123456789@s.whatsapp.net",
@@ -1047,14 +1047,14 @@ All endpoints require authentication via:
                             403: { $ref: "#/components/responses/Forbidden" },
                             404: { description: "Session not found or disconnected" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
-                            500: { description: "Failed to send message" }
+                            500: { description: "Não foi possível enviar mensagem" }
                         }
                     }
                 },
 
                 "/messages/{sessionId}/{jid}/media": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Send media (image/video/audio/document)",
                         description: "Send file using multipart/form-data",
                         parameters: [
@@ -1070,7 +1070,7 @@ All endpoints require authentication via:
                                 in: "path",
                                 required: true,
                                 schema: { type: "string" },
-                                description: "Recipient JID"
+                                description: "JID do destinatário"
                             }
                         ],
                         requestBody: {
@@ -1105,7 +1105,7 @@ All endpoints require authentication via:
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
-                            500: { description: "Failed to send media" }
+                            500: { description: "Não foi possível enviar mídia" }
                         }
                     }
                 },
@@ -1113,7 +1113,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/broadcast": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Broadcast message to multiple recipients",
                         description: "Send same message to multiple contacts with anti-ban delays (10-20s random)",
                         parameters: [
@@ -1156,14 +1156,14 @@ All endpoints require authentication via:
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
-                            500: { description: "Failed to start broadcast" }
+                            500: { description: "Não foi possível iniciar o disparo" }
                         }
                     }
                 },
 
                 "/messages/{sessionId}/broadcast/history": {
                     get: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Get broadcast history",
                         description: "Retrieve list of past broadcasts with status, sent/failed counts (persisted in DB)",
                         parameters: [
@@ -1200,7 +1200,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/broadcast/history/{logId}": {
                     get: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Get broadcast detail",
                         description: "Retrieve full detail of a specific broadcast including per-recipient status",
                         parameters: [
@@ -1249,7 +1249,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/{jid}/poll": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Send poll message",
                         description: "Create interactive poll (2-12 options, single or multiple choice)",
                         parameters: [
@@ -1289,8 +1289,8 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/{jid}/location": {
                     post: {
-                        tags: ["Messaging"],
-                        summary: "Send location",
+                        tags: ["Mensagens"],
+                        summary: "Enviar localização",
                         description: "Share GPS coordinates with optional name and address",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -1324,7 +1324,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/{jid}/contact": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Send contact card",
                         description: "Share one or multiple contact vCards",
                         parameters: [
@@ -1344,7 +1344,7 @@ All endpoints require authentication via:
                                                     type: "object",
                                                     required: ["displayName", "vcard"],
                                                     properties: {
-                                                        displayName: { type: "string", example: "John Doe" },
+                                                        displayName: { type: "string", example: "João da Silva" },
                                                         vcard: { type: "string", example: "BEGIN:VCARD..." }
                                                     }
                                                 }
@@ -1366,7 +1366,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/download/{messageId}/media": {
                     get: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Download message media",
                         description: "Download media from a message (direct binary or redirect)",
                         parameters: [
@@ -1389,7 +1389,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/{jid}/{messageId}/react": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "React to message with emoji",
                         description: "Add emoji reaction to a message (empty string removes reaction)",
                         parameters: [
@@ -1422,7 +1422,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/{jid}/{messageId}/reply": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Reply to a message (quoted reply)",
                         description: "Send a quoted reply to a specific message by its ID. Uses same request format as /send — pass a Baileys message object.",
                         parameters: [
@@ -1469,13 +1469,13 @@ All endpoints require authentication via:
                                             type: "object",
                                             properties: {
                                                 success: { type: "boolean", example: true },
-                                                message: { type: "string", example: "Message sent successfully" }
+                                                message: { type: "string", example: "Mensagem enviada" }
                                             }
                                         }
                                     }
                                 }
                             },
-                            400: { description: "message is required" },
+                            400: { description: "Informe a mensagem" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
@@ -1486,7 +1486,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/{jid}/reply": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Reply to a message (body-based)",
                         description: "Send a quoted reply with messageId provided in the request body. Same request format as /send with added messageId.",
                         parameters: [
@@ -1534,7 +1534,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/{jid}/{messageId}/star": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Star or unstar a message",
                         description: "Mark a message as starred (saved) or remove the star. Starred messages appear in the Starred Messages section.",
                         parameters: [
@@ -1553,7 +1553,7 @@ All endpoints require authentication via:
                                         }
                                     },
                                     examples: {
-                                        star: { summary: "Star message", value: { star: true } },
+                                        star: { summary: "Favoritar mensagem", value: { star: true } },
                                         unstar: { summary: "Unstar message", value: { star: false } }
                                     }
                                 }
@@ -1584,8 +1584,8 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/search": {
                     get: {
-                        tags: ["Messaging"],
-                        summary: "Search messages",
+                        tags: ["Mensagens"],
+                        summary: "Buscar mensagens",
                         description: "Search messages stored in the database for a session. Supports full-text search, filtering by JID, type, and sender.",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" }, example: "sales-01" },
@@ -1640,7 +1640,7 @@ All endpoints require authentication via:
                             400: { description: "q or jid is required" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            404: { description: "Session not found" },
+                            404: { description: "Sessão não encontrada" },
                             500: { description: "Failed to search messages" }
                         }
                     }
@@ -1648,7 +1648,7 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/{jid}/list": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Send list message",
                         description: "Send a formatted numbered list message",
                         parameters: [
@@ -1675,14 +1675,14 @@ All endpoints require authentication via:
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
-                            500: { description: "Failed to send message" }
+                            500: { description: "Não foi possível enviar mensagem" }
                         }
                     }
                 },
 
                 "/messages/{sessionId}/{jid}/spam": {
                     post: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Message bombing (Spam)",
                         description: "Send a message multiple times in a row in the background",
                         parameters: [
@@ -1716,8 +1716,8 @@ All endpoints require authentication via:
 
                 "/messages/{sessionId}/{jid}/sticker": {
                     post: {
-                        tags: ["Messaging"],
-                        summary: "Send sticker",
+                        tags: ["Mensagens"],
+                        summary: "Enviar figurinha",
                         description: "Convert an image to sticker and send it",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -1745,15 +1745,15 @@ All endpoints require authentication via:
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
-                            500: { description: "Failed to create sticker" }
+                            500: { description: "Não foi possível criar figurinha" }
                         }
                     }
                 },
 
                 "/messages/{sessionId}/forward": {
                     post: {
-                        tags: ["Messaging"],
-                        summary: "Forward message",
+                        tags: ["Mensagens"],
+                        summary: "Encaminhar mensagem",
                         description: "Forward a message to one or multiple chats",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } }
@@ -1789,7 +1789,7 @@ All endpoints require authentication via:
                 },
                 "/messages/{sessionId}/{jid}/{messageId}": {
                     delete: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Delete message for everyone",
                         description: "Delete message (only works for messages < 7 minutes old)",
                         parameters: [
@@ -1815,11 +1815,11 @@ All endpoints require authentication via:
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
-                            500: { description: "Failed to delete message" }
+                            500: { description: "Não foi possível excluir mensagem" }
                         }
                     },
                     patch: {
-                        tags: ["Messaging"],
+                        tags: ["Mensagens"],
                         summary: "Edit a sent message",
                         description: "Edit text of a sent message",
                         parameters: [
@@ -1868,7 +1868,7 @@ All endpoints require authentication via:
                 // ==================== CHAT MANAGEMENT ====================
                 "/chat/{sessionId}": {
                     get: {
-                        tags: ["Chat"],
+                        tags: ["Conversas"],
                         summary: "Get chat list with contacts",
                         description: "Retrieve all contacts with last message for a session",
                         parameters: [
@@ -1892,7 +1892,7 @@ All endpoints require authentication via:
 
                 "/chat/{sessionId}/{jid}": {
                     get: {
-                        tags: ["Chat"],
+                        tags: ["Conversas"],
                         summary: "Get message history",
                         description: "Fetch up to 100 messages for a chat (enriched with participant info for groups)",
                         parameters: [
@@ -1905,7 +1905,7 @@ All endpoints require authentication via:
 
                 "/chat/{sessionId}/{jid}/read": {
                     put: {
-                        tags: ["Chat"],
+                        tags: ["Conversas"],
                         summary: "Mark messages as read",
                         description: "Mark specific messages or entire chat as read using RESTful path parameters",
                         parameters: [
@@ -1953,7 +1953,7 @@ All endpoints require authentication via:
 
                 "/chat/{sessionId}/{jid}/archive": {
                     put: {
-                        tags: ["Chat"],
+                        tags: ["Conversas"],
                         summary: "Archive/unarchive chat",
                         description: "Archive or unarchive a chat using RESTful path parameters",
                         parameters: [
@@ -1988,7 +1988,7 @@ All endpoints require authentication via:
                                     }
                                 }
                             },
-                            400: { description: "Missing required fields" },
+                            400: { description: "Preencha os campos obrigatórios" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
@@ -1999,7 +1999,7 @@ All endpoints require authentication via:
 
                 "/chat/{sessionId}/{jid}/mute": {
                     put: {
-                        tags: ["Chat"],
+                        tags: ["Conversas"],
                         summary: "Mute/unmute chat",
                         description: "Mute chat with optional duration (default 8 hours)",
                         parameters: [
@@ -2035,7 +2035,7 @@ All endpoints require authentication via:
                                     }
                                 }
                             },
-                            400: { description: "Missing required fields" },
+                            400: { description: "Preencha os campos obrigatórios" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
@@ -2046,7 +2046,7 @@ All endpoints require authentication via:
 
                 "/chat/{sessionId}/{jid}/pin": {
                     put: {
-                        tags: ["Chat"],
+                        tags: ["Conversas"],
                         summary: "Pin/unpin chat",
                         description: "Pin or unpin a chat",
                         parameters: [
@@ -2081,7 +2081,7 @@ All endpoints require authentication via:
                                     }
                                 }
                             },
-                            400: { description: "Missing required fields" },
+                            400: { description: "Preencha os campos obrigatórios" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
@@ -2092,7 +2092,7 @@ All endpoints require authentication via:
 
                 "/chat/{sessionId}/{jid}/presence": {
                     post: {
-                        tags: ["Chat"],
+                        tags: ["Conversas"],
                         summary: "Send presence (typing/recording)",
                         description: "Send presence status (typing, recording, online, etc.) to a chat",
                         parameters: [
@@ -2142,7 +2142,7 @@ All endpoints require authentication via:
 
                 "/chat/{sessionId}/{jid}/profile-picture": {
                     post: {
-                        tags: ["Chat"],
+                        tags: ["Conversas"],
                         summary: "Get profile picture URL",
                         description: "Get profile picture URL for a contact or group",
                         parameters: [
@@ -2176,7 +2176,7 @@ All endpoints require authentication via:
 
                 "/chat/{sessionId}/check": {
                     post: {
-                        tags: ["Chat"],
+                        tags: ["Conversas"],
                         summary: "Check if numbers exist on WhatsApp",
                         description: "Validate phone numbers (max 50 per request)",
                         parameters: [
@@ -2226,7 +2226,7 @@ All endpoints require authentication via:
                                     }
                                 }
                             },
-                            400: { description: "Missing required fields" },
+                            400: { description: "Preencha os campos obrigatórios" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
@@ -2238,7 +2238,7 @@ All endpoints require authentication via:
                 // ==================== GROUPS ====================
                 "/groups/{sessionId}": {
                     get: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "List all groups",
                         description: "Get all groups associated with the session",
                         parameters: [
@@ -2249,14 +2249,14 @@ All endpoints require authentication via:
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             404: { $ref: "#/components/responses/NotFound" },
-                            500: { description: "Failed to fetch groups" }
+                            500: { description: "Não foi possível carregar grupos" }
                         }
                     }
                 },
 
                 "/groups/{sessionId}/create": {
                     post: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Create new group",
                         description: "Create a new group with specified participants",
                         parameters: [
@@ -2281,7 +2281,7 @@ All endpoints require authentication via:
                             }
                         },
                         responses: {
-                            200: { description: "Group created", content: { "application/json": { schema: { type: "object", properties: { success: { type: "boolean", example: true }, group: { $ref: "#/components/schemas/Group" } } } } } },
+                            200: { description: "Grupo criado", content: { "application/json": { schema: { type: "object", properties: { success: { type: "boolean", example: true }, group: { $ref: "#/components/schemas/Group" } } } } } },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" },
@@ -2292,7 +2292,7 @@ All endpoints require authentication via:
 
                 "/groups/{sessionId}/{jid}/subject": {
                     put: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Update group subject",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -2322,7 +2322,7 @@ All endpoints require authentication via:
                 },
                 "/groups/{jid}/subject": {
                     put: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Update group name",
                         description: "Update group subject (max 100 characters, requires admin)",
                         parameters: [
@@ -2369,7 +2369,7 @@ All endpoints require authentication via:
 
                 "/groups/{sessionId}/{jid}/members": {
                     put: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Manage group members",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -2402,7 +2402,7 @@ All endpoints require authentication via:
                 "/groups/{sessionId}/{jid}/invite": {
                     "put": {
                         "tags": [
-                            "Groups"
+                            "Grupos"
                         ],
                         "summary": "Update or revoke group invite link",
                         "parameters": [
@@ -2431,8 +2431,8 @@ All endpoints require authentication via:
                     }
                     ,
                     get: {
-                        tags: ["Groups"],
-                        summary: "Get invite code",
+                        tags: ["Grupos"],
+                        summary: "Consultar convite",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
                             { name: "jid", in: "path", required: true, schema: { type: "string" } }
@@ -2445,7 +2445,7 @@ All endpoints require authentication via:
                         }
                     },
                     put: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Revoke invite code",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -2571,7 +2571,7 @@ All endpoints require authentication via:
                         ],
                         "responses": {
                             "200": {
-                                "description": "Profile picture removed"
+                                "description": "Foto do perfil removida"
                             }
                         }
                     }
@@ -2643,7 +2643,7 @@ All endpoints require authentication via:
                     }
                     ,
                     get: {
-                        tags: ["Auto Reply"],
+                        tags: ["Resposta automática"],
                         summary: "List auto-reply rules",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } }
@@ -2652,11 +2652,11 @@ All endpoints require authentication via:
                             200: { description: "List of auto-reply rules" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            404: { description: "Session not found" }
+                            404: { description: "Sessão não encontrada" }
                         }
                     },
                     post: {
-                        tags: ["Auto Reply"],
+                        tags: ["Resposta automática"],
                         summary: "Create auto-reply rule",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } }
@@ -2691,7 +2691,7 @@ All endpoints require authentication via:
                         },
                         responses: {
                             200: { description: "Rule created" },
-                            400: { description: "Missing required fields" },
+                            400: { description: "Preencha os campos obrigatórios" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" }
                         }
@@ -2729,7 +2729,7 @@ All endpoints require authentication via:
                     }
                     ,
                     put: {
-                        tags: ["Auto Reply"],
+                        tags: ["Resposta automática"],
                         summary: "Update auto-reply rule",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -2766,11 +2766,11 @@ All endpoints require authentication via:
                             200: { description: "Rule updated" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            404: { description: "Rule not found" }
+                            404: { description: "Regra não encontrada" }
                         }
                     },
                     delete: {
-                        tags: ["Auto Reply"],
+                        tags: ["Resposta automática"],
                         summary: "Delete auto-reply rule",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -2780,7 +2780,7 @@ All endpoints require authentication via:
                             200: { description: "Rule deleted" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            404: { description: "Rule not found" }
+                            404: { description: "Regra não encontrada" }
                         }
                     }
                 },
@@ -2789,7 +2789,7 @@ All endpoints require authentication via:
                 "/scheduler/{sessionId}": {
                     "delete": {
                         "tags": [
-                            "Scheduler"
+                            "Agendamentos"
                         ],
                         "summary": "Delete all scheduled messages for a session",
                         "parameters": [
@@ -2810,7 +2810,7 @@ All endpoints require authentication via:
                     }
                     ,
                     get: {
-                        tags: ["Scheduler"],
+                        tags: ["Agendamentos"],
                         summary: "List scheduled messages",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } }
@@ -2819,11 +2819,11 @@ All endpoints require authentication via:
                             200: { description: "List of scheduled messages" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            404: { description: "Session not found" }
+                            404: { description: "Sessão não encontrada" }
                         }
                     },
                     post: {
-                        tags: ["Scheduler"],
+                        tags: ["Agendamentos"],
                         summary: "Create scheduled message",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } }
@@ -2858,7 +2858,7 @@ All endpoints require authentication via:
                         },
                         responses: {
                             200: { description: "Scheduled message created" },
-                            400: { description: "Missing required fields" },
+                            400: { description: "Preencha os campos obrigatórios" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" }
                         }
@@ -2867,7 +2867,7 @@ All endpoints require authentication via:
                 "/scheduler/{sessionId}/{scheduleId}": {
                     "delete": {
                         "tags": [
-                            "Scheduler"
+                            "Agendamentos"
                         ],
                         "summary": "Delete a specific scheduled message",
                         "parameters": [
@@ -2896,7 +2896,7 @@ All endpoints require authentication via:
                     }
                     ,
                     put: {
-                        tags: ["Scheduler"],
+                        tags: ["Agendamentos"],
                         summary: "Update scheduled message",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -2934,11 +2934,11 @@ All endpoints require authentication via:
                             200: { description: "Message updated" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            404: { description: "Message not found" }
+                            404: { description: "Mensagem não encontrada" }
                         }
                     },
                     delete: {
-                        tags: ["Scheduler"],
+                        tags: ["Agendamentos"],
                         summary: "Delete scheduled message",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -2948,14 +2948,14 @@ All endpoints require authentication via:
                             200: { description: "Message deleted" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            404: { description: "Message not found" }
+                            404: { description: "Mensagem não encontrada" }
                         }
                     }
                 },
                 "/scheduler": {
                     "post": {
                         "tags": [
-                            "Scheduler"
+                            "Agendamentos"
                         ],
                         "summary": "Create a scheduled message task",
                         "responses": {
@@ -3036,14 +3036,14 @@ All endpoints require authentication via:
                         ],
                         "responses": {
                             "200": {
-                                "description": "Webhook deleted"
+                                "description": "Webhook excluído"
                             }
                         }
                     }
                     ,
                     put: {
                         tags: ["Webhooks"],
-                        summary: "Update webhook",
+                        summary: "Atualizar webhook",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
                             { name: "id", in: "path", required: true, schema: { type: "string" } }
@@ -3073,13 +3073,13 @@ All endpoints require authentication via:
                     },
                     delete: {
                         tags: ["Webhooks"],
-                        summary: "Delete webhook",
+                        summary: "Excluir webhook",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
                             { name: "id", in: "path", required: true, schema: { type: "string" } }
                         ],
                         responses: {
-                            200: { description: "Webhook deleted" },
+                            200: { description: "Webhook excluído" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             404: { description: "Webhook not found" }
@@ -3089,13 +3089,13 @@ All endpoints require authentication via:
                 "/webhooks/{id}": {
                     delete: {
                         tags: ["Webhooks"],
-                        summary: "Delete webhook",
+                        summary: "Excluir webhook",
                         parameters: [
                             { name: "id", in: "path", required: true, schema: { type: "string" } }
                         ],
                         responses: {
                             200: {
-                                description: "Webhook deleted",
+                                description: "Webhook excluído",
                                 content: {
                                     "application/json": {
                                         schema: {
@@ -3197,18 +3197,18 @@ All endpoints require authentication via:
                 "/users": {
                     "post": {
                         "tags": [
-                            "Users"
+                            "Usuários"
                         ],
                         "summary": "Create user resource",
                         "responses": {
                             "200": {
-                                "description": "User created"
+                                "description": "Usuário criado"
                             }
                         }
                     }
                     ,
                     get: {
-                        tags: ["Users"],
+                        tags: ["Usuários"],
                         summary: "List users (SUPERADMIN only)",
                         responses: {
                             200: {
@@ -3243,7 +3243,7 @@ All endpoints require authentication via:
                         }
                     },
                     post: {
-                        tags: ["Users"],
+                        tags: ["Usuários"],
                         summary: "Create user (SUPERADMIN only)",
                         requestBody: {
                             content: {
@@ -3267,7 +3267,7 @@ All endpoints require authentication via:
                         },
                         responses: {
                             200: {
-                                description: "User created",
+                                description: "Usuário criado",
                                 content: {
                                     "application/json": {
                                         schema: {
@@ -3294,9 +3294,9 @@ All endpoints require authentication via:
                 "/users/{id}": {
                     "delete": {
                         "tags": [
-                            "Users"
+                            "Usuários"
                         ],
-                        "summary": "Delete user",
+                        "summary": "Excluir usuário",
                         "parameters": [
                             {
                                 "name": "id",
@@ -3309,13 +3309,13 @@ All endpoints require authentication via:
                         ],
                         "responses": {
                             "200": {
-                                "description": "User deleted"
+                                "description": "Usuário excluído"
                             }
                         }
                     }
                     ,
                     patch: {
-                        tags: ["Users"],
+                        tags: ["Usuários"],
                         summary: "Update user (SUPERADMIN only)",
                         parameters: [
                             { name: "id", in: "path", required: true, schema: { type: "string" } }
@@ -3337,7 +3337,7 @@ All endpoints require authentication via:
                         },
                         responses: {
                             200: {
-                                description: "User updated",
+                                description: "Usuário atualizado",
                                 content: {
                                     "application/json": {
                                         schema: {
@@ -3370,14 +3370,14 @@ All endpoints require authentication via:
                         }
                     },
                     delete: {
-                        tags: ["Users"],
+                        tags: ["Usuários"],
                         summary: "Delete user (SUPERADMIN only)",
                         parameters: [
                             { name: "id", in: "path", required: true, schema: { type: "string" } }
                         ],
                         responses: {
                             200: {
-                                description: "User deleted",
+                                description: "Usuário excluído",
                                 content: {
                                     "application/json": {
                                         schema: {
@@ -3423,7 +3423,7 @@ All endpoints require authentication via:
                     }
                     ,
                     get: {
-                        tags: ["Users"],
+                        tags: ["Usuários"],
                         summary: "Get current API key",
                         responses: {
                             200: {
@@ -3443,7 +3443,7 @@ All endpoints require authentication via:
                         }
                     },
                     post: {
-                        tags: ["Users"],
+                        tags: ["Usuários"],
                         summary: "Generate new API key",
                         responses: {
                             200: {
@@ -3460,11 +3460,11 @@ All endpoints require authentication via:
                                 }
                             },
                             401: { $ref: "#/components/responses/Unauthorized" },
-                            500: { description: "Failed to generate API key" }
+                            500: { description: "Não foi possível gerar chave da API" }
                         }
                     },
                     delete: {
-                        tags: ["Users"],
+                        tags: ["Usuários"],
                         summary: "Revoke API key",
                         responses: {
                             200: {
@@ -3476,14 +3476,14 @@ All endpoints require authentication via:
                                 }
                             },
                             401: { $ref: "#/components/responses/Unauthorized" },
-                            500: { description: "Failed to revoke API key" }
+                            500: { description: "Não foi possível revogar chave da API" }
                         }
                     }
                 },
 
                 "/groups/{sessionId}/{jid}": {
                     get: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Get group details",
                         description: "Get detailed group information",
                         parameters: [
@@ -3504,8 +3504,8 @@ All endpoints require authentication via:
                 },
                 "/groups/{jid}/leave": {
                     post: {
-                        tags: ["Groups"],
-                        summary: "Leave group",
+                        tags: ["Grupos"],
+                        summary: "Sair do grupo",
                         parameters: [
                             { name: "jid", in: "path", required: true, schema: { type: "string" } }
                         ],
@@ -3528,7 +3528,7 @@ All endpoints require authentication via:
                 // ==================== GROUPS ====================
                 "/groups/{sessionId}/invite/accept": {
                     post: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Accept group invite",
                         description: "Join a group using an invite code",
                         parameters: [
@@ -3560,7 +3560,7 @@ All endpoints require authentication via:
                 "/groups/{sessionId}/{jid}/picture": {
                     "delete": {
                         "tags": [
-                            "Groups"
+                            "Grupos"
                         ],
                         "summary": "Remove group picture",
                         "parameters": [
@@ -3589,7 +3589,7 @@ All endpoints require authentication via:
                     }
                     ,
                     put: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Update group picture",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -3611,7 +3611,7 @@ All endpoints require authentication via:
                         responses: { 200: { description: "Picture updated" } }
                     },
                     delete: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Remove group picture",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -3622,8 +3622,8 @@ All endpoints require authentication via:
                 },
                 "/groups/{sessionId}/{jid}/settings": {
                     put: {
-                        tags: ["Groups"],
-                        summary: "Update group settings",
+                        tags: ["Grupos"],
+                        summary: "Atualizar configurações do grupo",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
                             { name: "jid", in: "path", required: true, schema: { type: "string" } }
@@ -3651,7 +3651,7 @@ All endpoints require authentication via:
                 },
                 "/groups/{sessionId}/{jid}/description": {
                     put: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Update group description",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -3680,7 +3680,7 @@ All endpoints require authentication via:
                 },
                 "/groups/{sessionId}/{jid}/ephemeral": {
                     put: {
-                        tags: ["Groups"],
+                        tags: ["Grupos"],
                         summary: "Toggle disappearing messages",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -3712,7 +3712,7 @@ All endpoints require authentication via:
                 "/labels/{sessionId}": {
                     "post": {
                         "tags": [
-                            "Labels"
+                            "Etiquetas"
                         ],
                         "summary": "Create a label",
                         "parameters": [
@@ -3753,7 +3753,7 @@ All endpoints require authentication via:
                     },
                     "put": {
                         "tags": [
-                            "Labels"
+                            "Etiquetas"
                         ],
                         "summary": "Update all labels or bulk update",
                         "parameters": [
@@ -3774,7 +3774,7 @@ All endpoints require authentication via:
                     },
                     "delete": {
                         "tags": [
-                            "Labels"
+                            "Etiquetas"
                         ],
                         "summary": "Delete labels",
                         "parameters": [
@@ -3795,7 +3795,7 @@ All endpoints require authentication via:
                     }
                     ,
                     get: {
-                        tags: ["Labels"],
+                        tags: ["Etiquetas"],
                         summary: "List labels",
                         description: "Get all labels with chat count",
                         parameters: [
@@ -3818,12 +3818,12 @@ All endpoints require authentication via:
                             },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            404: { description: "Session not found" }
+                            404: { description: "Sessão não encontrada" }
                         }
                     },
                     post: {
-                        tags: ["Labels"],
-                        summary: "Create label",
+                        tags: ["Etiquetas"],
+                        summary: "Criar etiqueta",
                         description: "Create new label with color (0-19 index)",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } }
@@ -3859,14 +3859,14 @@ All endpoints require authentication via:
                             },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            500: { description: "Failed to create label" }
+                            500: { description: "Não foi possível criar etiqueta" }
                         }
                     }
                 },
                 "/labels/{sessionId}/{labelId}": {
                     "delete": {
                         "tags": [
-                            "Labels"
+                            "Etiquetas"
                         ],
                         "summary": "Delete a specific label",
                         "parameters": [
@@ -3895,8 +3895,8 @@ All endpoints require authentication via:
                     }
                     ,
                     put: {
-                        tags: ["Labels"],
-                        summary: "Update label",
+                        tags: ["Etiquetas"],
+                        summary: "Atualizar etiqueta",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
                             { name: "labelId", in: "path", required: true, schema: { type: "string" } }
@@ -3922,8 +3922,8 @@ All endpoints require authentication via:
                         }
                     },
                     delete: {
-                        tags: ["Labels"],
-                        summary: "Delete label",
+                        tags: ["Etiquetas"],
+                        summary: "Excluir etiqueta",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
                             { name: "labelId", in: "path", required: true, schema: { type: "string" } }
@@ -3938,8 +3938,8 @@ All endpoints require authentication via:
                 },
                 "/labels/{sessionId}/chat/{jid}/labels": {
                     get: {
-                        tags: ["Labels"],
-                        summary: "Get chat labels",
+                        tags: ["Etiquetas"],
+                        summary: "Consultar etiquetas da conversa",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
                             { name: "jid", in: "path", required: true, schema: { type: "string" } }
@@ -3952,7 +3952,7 @@ All endpoints require authentication via:
                         }
                     },
                     put: {
-                        tags: ["Labels"],
+                        tags: ["Etiquetas"],
                         summary: "Update chat labels",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
@@ -3985,7 +3985,7 @@ All endpoints require authentication via:
                 "/notifications": {
                     "post": {
                         "tags": [
-                            "Notifications"
+                            "Notificações"
                         ],
                         "summary": "Send or register a notification",
                         "responses": {
@@ -3996,7 +3996,7 @@ All endpoints require authentication via:
                     }
                     ,
                     get: {
-                        tags: ["Notifications"],
+                        tags: ["Notificações"],
                         summary: "List notifications",
                         description: "Get the last 50 notifications for the authenticated user",
                         responses: {
@@ -4024,12 +4024,12 @@ All endpoints require authentication via:
                                 }
                             },
                             401: { $ref: "#/components/responses/Unauthorized" },
-                            500: { description: "Error fetching notifications" }
+                            500: { description: "Erro ao carregar notificações" }
                         }
                     },
                     post: {
-                        tags: ["Notifications"],
-                        summary: "Create notification",
+                        tags: ["Notificações"],
+                        summary: "Criar notificação",
                         description: "Send a notification to a specific user or broadcast to all (Superadmin only)",
                         requestBody: {
                             content: {
@@ -4067,13 +4067,13 @@ All endpoints require authentication via:
                             400: { description: "Invalid request" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
-                            500: { description: "Error creating notification" }
+                            500: { description: "Erro ao criar notificação" }
                         }
                     }
                 },
                 "/notifications/read": {
                     patch: {
-                        tags: ["Notifications"],
+                        tags: ["Notificações"],
                         summary: "Mark notifications as read",
                         description: "Mark specific or all notifications as read for the authenticated user",
                         requestBody: {
@@ -4102,13 +4102,13 @@ All endpoints require authentication via:
                                 }
                             },
                             401: { $ref: "#/components/responses/Unauthorized" },
-                            500: { description: "Error updating notifications" }
+                            500: { description: "Erro ao atualizar notificações" }
                         }
                     }
                 },
                 "/notifications/delete": {
                     delete: {
-                        tags: ["Notifications"],
+                        tags: ["Notificações"],
                         summary: "Delete specific notification",
                         parameters: [
                             {
@@ -4121,7 +4121,7 @@ All endpoints require authentication via:
                         ],
                         responses: {
                             200: {
-                                description: "Notification deleted",
+                                description: "Notificação excluída",
                                 content: {
                                     "application/json": {
                                         schema: { $ref: "#/components/schemas/Success" }
@@ -4130,7 +4130,7 @@ All endpoints require authentication via:
                             },
                             400: { description: "Notification ID required" },
                             401: { $ref: "#/components/responses/Unauthorized" },
-                            500: { description: "Error deleting notification" }
+                            500: { description: "Erro ao excluir notificação" }
                         }
                     }
                 },
@@ -4139,9 +4139,9 @@ All endpoints require authentication via:
                 "/settings/system": {
                     "post": {
                         "tags": [
-                            "Settings"
+                            "Configurações"
                         ],
-                        "summary": "Update system settings",
+                        "summary": "Atualizar configurações do sistema",
                         "responses": {
                             "200": {
                                 "description": "System settings updated"
@@ -4150,8 +4150,8 @@ All endpoints require authentication via:
                     }
                     ,
                     get: {
-                        tags: ["System"],
-                        summary: "Get system settings",
+                        tags: ["Sistema"],
+                        summary: "Consultar configurações do sistema",
                         responses: {
                             200: {
                                 description: "System settings",
@@ -4172,8 +4172,8 @@ All endpoints require authentication via:
                         }
                     },
                     post: {
-                        tags: ["System"],
-                        summary: "Update system settings",
+                        tags: ["Sistema"],
+                        summary: "Atualizar configurações do sistema",
                         description: "Update global system configuration (Superadmin/Owner only)",
                         requestBody: {
                             content: {
@@ -4214,7 +4214,7 @@ All endpoints require authentication via:
                 },
                 "/status/{sessionId}/update": {
                     post: {
-                        tags: ["System"],
+                        tags: ["Sistema"],
                         summary: "Update status",
                         description: "Post a status update (story) to WhatsApp. Supports text, image, and video.",
                         parameters: [
@@ -4241,7 +4241,7 @@ All endpoints require authentication via:
                         },
                         responses: {
                             200: { description: "Status posted", content: { "application/json": { schema: { $ref: "#/components/schemas/Success" } } } },
-                            400: { description: "Missing required fields" },
+                            400: { description: "Preencha os campos obrigatórios" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { $ref: "#/components/responses/SessionNotReady" }
@@ -4250,7 +4250,7 @@ All endpoints require authentication via:
                 },
                 "/status/update": {
                     post: {
-                        tags: ["System"],
+                        tags: ["Sistema"],
                         summary: "Update status",
                         description: "Post a status update (story) to WhatsApp. Supports text, image, and video.",
                         requestBody: {
@@ -4316,7 +4316,7 @@ All endpoints require authentication via:
                                     }
                                 }
                             },
-                            400: { description: "Missing required fields" },
+                            400: { description: "Preencha os campos obrigatórios" },
                             401: { $ref: "#/components/responses/Unauthorized" },
                             403: { $ref: "#/components/responses/Forbidden" },
                             503: { description: "Session not ready" },
@@ -4326,7 +4326,7 @@ All endpoints require authentication via:
                 },
                 "/system/check-updates": {
                     post: {
-                        tags: ["System"],
+                        tags: ["Sistema"],
                         summary: "Check for updates",
                         description: "Checks for new releases on GitHub and creates a system notification if a newer version is available.",
                         responses: {
@@ -4346,14 +4346,14 @@ All endpoints require authentication via:
                                 }
                             },
                             401: { $ref: "#/components/responses/Unauthorized" },
-                            500: { description: "Error checking updates" }
+                            500: { description: "Erro ao verificar atualizações" }
                         }
                     }
                 },
                 "/contacts/{sessionId}/{jid}/block": {
                     post: {
-                        tags: ["Contacts"],
-                        summary: "Block contact",
+                        tags: ["Contatos"],
+                        summary: "Bloquear contato",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
                             { name: "jid", in: "path", required: true, schema: { type: "string" } }
@@ -4368,8 +4368,8 @@ All endpoints require authentication via:
                 },
                 "/contacts/{sessionId}/{jid}/unblock": {
                     post: {
-                        tags: ["Contacts"],
-                        summary: "Unblock contact",
+                        tags: ["Contatos"],
+                        summary: "Desbloquear contato",
                         parameters: [
                             { name: "sessionId", in: "path", required: true, schema: { type: "string" } },
                             { name: "jid", in: "path", required: true, schema: { type: "string" } }
@@ -4384,7 +4384,7 @@ All endpoints require authentication via:
                 },
                 "/chats/{sessionId}/by-label/{labelId}": {
                     get: {
-                        tags: ["Labels"],
+                        tags: ["Etiquetas"],
                         summary: "Get chats by label",
                         description: "Get all chats associated with a specific label",
                         parameters: [

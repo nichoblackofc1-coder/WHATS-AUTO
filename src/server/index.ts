@@ -53,7 +53,7 @@ app.prepare().then(() => {
     import("../lib/cron")
       .then(m => m.initScheduler())
       .catch(err => {
-        logger.warn("Scheduler", "Database offline, skipping scheduler startup: " + (err?.message || err));
+        logger.warn("Agendamentos", "Database offline, skipping scheduler startup: " + (err?.message || err));
       });
   }
 

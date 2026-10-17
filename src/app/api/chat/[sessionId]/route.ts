@@ -12,13 +12,13 @@ export async function GET(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Acesso negado" }, { status: 403 });
         }
 
         // Get the database Session ID (cuid) from the sessionId string
@@ -28,7 +28,7 @@ export async function GET(
         });
 
         if (!session) {
-            return NextResponse.json({ status: false, message: "Session not found", error: 'Session not found' }, { status: 404 });
+            return NextResponse.json({ status: false, message: "Sessão não encontrada", error: "Sessão não encontrada" }, { status: 404 });
         }
 
         const dbSessionId = session.id;
@@ -39,6 +39,6 @@ export async function GET(
         return NextResponse.json({ status: true, message: "Chats fetched successfully", data: chatList });
     } catch (error) {
         console.error("Chat API error:", error);
-        return NextResponse.json({ status: false, message: "Failed to fetch chats", error: 'Failed to fetch chats' }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível carregar conversas", error: "Não foi possível carregar conversas" }, { status: 500 });
     }
 }

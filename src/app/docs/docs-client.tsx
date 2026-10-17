@@ -31,12 +31,12 @@ function CopyButton({ code }: { code: string }) {
         navigator.clipboard.writeText(code).then(() => {
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
-        }).catch(() => toast.error("Copy failed"));
+        }).catch(() => toast.error("Não foi possível copiar"));
     }, [code]);
     return (
         <button onClick={handleCopy} className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 transition-colors cursor-pointer">
             {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-            {copied ? "Copied!" : "Copy"}
+            {copied ? "Copiado!" : "Copiar"}
         </button>
     );
 }
@@ -149,7 +149,7 @@ export function DocsClient({ content, toc }: DocsClientProps) {
                         </button>
                     ))}
                     {section.items.length === 0 && (
-                        <p className="text-xs text-gray-300 italic px-2 py-1">No subsections</p>
+                        <p className="text-xs text-gray-300 italic px-2 py-1">Nenhuma subseção</p>
                     )}
                 </div>
             )}
@@ -171,7 +171,7 @@ export function DocsClient({ content, toc }: DocsClientProps) {
                     />
                 ))
             ) : (
-                <p className="text-sm text-gray-400 text-center py-4">No results found</p>
+                <p className="text-sm text-gray-400 text-center py-4">Nenhum resultado encontrado</p>
             )}
         </nav>
     );
@@ -203,8 +203,8 @@ export function DocsClient({ content, toc }: DocsClientProps) {
                     </SheetTrigger>
                     <SheetContent side="left" className="w-[85vw] sm:w-[400px] p-0 flex flex-col"> {/* Adjusted width for mobile */}
                         <div className="p-6 border-b bg-gray-50/50">
-                            <h2 className="text-lg font-bold text-gray-900">Documentation</h2>
-                            <p className="text-xs text-gray-500 mt-1">Navigate through sections</p>
+                            <h2 className="text-lg font-bold text-gray-900">Documentação</h2>
+                            <p className="text-xs text-gray-500 mt-1">Navegue pelas seções</p>
                         </div>
                         <div className="p-4 flex-1 overflow-y-auto overscroll-contain"> {/* Added overscroll-contain */}
                             <div className="mb-6 relative">
@@ -234,7 +234,7 @@ export function DocsClient({ content, toc }: DocsClientProps) {
                         </div>
                         <div className="ml-3">
                             <p className="text-sm text-blue-700">
-                                For the most up-to-date API reference and interactive testing, please check the <Link href="/swagger" className="font-medium underline hover:text-blue-600">Swagger UI</Link> or the <Link href="/dashboard/api-docs" className="font-medium underline hover:text-blue-600">Dashboard API Docs</Link>.
+                                Para consultar a documentação atualizada e testar a API, acesse o <Link href="/swagger" className="font-medium underline hover:text-blue-600">Swagger UI</Link> ou o <Link href="/dashboard/api-docs" className="font-medium underline hover:text-blue-600">Documentação da API no painel</Link>.
                             </p>
                         </div>
                     </div>
@@ -273,7 +273,7 @@ export function DocsClient({ content, toc }: DocsClientProps) {
                                                     <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
                                                     <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
                                                 </svg>
-                                                <span className="font-medium">Copy</span>
+                                                <span className="font-medium">Copiar</span>
                                             </button>
                                         </div>
                                         <pre className="text-gray-100 text-sm leading-loose overflow-x-auto p-5 m-0 selection:bg-gray-700">
@@ -302,7 +302,7 @@ export function DocsClient({ content, toc }: DocsClientProps) {
                 </article>
 
                 <footer className="mt-20 pt-8 border-t text-center text-sm text-gray-400">
-                    <p>© {new Date().getFullYear()} WA-AKG. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} WA-AKG. Todos os direitos reservados.</p>
                 </footer>
             </main>
         </div>

@@ -12,21 +12,21 @@ export async function POST(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId, jid } = await params;
         const formData = await request.formData();
         const file = formData.get("file") as File;
-        
+
         if (!file) {
-             return NextResponse.json({ status: false, message: "file is required", error: "file is required" }, { status: 400 });
+             return NextResponse.json({ status: false, message: "Selecione um arquivo", error: "Selecione um arquivo" }, { status: 400 });
         }
 
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -61,10 +61,10 @@ export async function POST(
         // Fire webhook for sent message (non-blocking)
         fireSentWebhook(sessionId, decodedJid, { type: 'sticker' }, sendResult).catch(() => {});
 
-        return NextResponse.json({ status: true, message: "Operation successful" });
+        return NextResponse.json({ status: true, message: "Operação concluída" });
 
     } catch (e) {
         console.error("Sticker error", e);
-        return NextResponse.json({ status: false, message: "Failed to create sticker", error: "Failed to create sticker" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível criar figurinha", error: "Não foi possível criar figurinha" }, { status: 500 });
     }
 }

@@ -13,7 +13,7 @@ import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
     const user = await getAuthenticatedUser(req); // Support API Key
-    if (!user) return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+    if (!user) return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
 
     // Check for SUPERADMIN role? Original code didn't check, but usually system updates are restricted.
     // Ideally we should check user.role === 'SUPERADMIN'
@@ -68,6 +68,6 @@ export async function POST(req: NextRequest) {
 
     } catch (e) {
         console.error(e);
-        return NextResponse.json({ status: false, message: "Error checking updates", error: "Error checking updates" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Erro ao verificar atualizações", error: "Erro ao verificar atualizações" }, { status: 500 });
     }
 }

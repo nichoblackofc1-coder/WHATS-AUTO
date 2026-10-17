@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import { normalizeJid } from "@/lib/jid-utils";
 import { waManager } from "@/modules/whatsapp/manager";
 import { onMessageSent } from "@/lib/webhook";
@@ -19,29 +20,36 @@ export class ChatService {
         // 1. Get latest message per remoteJid with cursor pagination
         // Uses m1.timestamp < before (when provided) to load older chats
         // Build params: [dbSessionId, dbSessionId, (before?), limit]
-        const qParams: any[] = [dbSessionId, dbSessionId];
-        if (before) qParams.push(new Date(before));
-        qParams.push(limit);
-
-        const rawLastMessages = await prisma.$queryRawUnsafe<Array<{
+        const pageSize = Math.max(1, Math.min(100, Math.trunc(limit) || 50));
+        const cursor = before ? new Date(before) : null;
+        if (cursor && Number.isNaN(cursor.getTime())) throw new Error("Data de paginação inválida");
+        const query = search?.trim();
+        const searchPattern = query ? `%${query.replace(/[\\%_]/g, "\\$&")}%` : null;
+        const rawLastMessages = await prisma.$queryRaw<Array<{
             remoteJid: string;
             content: string | null;
             timestamp: Date;
             type: string;
-        }>>(`
-            SELECT m1.remoteJid, m1.content, m1.timestamp, m1.type
-            FROM \`Message\` m1
-            INNER JOIN (
-                SELECT remoteJid, MAX(timestamp) as max_ts
-                FROM \`Message\`
-                WHERE sessionId = ?
-                GROUP BY remoteJid
-            ) m2 ON m1.remoteJid = m2.remoteJid AND m1.timestamp = m2.max_ts
-            WHERE m1.sessionId = ?
-            ${before ? 'AND m1.timestamp < ?' : ''}
-            ORDER BY m1.timestamp DESC
-            LIMIT ?
-        `, ...qParams);
+        }>>(Prisma.sql`
+            SELECT latest.* FROM (
+                SELECT DISTINCT ON ("remoteJid") "remoteJid", content, "timestamp", type
+                FROM "Message"
+                WHERE "sessionId" = ${dbSessionId}
+                ORDER BY "remoteJid", "timestamp" DESC, id DESC
+            ) latest
+            WHERE true
+            ${cursor ? Prisma.sql`AND latest."timestamp" < ${cursor}` : Prisma.empty}
+            ${searchPattern ? Prisma.sql`AND (
+                latest."remoteJid" ILIKE ${searchPattern}
+                OR EXISTS (SELECT 1 FROM "Contact" c WHERE c."sessionId" = ${dbSessionId}
+                    AND c.jid = latest."remoteJid"
+                    AND (c.name ILIKE ${searchPattern} OR c.notify ILIKE ${searchPattern}))
+                OR EXISTS (SELECT 1 FROM "Group" g WHERE g."sessionId" = ${dbSessionId}
+                    AND g.jid = latest."remoteJid" AND g.subject ILIKE ${searchPattern})
+            )` : Prisma.empty}
+            ORDER BY latest."timestamp" DESC, latest."remoteJid" ASC
+            LIMIT ${pageSize}
+        `);
 
         // Fast return if no messages
         if (rawLastMessages.length === 0) return [];
@@ -194,7 +202,7 @@ export class ChatService {
     static async sendTextMessage(sessionId: string, jid: string, messagePayload: any, mentions?: string[], quotedMessageId?: string) {
         const instance = waManager.getInstance(sessionId);
         if (!instance || !instance.socket) {
-            throw new Error("WhatsApp session is disconnected or not found");
+            throw new Error("A sessão do WhatsApp está desconectada ou não foi encontrada");
         }
 
         // Handle quoted/reply message
@@ -208,10 +216,10 @@ export class ChatService {
                         select: { keyId: true, remoteJid: true, fromMe: true, content: true, senderJid: true }
                     });
                     if (quotedMsg) {
-                        const rawParticipant = quotedMsg.fromMe 
-                            ? instance.socket.user?.id 
+                        const rawParticipant = quotedMsg.fromMe
+                            ? instance.socket.user?.id
                             : (quotedMsg.senderJid || quotedMsg.remoteJid);
-                        
+
                         let cleanParticipant: string | undefined = undefined;
                         if (rawParticipant) {
                             const [userPart, domain] = rawParticipant.split('@');
@@ -375,7 +383,7 @@ export class ChatService {
     ) {
         const instance = waManager.getInstance(sessionId);
         if (!instance || !instance.socket) {
-            throw new Error("WhatsApp session is disconnected or not found");
+            throw new Error("A sessão do WhatsApp está desconectada ou não foi encontrada");
         }
 
         const messageOptions: any = {};

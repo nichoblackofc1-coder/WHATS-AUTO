@@ -28,7 +28,7 @@ export default async function Icon() {
             letter = config.appName.charAt(0).toUpperCase();
         }
     } catch (e) {
-        console.error("Failed to fetch favicon config", e);
+        console.error("Não foi possível carregar configuração do ícone", e);
     }
 
     return new ImageResponse(

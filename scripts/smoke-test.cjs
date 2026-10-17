@@ -26,7 +26,7 @@ async function main() {
     socket.on("connect_error", (error) => {
       clearTimeout(timer);
       socket.close();
-      if (error.message !== "Unauthorized") return reject(error);
+      if (!["Unauthorized", "Não autenticado"].includes(error.message)) return reject(error);
       console.log("PASS unauthenticated socket rejected");
       resolve();
     });

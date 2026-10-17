@@ -25,7 +25,7 @@ export class WhatsAppManager {
         if (!this.io) throw new Error("Socket.IO not initialized in WhatsAppManager");
         const sessions = await prisma.session.findMany({
             where: {
-                status: { not: "LOGGED_OUT" }
+                status: { in: ["CONNECTED", "CONNECTING", "DISCONNECTED", "ZOMBIE"] }
             },
             select: { sessionId: true, userId: true, status: true }
         });
@@ -62,7 +62,7 @@ export class WhatsAppManager {
 
         if (!this.io) {
             logger.error("Manager", "Socket.IO not initialized in WhatsAppManager");
-            throw new Error("Socket.IO not initialized");
+            throw new Error("O serviço do WhatsApp não foi iniciado");
         }
 
         const sessionId = customSessionId || Math.random().toString(36).substring(7);
@@ -133,7 +133,7 @@ export class WhatsAppManager {
         }
 
         const session = await prisma.session.findUnique({ where: { sessionId } });
-        if (!session) throw new Error("Session not found");
+        if (!session) throw new Error("Sessão não encontrada");
 
         // Create fresh instance
         let instance = this.sessions.get(sessionId);
@@ -157,7 +157,7 @@ export class WhatsAppManager {
 
     async requestPairingCode(sessionId: string, phoneNumber: string) {
         const instance = this.sessions.get(sessionId);
-        if (!instance) throw new Error("Instance not found or not running");
+        if (!instance) throw new Error("A sessão não está em execução");
         return await instance.requestPairingCode(phoneNumber);
     }
 }

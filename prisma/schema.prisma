@@ -11,6 +11,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model GatewayJob {
+  id        String   @id
+  status    String   @default("PENDING")
+  request   String   @db.Text
+  response  String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@index([status, createdAt])
+}
+
+model GatewayMedia {
+  filename  String   @id
+  data      Bytes
+  size      Int
+  createdAt DateTime @default(now())
+}
+
 enum Role {
   SUPERADMIN
   OWNER
@@ -295,7 +313,7 @@ model SystemConfig {
   appName            String   @default("WA-AKG")
   logoUrl            String?
   faviconUrl         String?
-  timezone           String   @default("Asia/Jakarta")
+  timezone           String   @default("America/Fortaleza")
   enableRegistration Boolean  @default(true)
   
   updatedAt          DateTime @updatedAt

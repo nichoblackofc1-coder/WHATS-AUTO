@@ -1,8 +1,10 @@
 <div align="center">
 
-# 🚀 WA-AKG: The Ultimate WhatsApp Gateway & Dashboard
+# WA-AKG: Central de WhatsApp e automação
 
 **Instalação deste projeto:** [publicação e hospedagem](docs/PUBLICACAO.md) · [validação realizada](docs/VALIDACAO.md).
+
+**Português do Brasil:** [guia completo de uso](docs/GUIA_PT_BR.md). A interface usa pt-BR, números brasileiros com código 55 e fuso padrão `America/Fortaleza`. Na Vercel, o serviço contínuo `whatsapp` mantém as sessões e os agendamentos; as novas mídias ficam no PostgreSQL. Os detalhes técnicos legados abaixo permanecem como referência do projeto original.
 
 [![WhatsApp Bot](https://img.shields.io/badge/WhatsApp-Bot-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)

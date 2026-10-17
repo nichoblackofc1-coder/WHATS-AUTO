@@ -11,7 +11,7 @@ export async function GET(
         const { sessionId } = await params;
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         if (!sessionId) {
@@ -21,7 +21,7 @@ export async function GET(
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const labels = await prisma.label.findMany({
@@ -34,7 +34,7 @@ export async function GET(
             orderBy: { createdAt: 'desc' }
         });
 
-        return NextResponse.json({ status: true, message: "Operation successful", data: { labels } });
+        return NextResponse.json({ status: true, message: "Operação concluída", data: { labels } });
 
     } catch (error) {
         console.error("Get labels error:", error);
@@ -51,7 +51,7 @@ export async function POST(
         const { sessionId } = await params;
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const body = await request.json();
@@ -64,7 +64,7 @@ export async function POST(
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         // Validate color (0-19 for WhatsApp colors)
@@ -90,11 +90,11 @@ export async function POST(
             }
         });
 
-        return NextResponse.json({ status: true, message: "Operation successful", data: { label } });
+        return NextResponse.json({ status: true, message: "Operação concluída", data: { label } });
 
     } catch (error) {
         console.error("Create label error:", error);
-        return NextResponse.json({ status: false, message: "Failed to create label", error: "Failed to create label" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível criar etiqueta", error: "Não foi possível criar etiqueta" }, { status: 500 });
     }
 
 }

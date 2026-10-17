@@ -74,7 +74,7 @@ export const bindSessionStore = (sock: WASocket, sessionId: string, io: Server |
                     handleBotCommand(sock, sessionId, msg).catch(e => logger.error("Bot", "Bot Handler Error", e));
                 }
             } catch (error) {
-                logger.error("Store", "Error saving message", error);
+                logger.error("Store", "Erro ao salvar mensagem", error);
             }
         }
 
@@ -209,7 +209,7 @@ export const bindSessionStore = (sock: WASocket, sessionId: string, io: Server |
         for (const update of updates) {
             try {
                 if (!update.id) continue;
-                
+
                 // Keep DB in sync
                 const updateData: any = {};
                 if (update.subject !== undefined) updateData.subject = update.subject;
@@ -226,7 +226,7 @@ export const bindSessionStore = (sock: WASocket, sessionId: string, io: Server |
                         data: updateData
                     });
                 }
-                
+
                 // Trigger webhook
                 dispatchWebhook(sessionId, "group.update", {
                     jid: update.id,
@@ -251,7 +251,7 @@ export const bindSessionStore = (sock: WASocket, sessionId: string, io: Server |
                 action: update.action,
                 participants: update.participants
             });
-            
+
             // To properly resync the group participants in DB, it's safer to re-fetch the entire group metadata
             // But we don't await strictly to not block the socket
             sock.groupMetadata(update.id).then(async (g) => {
@@ -509,7 +509,7 @@ async function processAndSaveMessage(
                 quoteId
             }
         });
-        
+
         // Ensure contact exists (Upsert Contact)
         const finalRemoteJid = normalizeJid(normalizedRemoteJid);
         if (remoteJid && !remoteJid.includes('@g.us') && !remoteJid.includes('status@broadcast')) {

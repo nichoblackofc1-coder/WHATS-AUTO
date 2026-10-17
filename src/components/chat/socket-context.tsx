@@ -1,7 +1,8 @@
 "use client";
 
+import { createRealtimeSocket, usesPolling } from '@/lib/realtime-client';
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 
 type SocketContextValue = {
     getSocket: () => Socket | null;
@@ -22,7 +23,7 @@ export function SocketProvider({ children }: { children: React.ReactNode }) {
     const [ready, setReady] = useState(false);
 
     useEffect(() => {
-        const socket = io({
+        const socket = createRealtimeSocket({
             path: "/api/socket/io",
             addTrailingSlash: false,
             transports: ["websocket", "polling"],

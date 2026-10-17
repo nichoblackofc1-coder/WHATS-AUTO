@@ -7,12 +7,12 @@ export async function PUT(
     request: NextRequest,
     { params }: { params: Promise<{ sessionId: string, labelId: string }> }
 ) {
-    
+
     try {
         const { sessionId, labelId } = await params;
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const body = await request.json();
@@ -59,11 +59,11 @@ export async function PUT(
             data: updateData
         });
 
-        return NextResponse.json({ status: true, message: "Operation successful", data: updatedLabel });
+        return NextResponse.json({ status: true, message: "Operação concluída", data: updatedLabel });
 
     } catch (error) {
         console.error("Update label error:", error);
-        return NextResponse.json({ status: false, message: "Failed to update label", error: "Failed to update label" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível atualizar etiqueta", error: "Não foi possível atualizar etiqueta" }, { status: 500 });
     }
 }
 
@@ -76,7 +76,7 @@ export async function DELETE(
         const { sessionId, labelId } = await params;
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         // Find label and verify access
@@ -103,10 +103,10 @@ export async function DELETE(
             where: { id: labelId }
         });
 
-        return NextResponse.json({ status: true, message: "Label deleted successfully" });
+        return NextResponse.json({ status: true, message: "Etiqueta excluída com sucesso" });
 
     } catch (error) {
         console.error("Delete label error:", error);
-        return NextResponse.json({ status: false, message: "Failed to delete label", error: "Failed to delete label" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível excluir etiqueta", error: "Não foi possível excluir etiqueta" }, { status: 500 });
     }
 }

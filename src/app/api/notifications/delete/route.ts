@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(req: Request) {
     const session = await auth();
-    if (!session?.user?.id) return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+    if (!session?.user?.id) return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
 
     try {
         const { searchParams } = new URL(req.url);
@@ -22,9 +22,9 @@ export async function DELETE(req: Request) {
             }
         });
 
-        return NextResponse.json({ status: true, message: "Notification deleted" });
+        return NextResponse.json({ status: true, message: "Notificação excluída" });
     } catch (e) {
         console.error(e);
-        return NextResponse.json({ status: false, message: "Error deleting notification", error: "Error deleting notification" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Erro ao excluir notificação", error: "Erro ao excluir notificação" }, { status: 500 });
     }
 }

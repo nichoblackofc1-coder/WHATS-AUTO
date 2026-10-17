@@ -10,7 +10,7 @@ export async function POST(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId, jid, messageId } = await params;
@@ -25,7 +25,7 @@ export async function POST(
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -48,7 +48,7 @@ export async function POST(
             }
         });
 
-        return NextResponse.json({ 
+        return NextResponse.json({
             success: true,
             message: emoji ? "Reaction sent" : "Reaction removed"
         });

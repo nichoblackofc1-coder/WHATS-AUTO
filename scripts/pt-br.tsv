@@ -1,0 +1,1024 @@
+Main|Principal
+Dashboard|Painel
+Messaging|Mensagens
+Chat|Conversas
+Broadcast|Disparo em massa
+Contacts|Contatos
+Groups|Grupos
+Labels|Etiquetas
+Automation|Automação
+Developer|Desenvolvedor
+Administration|Administração
+Users|Usuários
+Settings|Configurações
+Notifications|Notificações
+Sessions|Sessões
+Session|Sessão
+Sessions / QR|Sessões / QR Code
+Sticker Maker|Criador de figurinhas
+Bot Settings|Configurações do bot
+Auto Reply|Resposta automática
+Bot Profile|Perfil do bot
+Scheduler|Agendamentos
+Webhooks & API|Webhooks e API
+API Docs|Documentação da API
+API & Docs|API e documentação
+API Documentation|Documentação da API
+API Key|Chave da API
+Media Manager|Gerenciador de mídias
+Session Access|Acesso às sessões
+System Monitor|Monitor do sistema
+Welcome Back|Bem-vindo de volta
+Sign in to your WA-AKG account|Entre na sua conta do WA-AKG
+Email|E-mail
+Password|Senha
+Sign In|Entrar
+Sign in|Entrar
+Sign Out|Sair
+Logout|Desconectar
+Authenticating...|Autenticando...
+Create an account|Criar uma conta
+Create Account|Criar conta
+Don&apos;t have an account?|Ainda não tem uma conta?
+Already have an account?|Já tem uma conta?
+Join WA-AKG today|Crie sua conta no WA-AKG
+Full Name|Nome completo
+Confirm Password|Confirmar senha
+Creating Account...|Criando conta...
+By registering, you agree to our|Ao se cadastrar, você concorda com nossos
+Terms of Service|Termos de uso
+Privacy Policy|Política de privacidade
+Terms|Termos
+Privacy|Privacidade
+Please enter a valid email address|Informe um endereço de e-mail válido
+Password is required|Informe a senha
+Invalid email or password|E-mail ou senha incorretos
+An unexpected error occurred|Ocorreu um erro inesperado
+An error occurred|Ocorreu um erro
+Name must be at least 2 characters|O nome deve ter pelo menos 2 caracteres
+Password must be at least 6 characters|A senha deve ter pelo menos 6 caracteres
+Passwords do not match|As senhas não coincidem
+Registration Successful!|Cadastro realizado!
+Redirecting you to the login page...|Redirecionando para a página de login...
+Failed to register|Não foi possível cadastrar
+Cancel|Cancelar
+Save|Salvar
+Save Changes|Salvar alterações
+Save Configuration|Salvar configuração
+Save Rule|Salvar regra
+Save Bot Configuration|Salvar configurações do bot
+Save Automation Settings|Salvar configurações de automação
+Save Media Settings|Salvar configurações de mídia
+Save Privacy Settings|Salvar privacidade
+Save Protection Settings|Salvar proteção
+Saving...|Salvando...
+Delete|Excluir
+Edit|Editar
+Create|Criar
+Add|Adicionar
+Remove|Remover
+Close|Fechar
+Back|Voltar
+Continue|Continuar
+Next|Próximo
+Previous|Anterior
+Refresh|Atualizar
+View all|Ver todos
+View All|Ver todos
+See all|Ver todos
+Show All|Mostrar todos
+Search|Buscar
+Clear|Limpar
+All|Todos
+Select All|Selecionar todos
+Deselect All|Desmarcar todos
+Loading...|Carregando...
+Loading sessions...|Carregando sessões...
+Loading session...|Carregando sessão...
+Loading chats...|Carregando conversas...
+Loading older...|Carregando anteriores...
+Loading groups...|Carregando grupos...
+Loading logs...|Carregando registros...
+No data returned|Nenhum dado retornado
+Unknown error|Erro desconhecido
+Operation failed|Não foi possível concluir a operação
+Action failed|Não foi possível concluir a ação
+Unauthorized|Não autenticado
+Forbidden|Acesso negado
+Access Denied|Acesso negado
+Unknown runtime error|Erro inesperado no sistema
+Name|Nome
+Status|Status
+Actions|Ações
+Type|Tipo
+Title|Título
+Message|Mensagem
+Description|Descrição
+Role|Permissão
+Owner|Proprietário
+Staff|Colaborador
+Super Admin|Administrador
+User Account|Conta do usuário
+User Management|Gerenciamento de usuários
+Manage users and roles|Gerencie usuários e permissões
+Add User|Adicionar usuário
+New User|Novo usuário
+Edit User|Editar usuário
+User created|Usuário criado
+User updated|Usuário atualizado
+User deleted|Usuário excluído
+New Password (leave blank to keep)|Nova senha (deixe em branco para manter)
+Unauthorized. Only Super Admin can view users.|Apenas administradores podem visualizar os usuários.
+Please fill all fields|Preencha todos os campos
+Please fill required fields|Preencha os campos obrigatórios
+Please fill required fields (JID, Content/Media)|Preencha o destinatário e o texto ou a mídia
+Add Session|Adicionar sessão
+New Session|Nova sessão
+Create New Session|Criar nova sessão
+Create Session|Criar sessão
+Create a Session|Criar uma sessão
+Session Name|Nome da sessão
+Custom Session ID (Optional)|Identificador da sessão (opcional)
+Session Status|Status da sessão
+Session / Device|Sessão / dispositivo
+Manage Sessions|Gerenciar sessões
+Manage|Gerenciar
+Back to Sessions|Voltar às sessões
+Start Session|Iniciar sessão
+Stop Session|Parar sessão
+Restart Session|Reiniciar sessão
+Delete Session|Excluir sessão
+Session created successfully|Sessão criada com sucesso
+Session deleted|Sessão excluída
+Session name is required|Informe o nome da sessão
+Session ID already exists|O identificador da sessão já existe
+Session not found|Sessão não encontrada
+No sessions yet|Nenhuma sessão cadastrada
+No active session found|Nenhuma sessão ativa encontrada
+No active session selected|Nenhuma sessão ativa selecionada
+No Active Session|Nenhuma sessão ativa
+No Session Selected|Nenhuma sessão selecionada
+Select Session|Selecionar sessão
+Select a session|Selecione uma sessão
+Select a session from the top bar.|Selecione uma sessão na barra superior.
+No active WhatsApp session selected. Please select a session from the top bar.|Selecione uma sessão do WhatsApp na barra superior.
+Please select a WhatsApp session from the top navigation bar to access this feature.|Selecione uma sessão do WhatsApp na barra superior para acessar este recurso.
+No sessions found. Create one above to get started.|Nenhuma sessão encontrada. Crie uma sessão acima para começar.
+You don't have any sessions yet.|Você ainda não tem sessões.
+You don&apos;t have any sessions. Create a session first.|Você ainda não tem sessões. Crie uma sessão primeiro.
+Connect your first WhatsApp device to get started|Conecte seu primeiro dispositivo do WhatsApp para começar
+Add a new WhatsApp account to manage.|Adicione uma conta do WhatsApp para gerenciar.
+Connect a new device|Conectar novo dispositivo
+Scan with WhatsApp to connect|Leia o QR Code com o WhatsApp para conectar
+Or link with phone number|Ou conecte usando o número de telefone
+Your Pairing Code|Seu código de conexão
+Enter this code on your phone|Digite este código no seu telefone
+Phone Number|Número de telefone
+Target Number|Número de destino
+Target Numbers (e.g., 628123456789)|Números de destino (ex.: 5588981234567)
+Use country code without + or spaces (e.g., 628123456789)|Use o código do país sem + ou espaços (ex.: 5588981234567)
+Please enter a phone number|Informe um número de telefone
+Only letters, numbers, hyphens.|Use apenas letras, números e hífens.
+Registered sessions|Sessões cadastradas
+Total Sessions|Total de sessões
+Active Sessions (|Sessões ativas (
+Online & ready|Conectado e pronto
+Needs reconnection|Precisa reconectar
+Connected As|Conectado como
+Connection Update|Atualização de conexão
+List of active WhatsApp sessions and their current connection status.|Sessões do WhatsApp e seus estados de conexão.
+Real-time connection status and uptime.|Estado da conexão e tempo de atividade em tempo real.
+Manage the active session.|Gerencie a sessão ativa.
+Connected|Conectado
+Disconnected|Desconectado
+Stopped|Parado
+Connecting|Conectando
+Inbox|Caixa de entrada
+Chats|Conversas
+New Chat|Nova conversa
+New messages|Novas mensagens
+No chats yet|Nenhuma conversa ainda
+No chats match your search|Nenhuma conversa corresponde à busca
+No messages yet|Nenhuma mensagem ainda
+Beginning of conversation|Início da conversa
+Select a chat to start messaging|Selecione uma conversa para começar
+Type a message...|Digite uma mensagem...
+Search chats...|Buscar conversas...
+Search contacts...|Buscar contatos...
+Search contacts or enter JID...|Busque contatos ou informe o JID...
+Type to search contacts...|Digite para buscar contatos...
+Open chat|Abrir conversa
+Open chat interface|Abrir conversas
+Reply|Responder
+Replying to|Respondendo a
+Copy|Copiar
+Copy JID|Copiar JID
+Copied!|Copiado!
+Copied to clipboard|Copiado para a área de transferência
+Copied to clipboard!|Copiado para a área de transferência!
+JID copied!|JID copiado!
+Copy failed|Não foi possível copiar
+Info|Informações
+Today|Hoje
+Yesterday|Ontem
+Shortcuts|Atalhos
+Send|Enviar
+Send Message|Enviar mensagem
+Sent!|Enviado!
+Downloading...|Baixando...
+Download failed!|Não foi possível baixar!
+Drop files here|Solte os arquivos aqui
+Delete message?|Excluir mensagem?
+Delete failed|Não foi possível excluir
+This will delete the message for everyone. This action cannot be undone.|Isso excluirá a mensagem para todos. Esta ação não pode ser desfeita.
+Original message not loaded in view|A mensagem original não está carregada nesta conversa
+Enter: Send\nShift+Enter: New line\nEsc: Cancel reply\n?: Show this help|Enter: enviar\nShift+Enter: nova linha\nEsc: cancelar resposta\n?: mostrar ajuda
+Contact List|Lista de contatos
+Manage and view your saved contacts.|Gerencie e consulte os contatos salvos.
+No contacts found|Nenhum contato encontrado
+No contacts found.|Nenhum contato encontrado.
+No Name|Sem nome
+Name / Pushname|Nome / nome no WhatsApp
+Phone / Alt|Telefone / alternativo
+Personal|Pessoal
+Group|Grupo
+Channel|Canal
+Group Chats Only|Somente grupos
+Private Chats Only|Somente conversas privadas
+Everyone & Groups|Todos e grupos
+Manage groups for active session.|Gerencie os grupos da sessão ativa.
+Create New Group|Criar novo grupo
+Group Subject|Nome do grupo
+Group Member|Participante do grupo
+Participants:|Participantes:
+Search groups...|Buscar grupos...
+No groups found matching criteria.|Nenhum grupo corresponde aos filtros.
+Group created|Grupo criado
+Chat Labels|Etiquetas das conversas
+Label Name|Nome da etiqueta
+Label name is required|Informe o nome da etiqueta
+New Label|Nova etiqueta
+Create Label|Criar etiqueta
+Create New Label|Criar nova etiqueta
+Edit Label|Editar etiqueta
+Create your first label|Crie sua primeira etiqueta
+Color|Cor
+Label created successfully|Etiqueta criada com sucesso
+Label updated successfully|Etiqueta atualizada com sucesso
+Label deleted successfully|Etiqueta excluída com sucesso
+Label assigned|Etiqueta atribuída
+Label removed|Etiqueta removida
+Chat assigned to label|Conversa adicionada à etiqueta
+Chat removed from label|Conversa removida da etiqueta
+No labels found|Nenhuma etiqueta encontrada
+No labels. Create one in Labels page.|Nenhuma etiqueta. Crie uma na página de etiquetas.
+You haven't created any chat labels yet.|Você ainda não criou etiquetas para as conversas.
+Add a new color-coded label for organizing chats.|Adicione uma etiqueta colorida para organizar as conversas.
+Organize chats with color-coded labels. Click a label to manage assigned chats.|Organize conversas com etiquetas coloridas. Clique em uma etiqueta para gerenciar suas conversas.
+Update the label name or color.|Atualize o nome ou a cor da etiqueta.
+Delete label?|Excluir etiqueta?
+label and remove it from all assigned chats.|etiqueta e removê-la de todas as conversas associadas.
+No chats assigned to this label yet.|Nenhuma conversa associada a esta etiqueta.
+Assign|Associar
+Assign a chat|Associar uma conversa
+Assign Chat to Label|Associar conversa à etiqueta
+Assign labels|Associar etiquetas
+Assign &quot;|Associar &quot;
+&quot; directly|&quot; diretamente
+Remove from label|Remover da etiqueta
+Search for a contact or enter a JID to assign to this label.|Busque um contato ou informe o JID para associá-lo a esta etiqueta.
+e.g. VIP Customer|Ex.: cliente VIP
+Bot Mode & Access Control|Modo do bot e controle de acesso
+Bot Interaction Mode|Modo de interação do bot
+Configure who can interact with the bot and use commands.|Configure quem pode interagir com o bot e usar comandos.
+Private (Owner Only)|Privado (somente proprietário)
+Public (Everyone)|Público (todos)
+Control who can trigger bot commands.|Controle quem pode executar comandos do bot.
+Bot Name|Nome do bot
+Command Prefix|Prefixo dos comandos
+The display name used by the bot in automated responses.|Nome usado pelo bot nas respostas automáticas.
+The prefix character for bot commands.|Caractere usado como prefixo dos comandos do bot.
+Blacklist (Block JIDs)|Lista de bloqueio (JIDs bloqueados)
+Whitelist (Selected JIDs)|Lista de permissão (JIDs autorizados)
+Blacklisted Numbers|Números bloqueados
+Whitelisted Numbers|Números autorizados
+Enter phone numbers separated by comma or new line.|Informe os números separados por vírgula ou quebra de linha.
+Automation & Presence|Automação e presença
+Advanced bot automation and presence customization.|Automação do bot e configurações de presença.
+Auto Read (Blue Ticks)|Leitura automática (confirmações azuis)
+Automatically mark messages as read.|Marcar mensagens como lidas automaticamente.
+Always Online|Sempre conectado
+Stay "Online" even when inactive.|Manter o status conectado mesmo quando inativo.
+Welcome Message (Beta)|Mensagem de boas-vindas (beta)
+Sent automatically to users when they message this bot for the first time.|Enviada automaticamente ao receber a primeira mensagem de um contato.
+Ping Command|Comando de resposta
+Uptime Command|Comando de tempo de atividade
+Media & Stickers|Mídias e figurinhas
+Configure how the bot handles media and sticker conversion.|Configure como o bot processa mídias e cria figurinhas.
+Auto-convert images|Converter imagens automaticamente
+Auto-convert short videos|Converter vídeos curtos automaticamente
+Max Sticker Video Duration:|Duração máxima do vídeo para figurinha:
+Maximum video duration (in seconds) allowed for sticker conversion.|Duração máxima em segundos para converter vídeos em figurinhas.
+Remove.bg API Key (Optional)|Chave da API Remove.bg (opcional)
+Enter your Remove.bg API Key|Informe sua chave da API Remove.bg
+Enables background removal for stickers (use|Ativa a remoção de fundo das figurinhas (use
+Privacy & Utility|Privacidade e utilitários
+Ghost Mode|Modo invisível
+View status and read messages without sending blue ticks.|Veja status e leia mensagens sem enviar confirmações de leitura.
+Anti-Delete|Preservar mensagens excluídas
+Keep messages even if the sender deletes them for everyone.|Mantenha mensagens mesmo quando o remetente excluí-las para todos.
+Configure ghost mode and other features for your active session.|Configure o modo invisível e outros recursos da sessão ativa.
+Configure bot features and session privacy for the active WhatsApp session.|Configure os recursos do bot e a privacidade da sessão ativa.
+Bot configuration saved|Configurações do bot salvas
+Privacy settings saved|Configurações de privacidade salvas
+Anti-Ban Protection (Beta)|Controle de frequência de envio (beta)
+Enable Anti-Spam Delay|Ativar intervalo entre envios
+Messages Threshold|Limite de mensagens
+Time Window (Seconds)|Janela de tempo (segundos)
+Min Delay (ms)|Intervalo mínimo (ms)
+Max Delay (ms)|Intervalo máximo (ms)
+Minimum random delay applied. 1000ms = 1 second.|Intervalo aleatório mínimo. 1000 ms equivalem a 1 segundo.
+Maximum random delay applied. 3000ms = 3 seconds.|Intervalo aleatório máximo. 3000 ms equivalem a 3 segundos.
+Number of messages allowed at full speed before delay kicks in.|Número de mensagens enviadas antes de aplicar o intervalo.
+The rolling window to count messages. After this time passes, the counter resets naturally.|Período usado para contar as mensagens. Após esse tempo, a contagem é reiniciada.
+Lower = safer but slower.|Um limite menor reduz a velocidade de envio.
+Longer = more conservative.|Um período maior reduz a frequência de envio.
+Recommended safe settings:|Configurações sugeridas de intervalo:
+💡 How it works|💡 Como funciona
+Threshold|Limite
+Min|Mínimo
+Max|Máximo
+Auto Replies Builder|Respostas automáticas
+Auto-Reply Rules|Regras de resposta automática
+Setup rules to automatically respond to incoming messages.|Crie regras para responder automaticamente às mensagens recebidas.
+New Rule|Nova regra
+Create your first rule|Crie sua primeira regra
+Create Auto-Reply Rule|Criar regra de resposta automática
+Edit Auto-Reply Rule|Editar regra de resposta automática
+Keyword|Palavra-chave
+Match Type|Tipo de correspondência
+Exact Match|Correspondência exata
+Contains|Contém
+Starts With|Começa com
+Regex Pattern|Expressão regular
+Respond to|Responder a
+Select Trigger Audience|Selecione o público
+Response|Resposta
+Response text...|Texto da resposta...
+Reply Message (Optional)|Mensagem de resposta (opcional)
+Media URL (Optional)|URL da mídia (opcional)
+Media Type|Tipo de mídia
+Keyword and either response or media URL are required|Informe a palavra-chave e uma resposta ou URL de mídia
+Add a new keyword-based response.|Adicione uma resposta por palavra-chave.
+Modify the keyword-based response rule.|Edite a regra de resposta por palavra-chave.
+No auto-replies configured|Nenhuma resposta automática configurada
+You haven't set up any automated responses yet.|Você ainda não configurou respostas automáticas.
+Auto-reply rule created|Regra de resposta automática criada
+Auto-reply rule updated|Regra de resposta automática atualizada
+Auto-reply deleted|Resposta automática excluída
+Delete Rule?|Excluir regra?
+Are you sure you want to delete the auto-reply for keyword|Deseja excluir a resposta automática da palavra-chave
+e.g. !help, ping|Ex.: !ajuda, ping
+Message Content|Conteúdo da mensagem
+Schedule New Message|Agendar nova mensagem
+Schedule Type|Tipo de agendamento
+Schedule|Agendar
+Edit Schedule|Editar agendamento
+Send At (Date & Time)|Enviar em (data e hora)
+One-time|Envio único
+Recurring|Recorrente
+Every X Minutes|A cada X minutos
+Every X Hours|A cada X horas
+Specific Days of Week|Dias específicos da semana
+Custom Cron|Expressão cron personalizada
+Cron Expression|Expressão cron
+Repeat Interval|Intervalo de repetição
+Every|A cada
+Minutes|Minutos
+Hours|Horas
+Select Days|Selecione os dias
+Time of Day|Horário
+Timezone|Fuso horário
+Scheduler will use this timezone.|Este fuso será usado nos agendamentos.
+The exact date and time this message will be sent.|Data e hora em que a mensagem será enviada.
+The schedule will be evaluated starting from the current time.|O agendamento será calculado a partir do horário atual.
+Please specify Send At|Informe a data e a hora de envio
+Please specify a Time of Day|Informe o horário
+Recipient JID|JID do destinatário
+Search schedules...|Buscar agendamentos...
+Message scheduled|Mensagem agendada
+Schedule updated|Agendamento atualizado
+Schedule deleted|Agendamento excluído
+Schedule messages for active session.|Agende mensagens para a sessão ativa.
+Pending Queue|Fila de pendências
+No pending messages.|Nenhuma mensagem pendente.
+Pending|Pendente
+Sent|Enviado
+Failed|Falhou
+Success|Sucesso
+✓ Success|✓ Sucesso
+✗ Failed|✗ Falhou
+Next Run:|Próxima execução:
+History Logs|Histórico
+Delete Record?|Excluir registro?
+Are you sure you want to delete this schedule record?|Deseja excluir este agendamento?
+Message cannot be empty|A mensagem não pode ficar vazia
+Broadcast / Blast|Disparos em massa
+New Broadcast|Novo disparo
+Broadcast History|Histórico de disparos
+Broadcast Detail|Detalhes do disparo
+Broadcast In Progress|Disparo em andamento
+Broadcast Completed|Disparo concluído
+Broadcast Completed with Errors|Disparo concluído com erros
+Send bulk messages to multiple recipients at once.|Envie mensagens para vários destinatários.
+Start Broadcast|Iniciar disparo
+History of sent broadcasts, stored permanently.|Histórico dos disparos enviados.
+Recipients|Destinatários
+Recipients (|Destinatários (
+Processed:|Processados:
+Failed (|Falharam (
+No recipients specified|Informe os destinatários
+No numbers added yet.|Nenhum número adicionado.
+No history found.|Nenhum histórico encontrado.
+No connected sessions found.|Nenhuma sessão conectada.
+Delay antar pesan (+ random).|Intervalo entre mensagens (com variação aleatória).
+Belum ada broadcast.|Nenhum disparo ainda.
+Now sending:|Enviando agora:
+Started:|Iniciado:
+Completed:|Concluído:
+Progress|Progresso
+Check complete!|Verificação concluída!
+Sticker|Figurinha
+Image|Imagem
+Video|Vídeo
+Audio|Áudio
+Document|Documento
+Media|Mídia
+Image to Sticker|Imagem para figurinha
+Video to Sticker|Vídeo para figurinha
+Image File|Arquivo de imagem
+Upload an image and configure sticker meta.|Envie uma imagem e configure a figurinha.
+Click to upload|Clique para enviar
+Click to view|Clique para visualizar
+Click to copy|Clique para copiar
+or drag and drop|ou arraste e solte
+Pack Name|Nome do pacote
+Author|Autor
+Crop|Recortar
+Circle|Círculo
+Quality (1-100)|Qualidade (1 a 100)
+Preview|Prévia
+This is how your image looks.|Esta é a prévia da imagem.
+Send Sticker|Enviar figurinha
+Sticker sent!|Figurinha enviada!
+No image selected|Nenhuma imagem selecionada
+Media Manager|Gerenciador de mídias
+Manage downloaded media files|Gerencie os arquivos de mídia baixados
+Total Files|Total de arquivos
+Total Size|Tamanho total
+Per page|Por página
+Page|Página
+Showing|Exibindo
+No media files downloaded yet|Nenhum arquivo de mídia baixado ainda
+No media files match your filters|Nenhum arquivo corresponde aos filtros
+Search by filename, session, user, or sender...|Busque por arquivo, sessão, usuário ou remetente...
+This action cannot be undone. The selected files will be permanently removed from the server.|Esta ação não pode ser desfeita. Os arquivos selecionados serão excluídos permanentemente do servidor.
+Webhook URL|URL do webhook
+Add Webhook|Adicionar webhook
+New Webhook|Novo webhook
+Create Webhook|Criar webhook
+Edit Webhook|Editar webhook
+Events|Eventos
+Events (click to toggle)|Eventos (clique para selecionar)
+Secret (optional, for HMAC signature)|Segredo (opcional, para assinatura HMAC)
+Name, URL, and at least one event are required|Informe nome, URL e pelo menos um evento
+Modify the webhook endpoint configuration and subscribed events.|Edite o endereço do webhook e os eventos selecionados.
+Send real-time events to external URLs when activities happen in WhatsApp.|Envie eventos para URLs externas quando houver atividades no WhatsApp.
+No webhooks configured for this session. Click "Add Webhook" to create one.|Nenhum webhook configurado. Clique em "Adicionar webhook" para criar um.
+Webhook created!|Webhook criado!
+Webhook updated!|Webhook atualizado!
+Webhook deleted|Webhook excluído
+Webhook test successful!|Teste do webhook concluído!
+Test|Testar
+Logs|Registros
+Webhook Delivery Logs|Registros de entrega de webhooks
+Delivery Failure|Falha na entrega
+No delivery logs yet|Nenhum registro de entrega ainda
+No Log Selected|Nenhum registro selecionado
+Refresh logs|Atualizar registros
+Select a webhook attempt from the sidebar to inspect detailed metadata and payloads.|Selecione uma tentativa de entrega para consultar os detalhes e os dados enviados.
+Logs will appear here as soon as webhooks are dispatched or when you click "Test".|Os registros aparecerão após um envio ou ao clicar em "Testar".
+Response Body|Corpo da resposta
+No response|Sem resposta
+No response body returned from server.|O servidor não retornou conteúdo na resposta.
+Headers|Cabeçalhos
+Headers copied|Cabeçalhos copiados
+Payload|Dados enviados
+Payload copied|Dados copiados
+Response body copied|Resposta copiada
+Attempted:|Tentativa:
+When a new message is received|Ao receber uma mensagem
+When a message is sent|Ao enviar uma mensagem
+When a message is edited|Ao editar uma mensagem
+When a message is revoked/deleted|Ao excluir uma mensagem
+When a status is posted or viewed|Ao publicar ou visualizar um status
+When message status changes (delivered, read)|Ao alterar o status da mensagem (entregue, lida)
+When contact info changes|Ao alterar um contato
+When group info changes|Ao alterar um grupo
+When participants join, leave, or change roles|Ao entrar, sair ou alterar permissões de participantes
+When session connects/disconnects|Ao conectar ou desconectar uma sessão
+Message Received|Mensagem recebida
+Message Sent|Mensagem enviada
+Message Edited|Mensagem editada
+Message Deleted|Mensagem excluída
+Message Status|Status da mensagem
+Contact Update|Atualização de contato
+Group Update|Atualização de grupo
+Share your WhatsApp sessions with other users|Compartilhe suas sessões do WhatsApp com outros usuários
+Choose a session you own to manage its shared access|Escolha uma sessão sua para gerenciar o acesso compartilhado
+Grant Access|Conceder acesso
+Granting...|Concedendo acesso...
+Users with Access|Usuários com acesso
+Revoke Access|Revogar acesso
+Revoke access|Revogar acesso
+Revoke Access?|Revogar acesso?
+Enter the email address of the user you want to give access to|Informe o e-mail do usuário que receberá acesso
+Access granted successfully|Acesso concedido com sucesso
+Access revoked successfully|Acesso revogado com sucesso
+You don't have permission to manage this session's access|Você não tem permissão para gerenciar o acesso desta sessão
+No users have been granted access to this session yet.|Nenhum usuário recebeu acesso a esta sessão ainda.
+You can use standard WhatsApp formatting (*bold*, _italic_, ~strikethrough~)|Use a formatação do WhatsApp (*negrito*, _itálico_, ~riscado~)
+Are you sure you want to revoke access for|Deseja revogar o acesso de
+? They will no longer be able to view or use this session. This action can be undone by granting access again.|? Essa pessoa não poderá mais visualizar ou usar esta sessão. Você poderá conceder o acesso novamente.
+App Configuration|Configuração da aplicação
+Application Name|Nome da aplicação
+Global system configuration. Only SuperAdmins can make changes.|Configuração global. Somente administradores podem fazer alterações.
+Global settings for the application branding and access control.|Configurações de identidade visual e controle de acesso.
+Changes the name in the sidebar and browser title.|Altera o nome no menu e no título do navegador.
+Logo URL|URL do logotipo
+Favicon URL|URL do ícone da aba
+URL for the browser tab icon.|URL do ícone da aba do navegador.
+URL for the main dashboard logo.|URL do logotipo principal do painel.
+Enable User Registration|Permitir novos cadastros
+Allow new users to sign up for accounts. Turn off to keep the platform private.|Permita que novos usuários criem contas. Desative para manter o acesso restrito.
+System settings updated. Refresh to see changes.|Configurações atualizadas. Recarregue para ver as alterações.
+View Only Mode|Modo somente leitura
+Only Superadmins can modify system settings. You can view current settings but cannot make changes.|Somente administradores podem alterar estas configurações. Você pode consultá-las, mas não editá-las.
+Public Registration is Enabled|O cadastro público está ativado
+Anyone can register to this instance. If this is unintended, disable it in System Settings to prevent unauthorized access.|Qualquer pessoa pode criar uma conta. Desative o cadastro público nas configurações se desejar restringir o acesso.
+System Updates|Atualizações do sistema
+Check for Updates|Verificar atualizações
+Check for the latest version from GitHub.|Verifique a versão mais recente no GitHub.
+User ID (cuid)|Identificador do usuário (cuid)
+Target User ID|Identificador do destinatário
+Target User ID is required for non-broadcast|Informe o destinatário quando o envio não for para todos
+Notification Manager|Gerenciador de notificações
+Compose Notification|Criar notificação
+Notification Title|Título da notificação
+Message (Optional)|Mensagem (opcional)
+Detailed message...|Mensagem detalhada...
+Action Link (Optional)|Link da ação (opcional)
+Send Notification|Enviar notificação
+Send alerts to users or system-wide broadcasts.|Envie avisos a usuários ou a todos do sistema.
+Broadcast to ALL Users|Enviar para todos os usuários
+Title and Message are required|Informe o título e a mensagem
+Notification deleted|Notificação excluída
+Mark all read|Marcar todas como lidas
+Mark as read|Marcar como lida
+All caught up!|Tudo em dia!
+No new notifications|Nenhuma notificação nova
+No new notifications.|Nenhuma notificação nova.
+No notifications|Nenhuma notificação
+No notifications yet. We'll notify you when something arrives.|Nenhuma notificação ainda. Avisaremos quando houver novidades.
+No unread notifications. Good job!|Nenhuma notificação não lida.
+No read notifications.|Nenhuma notificação lida.
+We'll notify you when something important arrives.|Avisaremos quando houver uma atualização importante.
+Notification message content will appear here.|O conteúdo da notificação aparecerá aqui.
+e.g. System Maintenance|Ex.: manutenção do sistema
+WhatsApp Profile|Perfil do WhatsApp
+Profile Info|Informações do perfil
+Profile Picture|Foto do perfil
+Change Photo|Alterar foto
+Remove Photo|Remover foto
+WhatsApp Name (Pushname)|Nome no WhatsApp
+Enter profile name|Informe o nome do perfil
+This is the name visible to your contacts.|Este nome aparece para seus contatos.
+Update About|Atualizar recado
+Update your WhatsApp 'About' section.|Atualize o recado do seu WhatsApp.
+Update your WhatsApp identity and about section.|Atualize sua identidade e o recado do WhatsApp.
+Manage your WhatsApp account presence directly from the dashboard.|Gerencie seu perfil do WhatsApp diretamente pelo painel.
+Please select an active WhatsApp session from the sidebar to manage its profile.|Selecione uma sessão ativa para gerenciar o perfil.
+Profile name updated successfully|Nome do perfil atualizado
+Profile picture updated|Foto do perfil atualizada
+Profile picture removed|Foto do perfil removida
+About/Status updated successfully|Recado atualizado
+About|Sobre
+Uptime|Tempo de atividade
+CPU Load|Uso da CPU
+CPU Cores Breakdown|Uso dos núcleos da CPU
+Cores Average|Média dos núcleos
+Core|Núcleo
+Load|Uso
+System RAM|Memória RAM
+System Health|Saúde do sistema
+System|Sistema
+Node.js Process|Processo Node.js
+Storage Volumes|Volumes de armazenamento
+Network Traffic|Tráfego de rede
+Real-time OS and Node process metrics.|Métricas do sistema operacional e do processo Node.js.
+Only Super Admins can view system resources.|Somente administradores podem consultar os recursos do sistema.
+Individual load percentage for each logical core.|Percentual de uso de cada núcleo lógico.
+Mounted filesystems and current space usage.|Discos montados e uso de espaço.
+No disk information available|Nenhuma informação de disco disponível
+Quick Actions|Ações rápidas
+Overview of your WhatsApp gateway|Visão geral do seu WhatsApp
+Active automations|Automações ativas
+View server metrics|Ver métricas do servidor
+Store Chats|Conversas salvas
+Store Contacts|Contatos salvos
+Store Msgs|Mensagens salvas
+Manage and monitor all sessions|Gerencie e monitore todas as sessões
+Search by name or number...|Buscar por nome ou número...
+Search contacts or numbers...|Buscar contatos ou números...
+Image File|Arquivo de imagem
+Enter Dashboard|Entrar no painel
+Features|Recursos
+Read Documentation|Ler documentação
+Access Documentation|Acessar documentação
+Next-Gen WhatsApp|WhatsApp para o seu negócio
+Gateway Engine.|Central de automação.
+The complete open-source solution for managing WhatsApp sessions, orchestrating smart auto-replies, and integrating via a robust REST API.|Uma solução de código aberto para gerenciar sessões do WhatsApp, automatizar respostas e integrar sistemas pela API REST.
+A powerful, self-hosted dashboard to manage your WhatsApp sessions, schedules, and auto-replies. Built for modern businesses.|Um painel para gerenciar suas sessões do WhatsApp, agendamentos e respostas automáticas.
+Engineered for Scale|Preparado para crescer
+Carefully crafted features packaged in a gorgeous, performant interface.|Recursos para o seu dia a dia em uma interface simples e rápida.
+Multi-Session Mastery|Várias sessões em um só lugar
+Connect, monitor, and control multiple distinct WhatsApp numbers from one unified dashboard.|Conecte, acompanhe e gerencie vários números do WhatsApp em um único painel.
+Precision Scheduler|Agendamentos precisos
+Schedule targeted messages for future delivery. Perfect for campaigns and reminders.|Agende mensagens para campanhas e lembretes.
+Smart Auto Replies|Respostas automáticas
+Set up intelligent, keyword-based auto-replies to automate customer interactions 24/7.|Configure respostas por palavra-chave para automatizar o atendimento.
+Instant API & Webhooks|API e webhooks
+Send messages, media, and handle incoming events instantly via our robust REST API.|Envie mensagens e mídias e receba eventos pela API REST.
+Secure & Private|Segurança e privacidade
+Self-hosted architecture guarantees your data and sessions stay entirely under your control.|Hospede o sistema e mantenha o controle dos seus dados e sessões.
+Developer Experience|Recursos para desenvolvedores
+Built on TypeScript with comprehensive Swagger documentation and strict typing.|Desenvolvido em TypeScript com documentação da API no Swagger.
+Built with Industry Standards|Tecnologias consolidadas
+WA-AKG. Released under MIT.|WA-AKG. Distribuído sob a licença MIT.
+Self-hosted WhatsApp Gateway with Multi-device support, Auto-replies, API integration, and session management dashboard.|Central do WhatsApp com vários dispositivos, respostas automáticas, API e gerenciamento de sessões.
+Self-hosted WhatsApp Gateway with Multi-device support, Auto-replies, and API integration.|Central do WhatsApp com vários dispositivos, respostas automáticas e integração por API.
+WhatsApp Gateway|Central do WhatsApp
+WA-AKG | Premium WhatsApp Gateway|WA-AKG | Central do WhatsApp
+Are you absolutely sure?|Deseja continuar?
+? This action cannot be undone.|? Esta ação não pode ser desfeita.
+This action cannot be undone. This will permanently delete the session and remove your connection data from the server.|Esta ação excluirá permanentemente a sessão e seus dados de conexão.
+This action cannot be undone. This will permanently delete the user request and remove their data from our servers.|Esta ação excluirá permanentemente o usuário e seus dados do servidor.
+This action cannot be undone. This will permanently delete the webhook configuration.|Esta ação excluirá permanentemente a configuração do webhook.
+This will invalidate your current API key. All existing integrations using the old key will stop working immediately. This action cannot be undone.|Sua chave atual será invalidada. Integrações que usam a chave antiga deixarão de funcionar e precisarão da nova chave.
+This will permanently delete the|Isso excluirá permanentemente a
+No API key generated|Nenhuma chave de API gerada
+New API key generated!|Nova chave de API gerada!
+Regenerate|Gerar novamente
+Regenerate API Key?|Gerar nova chave de API?
+Use this key to authenticate API requests. Include it in the X-API-Key header.|Use esta chave no cabeçalho X-API-Key para autenticar chamadas da API.
+Show Advanced Options|Mostrar opções avançadas
+Hide Advanced Options|Ocultar opções avançadas
+Scroll for more|Role para ver mais
+Go to next page|Ir para a próxima página
+Go to previous page|Ir para a página anterior
+More pages|Mais páginas
+Collapse|Recolher
+Expand|Expandir
+Back to Home|Voltar ao início
+Fatal Error|Erro crítico
+Error 500|Erro 500
+Akses Ditolak|Acesso negado
+Akses Terlarang|Acesso proibido
+Anda harus masuk (login) terlebih dahulu untuk mengakses halaman ini.|Entre na sua conta para acessar esta página.
+Anda tidak memiliki izin yang cukup untuk mengakses halaman atau sumber daya ini.|Você não tem permissão para acessar esta página ou recurso.
+Aplikasi mengalami kesalahan pada konfigurasi dasar. Silakan muat ulang sistem.|Ocorreu um erro de configuração. Recarregue a aplicação.
+Batas permintaan terlampaui. Harap tunggu beberapa saat sebelum mencoba lagi.|Limite de solicitações atingido. Aguarde antes de tentar novamente.
+Beranda|Início
+Coba Lagi|Tentar novamente
+Kembali|Voltar
+Kesalahan Server|Erro no servidor
+Halaman Tidak Ditemukan|Página não encontrada
+Lihat detail teknis|Ver detalhes técnicos
+Sembunyikan detail teknis|Ocultar detalhes técnicos
+Muat Ulang Aplikasi|Recarregar aplicação
+Maaf, halaman yang Anda cari mungkin telah dihapus, dipindahkan, atau memang tidak pernah ada.|A página pode ter sido removida, movida ou não existir.
+Maaf, terjadi kesalahan tak terduga pada aplikasi. Tim kami telah diberitahu mengenai masalah ini.|Ocorreu um erro inesperado. Tente novamente ou entre em contato com o administrador.
+Permintaan Tidak Valid|Solicitação inválida
+Server tidak dapat memproses permintaan Anda karena format yang tidak valid.|O servidor não pôde processar a solicitação porque o formato é inválido.
+Sistem Mengalami Kendala|O sistema encontrou um problema
+Sistem Mengalami Kendala Kritis|O sistema encontrou um erro crítico
+Terjadi Kesalahan|Ocorreu um erro
+Terjadi kesalahan atau kendala tak terduga pada aplikasi.|Ocorreu um problema inesperado na aplicação.
+Terjadi kesalahan tak terduga pada server saat memproses permintaan Anda.|Ocorreu um erro inesperado ao processar sua solicitação.
+Terlalu Banyak Permintaan|Muitas solicitações
+Warning|Aviso
+Hello!|Olá!
+Hello! Welcome to our WhatsApp Bot. How can I help you today?|Olá! Boas-vindas ao nosso atendimento. Como podemos ajudar?
+Thank you for your message! Our team will get back to you shortly.|Obrigado pela mensagem! Nossa equipe responderá em breve.
+My Business WA|WhatsApp da minha empresa
+My New Group|Meu novo grupo
+My Server|Meu servidor
+John Doe|João da Silva
+name@example.com|nome@exemplo.com
+user@example.com|usuario@exemplo.com
+Just now|Agora
+Live|Em tempo real
+Available|Disponível
+Full|Completo
+Detail|Detalhes
+Details|Detalhes
+Total|Total
+Select Mode|Selecione o modo
+Share|Compartilhar
+Link|Link
+Me (Sent)|Eu (enviado)
+[Media Only]|[Somente mídia]
+Includes Media Attachment|Inclui mídia anexada
+Enter your message|Digite sua mensagem
+Type your message here...|Digite sua mensagem aqui...
+No active session selected.|Nenhuma sessão ativa selecionada.
+No session selected.|Nenhuma sessão selecionada.
+Error:|Erro:
+Uptime:|Tempo de atividade:
+Session:|Sessão:
+Message:|Mensagem:
+Total:|Total:
+Delay:|Intervalo:
+Recipient|Destinatário
+Refresh Sessions|Atualizar sessões
+(Active)|(Ativo)
+API endpoints.|endereços da API.
+Absolute Data Ownership:|Controle dos dados:
+Authentication Credentials:|Credenciais de autenticação:
+Authentication:|Autenticação:
+Base URL|URL base
+Categories|Categorias
+Category|Categoria
+Communication Logs:|Registros de comunicação:
+Complete reference for all|Referência completa de todos os
+Controls|Controles
+Create Configuration|Criar configuração
+Dashboard API Docs|Documentação da API no painel
+Database Schema|Estrutura do banco de dados
+Default credentials:|Credenciais padrão:
+Documentation|Documentação
+Effective Date:|Vigência:
+Example:|Exemplo:
+For a deep dive into the|Para conhecer os detalhes da
+For the most up-to-date API reference and interactive testing, please check the|Para consultar a documentação atualizada e testar a API, acesse o
+Frontend Routing|Rotas da interface
+GET Endpoints|Rotas GET
+POST Endpoints|Rotas POST
+GitHub Repository|Repositório no GitHub
+Go|Ir
+Have questions about these terms?|Tem dúvidas sobre estes termos?
+Interactive API documentation with 58+ endpoints|Documentação interativa dos recursos da API
+Interactive API testing|Testes interativos da API
+JSON specification|Especificação JSON
+Joined|Criado em
+Last updated:|Última atualização:
+Master Project Documentation|Documentação do projeto
+Method|Método
+Navigate through sections|Navegue pelas seções
+Need Further Details?|Precisa de mais detalhes?
+No Centralized Telemetry:|Sem telemetria centralizada:
+No endpoints found matching your criteria|Nenhuma rota corresponde aos filtros
+No results found|Nenhum resultado encontrado
+No subsections|Nenhuma subseção
+Open Swagger UI|Abrir documentação Swagger
+OpenAPI Spec|Especificação OpenAPI
+Params|Parâmetros
+Ping state|Verificar conexão
+Please authenticate to access Swagger UI|Entre na sua conta para acessar a documentação Swagger
+Please review our|Consulte nossos
+Project Architecture|Arquitetura do projeto
+Quick Links|Links rápidos
+Register|Cadastrar
+Release|Versão
+SSL/TLS encryption|criptografia SSL/TLS
+Safe Usage:|Uso responsável:
+Total Endpoints|Total de rotas
+Username|Usuário
+Username:|Usuário:
+WA-AKG API Documentation|Documentação da API WA-AKG
+WA-AKG. All rights reserved.|WA-AKG. Todos os direitos reservados.
+WhatsApp Sessions:|Sessões do WhatsApp:
+Your Data is Yours:|Seus dados pertencem a você:
+📘 Project Documentation Available|📘 Documentação do projeto disponível
+— Monitor event payloads, server response headers, and latency.|— Consulte os dados dos eventos, cabeçalhos das respostas e tempo de resposta.
+At WA-AKG, we believe that your data is your property. This Privacy Policy details the strict boundaries regarding how information is handled when using our open-source, self-hosted WhatsApp Gateway.|Seus dados pertencem a você. Esta política descreve como as informações são tratadas ao usar esta central do WhatsApp de código aberto.
+1. Data Security & Responsibility|1. Segurança dos dados e responsabilidade
+1. Zero-Tracking Architecture|1. Arquitetura sem rastreamento
+2. Acceptable Use Policy|2. Política de uso aceitável
+2. Data We Process Locally|2. Dados processados na sua instalação
+3. Account Integrity|3. Segurança da conta
+3. Protecting Your Information|3. Proteção das suas informações
+4. Disclaimers and Limitations|4. Limitações e responsabilidades
+4. Third-Party Integrations|4. Integrações com terceiros
+Attempt to reverse-engineer the core API or overload the service with excessive requests.|Tentar sobrecarregar o serviço com solicitações excessivas ou explorar sua API indevidamente.
+Because WA-AKG is designed to be|Como o WA-AKG foi desenvolvido para
+, all core data processing occurs exclusively on the hardware where you deploy the application.|, o processamento dos dados ocorre na infraestrutura em que a aplicação é instalada.
+Deploying the application behind a reverse proxy with enforced|Publicar a aplicação atrás de um proxy com
+If you have specific questions about data handling or wish to audit the code, please visit our|Para esclarecer dúvidas sobre os dados ou auditar o código, visite nosso
+Keeping the underlying operating system and Node.js environment constantly updated.|Manter o sistema operacional e o Node.js atualizados.
+Messages sent and received via the gateway are logged within your local database to provide you with historical data and webhook functionality.|As mensagens enviadas e recebidas são registradas no banco da sua instalação para oferecer histórico e integração por webhooks.
+Passwords you create for the dashboard are securely hashed using bcrypt before being stored in your local database.|As senhas do painel são protegidas com bcrypt antes de serem armazenadas no banco da sua instalação.
+Securing the host server with firewalls and SSH key authentication.|Proteger o servidor com firewall e autenticação SSH por chave.
+Security forms the core of our service. As a self-hosted platform, WA-AKG ensures that your data remains strictly within your own infrastructure.|A segurança depende da sua instalação. Os dados do WA-AKG ficam na infraestrutura e nos serviços que você configura.
+Send unsolicited "spam" messages or bulk promotional campaigns to users who have not explicitly opted-in.|Enviar mensagens indesejadas ou campanhas para pessoas que não autorizaram o contato.
+The creators of WA-AKG do not receive telemetry, analytics, or usage reports about your WhatsApp interactions.|Os criadores do WA-AKG não recebem telemetria nem relatórios sobre suas conversas no WhatsApp.
+Use the platform to distribute malicious software, phishing links, or illegal content.|Usar a plataforma para distribuir software malicioso, links de fraude ou conteúdo ilegal.
+WA-AKG acts as a bridge to WhatsApp Web. The session tokens (keys) necessary to maintain this connection are stored locally on your server.|O WA-AKG se conecta ao WhatsApp Web. As credenciais necessárias para manter a conexão são armazenadas no banco da sua instalação.
+WA-AKG is provided "as is" and without warranties of any kind. We utilize third-party libraries (such as Baileys) to connect to WhatsApp web protocols. Changes to WhatsApp's internal systems may occasionally disrupt service. We are not liable for any account suspensions or bans imposed by WhatsApp as a result of your usage.|O WA-AKG é fornecido no estado em que se encontra, sem garantias. A conexão utiliza bibliotecas de terceiros, como Baileys. Mudanças no WhatsApp podem interromper o serviço. O uso da sua conta continua sujeito às regras do WhatsApp.
+WA-AKG provides tools to manage multiple WhatsApp sessions. It is crucial to monitor your active devices. If you suspect unauthorized access to your gateway dashboard, immediately change your password and revoke any connected WhatsApp sessions from your physical device.|O WA-AKG permite gerenciar várias sessões. Acompanhe seus dispositivos conectados. Se suspeitar de acesso indevido, altere sua senha e desconecte as sessões pelo aplicativo do WhatsApp no telefone.
+WA-AKG utilizes the|O WA-AKG utiliza a biblioteca
+We do not track, intercept, or sell your WhatsApp messages, contact lists, or session data. Your information is secure and not misused.|O projeto não vende suas mensagens, contatos ou dados de sessão. Proteja o acesso à sua instalação e aos serviços conectados.
+Welcome to WA-AKG. By accessing or using our WhatsApp Gateway platform, you agree to be bound by these Terms. If you do not agree, please do not use the service.|Boas-vindas ao WA-AKG. Ao usar a plataforma, você concorda com estes termos. Se não concordar, não utilize o serviço.
+When utilizing WA-AKG's API, auto-replies, and broadcasting capabilities, you agree to abide by WhatsApp's official Terms of Service and Anti-Spam policies. You agree not to:|Ao utilizar a API, respostas automáticas e disparos, respeite os termos de uso e as políticas do WhatsApp. Você concorda em não:
+When you deploy the gateway, the application running on your server interacts with:|Ao instalar a aplicação, os seguintes dados são processados:
+While WA-AKG is built with modern security practices, the ultimate safety of your data depends on your hosting environment. We strongly recommend:|A proteção dos dados depende do ambiente de hospedagem. Recomendamos:
+You are responsible for ensuring your hardware and server environments are properly secured.|Você é responsável por proteger seus dispositivos e ambientes de servidor.
+You must safeguard your account credentials. Do not share your login details with unauthorized personnel.|Proteja suas credenciais e não compartilhe o acesso com pessoas não autorizadas.
+Your contacts, messages, schedules, and auto-replies remain in your own database. We cannot and will not access it.|Seus contatos, mensagens, agendamentos e respostas automáticas permanecem no banco configurado na sua instalação.
+library to communicate directly with WhatsApp's servers. By using this gateway, your server will establish a direct web-socket connection to WhatsApp. Please be aware that your use of WhatsApp is still subject to Meta's Privacy Policy.|para se comunicar com os servidores do WhatsApp por WebSocket. O uso do WhatsApp continua sujeito à política de privacidade da Meta.
+Prevent your WhatsApp number from being detected as spam or banned by adding intelligent random delays between outgoing messages. This applies to|Configure intervalos aleatórios entre os envios para controlar a frequência. Isso não garante proteção contra bloqueios. Aplica-se a
+actions: bot replies, auto-replies, broadcasts, scheduled messages, and API calls for this session.|respostas do bot, respostas automáticas, disparos, agendamentos e chamadas da API desta sessão.
+The system tracks how many messages this session sends within a time window. If the number of messages exceeds the|O sistema conta as mensagens enviadas dentro de uma janela de tempo. Se a quantidade ultrapassar o
+When enabled, messages will be queued and sent with a random delay if the rate limit is reached. Messages are never rejected — only delayed.|Quando ativado, as mensagens entram em uma fila e são enviadas com intervalo aleatório ao atingir o limite.
+With threshold =|Com limite =
+jsx:, Delay|, intervalo
+jsx:, Window|, janela
+jsx:, each subsequent message will be|, cada mensagem seguinte será
+jsx:. For high-volume broadcasts, use Threshold|. Para grandes volumes, use o limite
+jsx:/ page|/ página
+jsx:/139 characters|/139 caracteres
+jsx:, and|, e
+jsx:, please refer to the|, consulte o
+jsx:all|todos
+jsx:and|e
+jsx:and beyond will be delayed by|em diante terão um intervalo de
+jsx:and window =|e janela =
+jsx:by a random amount between|com intervalo aleatório entre
+jsx:caption).|na legenda).
+jsx:contacts found|contatos encontrados
+jsx:delay. Once the time window resets (old messages expire), messages go back to normal speed.|de intervalo. Quando a janela de tempo reiniciar, o envio volta à velocidade normal.
+jsx:delayed|enviada com intervalo
+jsx:file in your codebase.|no código do projeto.
+jsx:file(s)?|arquivo(s)?
+jsx:is live|está disponível
+jsx:logs|registros
+jsx:logs loaded|registros carregados
+jsx:messages within|mensagens em
+jsx:more|mais
+jsx:ms each.|ms entre cada mensagem.
+jsx:ms latency)|ms de tempo de resposta)
+jsx:numbers identified|números identificados
+jsx:of|de
+jsx:or reach out to the project maintainers for further clarification.|ou entre em contato com os responsáveis pelo projeto.
+jsx:or the|ou o
+jsx:seconds are sent instantly. Message #|segundos são enviadas imediatamente. A mensagem #
+jsx:selected|selecionado(s)
+jsx:self-hosted|hospedagem própria
+jsx:threshold|limite
+jsx:time window|janela de tempo
+jsx:with Delay|com intervalo
+jsx:within the|dentro da
+jsx:→ the first|→ as primeiras
+ΓÇö Heap:|— Memória:
+Γåæ TX|↑ Enviados
+Γåô RX|↓ Recebidos
+Forbidden - Cannot access this session|Você não tem acesso a esta sessão
+Internal Server Error|Erro interno do servidor
+Operation successful|Operação concluída
+Message sent successfully|Mensagem enviada
+message is required|Informe a mensagem
+file is required|Selecione um arquivo
+Session not connected|A sessão não está conectada
+Instance not found or not running|A sessão não está em execução
+Socket.IO not initialized|O serviço do WhatsApp não foi iniciado
+Missing required fields|Preencha os campos obrigatórios
+Keyword and either response or media are required|Informe a palavra-chave e uma resposta ou mídia
+Rule not found|Regra não encontrada
+WhatsApp Channels/Newsletters sementara waktu HANYA mendukung format gambar JPG/JPEG. Silakan gunakan format tersebut.|Os canais do WhatsApp aceitam apenas imagens JPG/JPEG. Converta a imagem antes de enviar.
+Failed to create|Não foi possível criar
+Failed to delete|Não foi possível excluir
+Failed to fetch|Não foi possível carregar
+Failed to send|Não foi possível enviar
+Failed to schedule message|Não foi possível agendar a mensagem
+Failed to check updates|Não foi possível verificar atualizações
+Error checking updates|Erro ao verificar atualizações
+Failed to start broadcast|Não foi possível iniciar o disparo
+Error sending broadcast|Erro ao enviar o disparo
+Failed to mark read|Não foi possível marcar como lida
+An error occurred while fetching profile|Ocorreu um erro ao carregar o perfil
+Failed to list media|Não foi possível listar as mídias
+Failed to download media|Não foi possível baixar a mídia
+Message not found|Mensagem não encontrada
+Message has no media|A mensagem não tem mídia
+Media file not found on disk|Arquivo de mídia não encontrado
+WhatsApp session is disconnected or not found|A sessão do WhatsApp está desconectada ou não foi encontrada
+Get session details|Consultar detalhes da sessão
+Get sessions|Listar sessões
+Create new session|Criar nova sessão
+Delete session|Excluir sessão
+Control session|Controlar sessão
+Get session QR|Consultar QR Code da sessão
+Get session settings|Consultar configurações da sessão
+Update session settings|Atualizar configurações da sessão
+Get contacts|Listar contatos
+Get groups|Listar grupos
+Create group|Criar grupo
+Get chats|Listar conversas
+Get messages|Listar mensagens
+Send text message|Enviar mensagem de texto
+Send media|Enviar mídia
+Send contact|Enviar contato
+Send location|Enviar localização
+Send poll|Enviar enquete
+Send sticker|Enviar figurinha
+Delete message|Excluir mensagem
+Reply to message|Responder mensagem
+Forward message|Encaminhar mensagem
+Update group settings|Atualizar configurações do grupo
+Change group subject|Alterar nome do grupo
+Change group description|Alterar descrição do grupo
+Add participants|Adicionar participantes
+Remove participants|Remover participantes
+Promote participants|Promover participantes
+Demote participants|Remover permissões dos participantes
+Leave group|Sair do grupo
+Get invite code|Consultar convite
+Accept invite|Aceitar convite
+Revoke invite|Revogar convite
+Get profile|Consultar perfil
+Update profile|Atualizar perfil
+Get auto replies|Listar respostas automáticas
+Create auto reply|Criar resposta automática
+Update auto reply|Atualizar resposta automática
+Delete auto reply|Excluir resposta automática
+Get scheduled|Listar agendamentos
+Create scheduled|Criar agendamento
+Update scheduled|Atualizar agendamento
+Delete scheduled|Excluir agendamento
+Get webhooks|Listar webhooks
+Create webhook|Criar webhook
+Update webhook|Atualizar webhook
+Delete webhook|Excluir webhook
+Test webhook|Testar webhook
+Get notifications|Listar notificações
+Create notification|Criar notificação
+Delete notification|Excluir notificação
+Get users|Listar usuários
+Create user|Criar usuário
+Update user|Atualizar usuário
+Delete user|Excluir usuário
+Get profile picture|Consultar foto do perfil
+Block contact|Bloquear contato
+Unblock contact|Desbloquear contato
+Archive chat|Arquivar conversa
+Mute chat|Silenciar conversa
+Pin chat|Fixar conversa
+Mark chat read|Marcar conversa como lida
+Search messages|Buscar mensagens
+Send reaction|Enviar reação
+Star message|Favoritar mensagem
+Check WhatsApp numbers|Verificar números no WhatsApp
+Broadcast message|Disparo em massa
+Download media|Baixar mídia
+Configure chatbot|Configurar bot
+Get labels|Listar etiquetas
+Create label|Criar etiqueta
+Update label|Atualizar etiqueta
+Delete label|Excluir etiqueta
+Add/remove labels|Associar ou remover etiquetas
+Get system settings|Consultar configurações do sistema
+Update system settings|Atualizar configurações do sistema
+Check updates|Verificar atualizações
+System metrics|Métricas do sistema
+Grant access|Conceder acesso
+Revoke access|Revogar acesso
+Get API key|Consultar chave de API
+Generate API key|Gerar chave de API
+Refresh token|Atualizar token
+Mark notifications read|Marcar notificações como lidas
+Get chat labels|Consultar etiquetas da conversa
+Get label chats|Consultar conversas da etiqueta
+Sun|Dom
+Mon|Seg
+Tue|Ter
+Wed|Qua
+Thu|Qui
+Fri|Sex
+Sat|Sáb
+Monday|Segunda-feira
+Tuesday|Terça-feira
+Wednesday|Quarta-feira
+Thursday|Quinta-feira
+Friday|Sexta-feira
+Saturday|Sábado
+Sunday|Domingo

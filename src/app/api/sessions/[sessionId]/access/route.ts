@@ -19,7 +19,7 @@ export async function GET(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId } = await params;
@@ -39,7 +39,7 @@ export async function GET(
         });
 
         if (!dbSession) {
-            return NextResponse.json({ status: false, message: "Session not found" }, { status: 404 });
+            return NextResponse.json({ status: false, message: "Sessão não encontrada" }, { status: 404 });
         }
 
         const accessList = await prisma.sessionAccess.findMany({
@@ -59,7 +59,7 @@ export async function GET(
         });
     } catch (error) {
         console.error("Get session access error:", error);
-        return NextResponse.json({ status: false, message: "Internal Server Error" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Erro interno do servidor" }, { status: 500 });
     }
 }
 
@@ -71,7 +71,7 @@ export async function POST(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId } = await params;
@@ -99,7 +99,7 @@ export async function POST(
         });
 
         if (!dbSession) {
-            return NextResponse.json({ status: false, message: "Session not found" }, { status: 404 });
+            return NextResponse.json({ status: false, message: "Sessão não encontrada" }, { status: 404 });
         }
 
         // Find target user
@@ -157,7 +157,7 @@ export async function POST(
 
     } catch (error) {
         console.error("Grant session access error:", error);
-        return NextResponse.json({ status: false, message: "Internal Server Error" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Erro interno do servidor" }, { status: 500 });
     }
 }
 
@@ -169,7 +169,7 @@ export async function DELETE(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId } = await params;
@@ -197,7 +197,7 @@ export async function DELETE(
         });
 
         if (!dbSession) {
-            return NextResponse.json({ status: false, message: "Session not found" }, { status: 404 });
+            return NextResponse.json({ status: false, message: "Sessão não encontrada" }, { status: 404 });
         }
 
         // Check if access record exists
@@ -220,12 +220,12 @@ export async function DELETE(
 
         return NextResponse.json({
             status: true,
-            message: "Access revoked successfully",
+            message: "Acesso revogado com sucesso",
             data: null
         });
 
     } catch (error) {
         console.error("Revoke session access error:", error);
-        return NextResponse.json({ status: false, message: "Internal Server Error" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Erro interno do servidor" }, { status: 500 });
     }
 }

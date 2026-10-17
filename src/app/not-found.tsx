@@ -27,7 +27,7 @@ export default function NotFound() {
       <div className="w-full max-w-lg bg-background/50 dark:bg-background/20 backdrop-blur-3xl border border-primary/20 shadow-2xl shadow-primary/5 rounded-3xl p-8 sm:p-12 flex flex-col items-center relative overflow-hidden" suppressHydrationWarning>
         {/* Glow Effect behind the card content */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" suppressHydrationWarning />
-        
+
         {/* Decorative Icon */}
         <div className="relative w-24 h-24 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-8 ring-8 ring-primary/5" suppressHydrationWarning>
           <FileQuestion className="size-12 animate-pulse" />
@@ -39,10 +39,10 @@ export default function NotFound() {
             404
           </h1>
           <h2 className="text-xl font-bold text-foreground mb-4" suppressHydrationWarning>
-            Halaman Tidak Ditemukan
+            Página não encontrada
           </h2>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mx-auto" suppressHydrationWarning>
-            Maaf, halaman yang Anda cari mungkin telah dihapus, dipindahkan, atau memang tidak pernah ada.
+            A página pode ter sido removida, movida ou não existir.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export default function NotFound() {
             className="w-full flex-1 flex items-center justify-center gap-2 h-12 border-primary/20 hover:bg-primary/10 text-primary hover:text-primary rounded-xl transition-all shadow-sm"
           >
             <ArrowLeft className="size-4" />
-            <span>Kembali</span>
+            <span>Voltar</span>
           </Button>
           <Button
             asChild
@@ -63,7 +63,7 @@ export default function NotFound() {
           >
             <Link href="/dashboard">
               <Home className="size-4" />
-              <span>Beranda</span>
+              <span>Início</span>
             </Link>
           </Button>
         </div>

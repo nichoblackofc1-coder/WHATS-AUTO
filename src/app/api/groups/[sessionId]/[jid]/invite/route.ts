@@ -10,7 +10,7 @@ export async function GET(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId, jid } = await params;
@@ -19,7 +19,7 @@ export async function GET(
         // Check verification
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -30,7 +30,7 @@ export async function GET(
         // Get invite code
         const inviteCode = await instance.socket.groupInviteCode(decodedJid);
 
-        return NextResponse.json({ 
+        return NextResponse.json({
             success: true,
             inviteCode,
             inviteUrl: `https://chat.whatsapp.com/${inviteCode}`
@@ -38,11 +38,11 @@ export async function GET(
 
     } catch (error: any) {
         console.error("Fetch invite code error:", error);
-        
+
         if (error.message?.includes("not-admin") || error.message?.includes("forbidden")) {
             return NextResponse.json({ status: false, message: "Bot must be admin to fetch invite code", error: "Bot must be admin to fetch invite code" }, { status: 403 });
         }
-        
+
         return NextResponse.json({ status: false, message: "Failed to fetch invite code", error: "Failed to fetch invite code" }, { status: 500 });
     }
 }
@@ -55,7 +55,7 @@ export async function PUT(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId, jid } = await params;
@@ -64,7 +64,7 @@ export async function PUT(
         // Check verification
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -75,7 +75,7 @@ export async function PUT(
         // Revoke invite code
         const newInviteCode = await instance.socket.groupRevokeInvite(decodedJid);
 
-        return NextResponse.json({ 
+        return NextResponse.json({
             success: true,
             message: "Invite code revoked successfully",
             newInviteCode,
@@ -84,11 +84,11 @@ export async function PUT(
 
     } catch (error: any) {
         console.error("Revoke invite code error:", error);
-        
+
         if (error.message?.includes("not-admin") || error.message?.includes("forbidden")) {
             return NextResponse.json({ status: false, message: "Bot must be admin to revoke invite code", error: "Bot must be admin to revoke invite code" }, { status: 403 });
         }
-        
+
         return NextResponse.json({ status: false, message: "Failed to revoke invite code", error: "Failed to revoke invite code" }, { status: 500 });
     }
 }

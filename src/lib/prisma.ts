@@ -8,4 +8,5 @@ export const prisma =
     log: ["warn", "error"],
   });
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+// The custom server and Next.js route bundles must share one connection pool.
+globalForPrisma.prisma = prisma;

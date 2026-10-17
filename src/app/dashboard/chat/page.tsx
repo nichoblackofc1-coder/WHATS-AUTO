@@ -9,7 +9,7 @@ export default async function ChatPage() {
     const session = await auth();
     console.log("ChatPage Session (Role debug):", session?.user?.role);
 
-    if (!session?.user?.id) return <div>Unauthorized</div>;
+    if (!session?.user?.id) return <div>Não autenticado</div>;
 
     const cookieStore = await cookies();
     const sessionId = cookieStore.get("sessionId")?.value;

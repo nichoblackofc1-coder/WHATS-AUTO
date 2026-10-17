@@ -10,21 +10,21 @@ export async function POST(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId, jid } = await params;
         const body = await request.json();
-        const { message, count = 10, delay = 500 } = body; 
-        
+        const { message, count = 10, delay = 500 } = body;
+
         if (!message) {
-             return NextResponse.json({ status: false, message: "message is required", error: "message is required" }, { status: 400 });
+             return NextResponse.json({ status: false, message: "Informe a mensagem", error: "Informe a mensagem" }, { status: 400 });
         }
 
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -45,7 +45,7 @@ export async function POST(
                  }
              }
         })();
-        
+
         return NextResponse.json({ status: true, message: `Bombing ${count} messages started` });
 
     } catch (e) {

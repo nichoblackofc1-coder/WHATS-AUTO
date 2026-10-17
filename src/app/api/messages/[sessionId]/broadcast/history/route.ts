@@ -9,14 +9,14 @@ export async function GET(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId } = await params;
 
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Acesso negado" }, { status: 403 });
         }
 
         const { searchParams } = new URL(request.url);

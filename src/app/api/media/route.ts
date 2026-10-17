@@ -4,6 +4,7 @@ import path from "path";
 import { existsSync } from "fs";
 import { getAuthenticatedUser, canAccessSession } from "@/lib/api-auth";
 import { prisma } from "@/lib/prisma";
+import { listMediaFiles, removeMediaFile } from "@/lib/media-storage";
 
 // Media directory — private, NOT in public/
 const MEDIA_DIR = path.join(process.cwd(), "data", "media");
@@ -28,13 +29,11 @@ function parseFilename(filename: string): { sessionId: string; keyId: string } |
 export async function GET(request: NextRequest) {
     const user = await getAuthenticatedUser(request);
     if (!user) {
-        return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
     }
 
     try {
-        if (!existsSync(MEDIA_DIR)) {
-            return NextResponse.json({ status: true, message: "No media directory", data: { files: [], totalSize: 0, totalCount: 0 } });
-        }
+        const storedFiles = await listMediaFiles();
 
         const isSuperAdmin = user.role === "SUPERADMIN";
 
@@ -45,7 +44,7 @@ export async function GET(request: NextRequest) {
                 orderBy: { createdAt: "desc" },
             })
             : await prisma.session.findMany({
-                where: { userId: user.id },
+                where: { OR: [{ userId: user.id }, { sessionAccesses: { some: { userId: user.id } } }] },
                 include: { user: { select: { id: true, name: true, email: true } } },
                 orderBy: { createdAt: "desc" },
             });
@@ -57,7 +56,7 @@ export async function GET(request: NextRequest) {
             ownerId: s.user.id,
         }]));
 
-        const filenames = (await readdir(MEDIA_DIR)).filter(n => n !== ".gitkeep");
+        const filenames = Array.from(storedFiles.keys());
 
         // Filter by session ownership
         const ownedFiles: { name: string; parsed: { sessionId: string; keyId: string } | null }[] = [];
@@ -86,7 +85,7 @@ export async function GET(request: NextRequest) {
         const files = await Promise.all(
             ownedFiles.map(async ({ name, parsed }) => {
                 const filePath = path.join(MEDIA_DIR, name);
-                const fileStat = await stat(filePath);
+                const fileStat = storedFiles.get(name)!;
                 const ext = path.extname(name).toLowerCase();
 
                 let type: "image" | "video" | "audio" | "document" = "document";
@@ -115,8 +114,8 @@ export async function GET(request: NextRequest) {
                     from,
                     fromName,
                     fromMe: msgInfo?.fromMe ?? false,
-                    createdAt: fileStat.birthtime.toISOString(),
-                    modifiedAt: fileStat.mtime.toISOString(),
+                    createdAt: fileStat.createdAt.toISOString(),
+                    modifiedAt: fileStat.modifiedAt.toISOString(),
                     url: `/api/media/${encodeURIComponent(name)}`,
                 };
             })
@@ -137,7 +136,7 @@ export async function GET(request: NextRequest) {
         });
     } catch (error: any) {
         console.error("Media list error:", error);
-        return NextResponse.json({ status: false, message: "Failed to list media", error: "Failed to list media" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível listar as mídias", error: "Não foi possível listar as mídias" }, { status: 500 });
     }
 }
 
@@ -148,7 +147,7 @@ export async function GET(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
     const user = await getAuthenticatedUser(request);
     if (!user) {
-        return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
     }
 
     try {
@@ -171,6 +170,7 @@ export async function DELETE(request: NextRequest) {
             }
 
             const parsed = parseFilename(filename);
+            if (!parsed && user.role !== "SUPERADMIN") { failed++; continue; }
             if (parsed) {
                 const canAccess = await canAccessSession(user.id, user.role, parsed.sessionId);
                 if (!canAccess) {
@@ -181,14 +181,8 @@ export async function DELETE(request: NextRequest) {
             }
 
             const filePath = path.join(MEDIA_DIR, filename);
-            if (!existsSync(filePath)) {
-                errors.push(`Not found: ${filename}`);
-                failed++;
-                continue;
-            }
-
             try {
-                await unlink(filePath);
+                if (!await removeMediaFile(filename)) { failed++; continue; }
                 deleted++;
             } catch (e) {
                 errors.push(`Failed to delete: ${filename}`);
@@ -199,6 +193,6 @@ export async function DELETE(request: NextRequest) {
         return NextResponse.json({ status: true, message: "Media files processed", data: { deleted, failed, errors } });
     } catch (error: any) {
         console.error("Media delete error:", error);
-        return NextResponse.json({ status: false, message: "Failed to delete media", error: "Failed to delete media" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível excluir mídia", error: "Não foi possível excluir mídia" }, { status: 500 });
     }
 }

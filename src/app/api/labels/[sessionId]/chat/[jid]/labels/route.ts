@@ -13,7 +13,7 @@ export async function GET(
 
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         if (!sessionId) {
@@ -23,7 +23,7 @@ export async function GET(
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const chatLabels = await prisma.chatLabel.findMany({
@@ -38,7 +38,7 @@ export async function GET(
 
         const labels = chatLabels.map(cl => cl.label);
 
-        return NextResponse.json({ status: true, message: "Operation successful", data: { labels } });
+        return NextResponse.json({ status: true, message: "Operação concluída", data: { labels } });
 
     } catch (error) {
         console.error("Get chat labels error:", error);
@@ -54,10 +54,10 @@ export async function PUT(
     try {
         const { sessionId, jid } = await params;
         const decodedJid = decodeURIComponent(jid);
-        
+
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const body = await request.json();
@@ -74,7 +74,7 @@ export async function PUT(
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         if (action === 'add') {
@@ -129,7 +129,7 @@ export async function PUT(
 
         const labels = chatLabels.map(cl => cl.label);
 
-        return NextResponse.json({ 
+        return NextResponse.json({
             success: true,
             message: `Labels ${action === 'add' ? 'added to' : 'removed from'} chat`,
             labels

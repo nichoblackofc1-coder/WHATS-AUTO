@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ChatList } from "./chat-list";
 import { ChatWindow } from "./chat-window";
 import { MessageCircle } from "lucide-react";
+import { toWhatsAppJid } from "@/lib/phone";
 
 interface ChatLayoutClientProps {
     sessionId: string;
@@ -25,8 +26,7 @@ export function ChatLayoutClient({ sessionId, initialJid }: ChatLayoutClientProp
         if (typeof window === "undefined") return;
         const base = "/dashboard/chat";
         if (selectedChat) {
-            const number = selectedChat.jid.split("@")[0];
-            const newPath = `${base}/${number}`;
+            const newPath = `${base}/${encodeURIComponent(selectedChat.jid)}`;
             if (window.location.pathname !== newPath) {
                 window.history.replaceState(null, "", newPath);
             }
@@ -43,9 +43,11 @@ export function ChatLayoutClient({ sessionId, initialJid }: ChatLayoutClientProp
             const path = window.location.pathname;
             if (path.startsWith("/dashboard/chat/")) {
                 const rawJid = path.replace("/dashboard/chat/", "");
-                let clean = rawJid.replace(/\D/g, "");
-                if (clean.startsWith("0")) clean = "62" + clean.substring(1);
-                setSelectedChat({ jid: `${clean}@s.whatsapp.net` });
+                try {
+                    setSelectedChat({ jid: toWhatsAppJid(decodeURIComponent(rawJid)) });
+                } catch {
+                    setSelectedChat(null);
+                }
             } else {
                 setSelectedChat(null);
             }
@@ -98,7 +100,7 @@ export function ChatLayoutClient({ sessionId, initialJid }: ChatLayoutClientProp
                                 <MessageCircle className="h-8 w-8 text-muted-foreground/40" />
                             </div>
                             <p className="text-sm text-muted-foreground">
-                                Select a chat to start messaging
+                                Selecione uma conversa para começar
                             </p>
                         </div>
                     </div>

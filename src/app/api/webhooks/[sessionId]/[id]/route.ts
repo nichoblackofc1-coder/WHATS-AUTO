@@ -8,14 +8,14 @@ export async function PUT(
 ) {
     const user = await getAuthenticatedUser(request);
     if (!user) {
-        return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
     }
-    
+
     const { sessionId, id } = await params;
 
     const hasAccess = await canAccessSession(user.id, user.role, sessionId);
     if (!hasAccess) {
-        return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+        return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
     }
 
     try {
@@ -33,7 +33,7 @@ export async function PUT(
         });
 
         if (!session) {
-            return NextResponse.json({ status: false, message: "Session not found", error: "Session not found" }, { status: 404 });
+            return NextResponse.json({ status: false, message: "Sessão não encontrada", error: "Sessão não encontrada" }, { status: 404 });
         }
 
         // Verify ownership and session context
@@ -65,7 +65,7 @@ export async function PUT(
         return NextResponse.json(webhook);
     } catch (error) {
         console.error("Update webhook error:", error);
-        return NextResponse.json({ status: false, message: "Failed to update webhook", error: "Failed to update webhook" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível atualizar webhook", error: "Não foi possível atualizar webhook" }, { status: 500 });
     }
 }
 
@@ -75,14 +75,14 @@ export async function DELETE(
 ) {
     const user = await getAuthenticatedUser(request);
     if (!user) {
-        return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
     }
-    
+
     const { sessionId, id } = await params;
 
     const hasAccess = await canAccessSession(user.id, user.role, sessionId);
     if (!hasAccess) {
-        return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+        return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
     }
 
     try {
@@ -97,7 +97,7 @@ export async function DELETE(
         });
 
         if (!session) {
-            return NextResponse.json({ status: false, message: "Session not found", error: "Session not found" }, { status: 404 });
+            return NextResponse.json({ status: false, message: "Sessão não encontrada", error: "Sessão não encontrada" }, { status: 404 });
         }
 
         const existing = await prisma.webhook.findFirst({
@@ -116,9 +116,9 @@ export async function DELETE(
 
         await prisma.webhook.delete({ where: { id } });
 
-        return NextResponse.json({ status: true, message: "Operation successful" });
+        return NextResponse.json({ status: true, message: "Operação concluída" });
     } catch (error) {
         console.error("Delete webhook error:", error);
-        return NextResponse.json({ status: false, message: "Failed to delete webhook", error: "Failed to delete webhook" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível excluir webhook", error: "Não foi possível excluir webhook" }, { status: 500 });
     }
 }

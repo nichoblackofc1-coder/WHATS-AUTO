@@ -3,12 +3,14 @@ import cronParser from "cron-parser";
 import { prisma } from "@/lib/prisma";
 import { waManager } from "@/modules/whatsapp/manager";
 import { logger } from "./logger";
+import { readMediaFile } from "./media-storage";
+import path from "node:path";
 export function initScheduler() {
     // Run every minute
     cron.schedule("* * * * *", async () => {
         try {
             const now = new Date();
-            
+
             // Fetch pending messages due for sending
             const pendingMessages = await prisma.scheduledMessage.findMany({
                 where: {
@@ -24,7 +26,7 @@ export function initScheduler() {
 
             if (pendingMessages.length === 0) return;
             const config = await prisma.systemConfig.findUnique({ where: { id: "default" } });
-            const timezone = config?.timezone || process.env.TZ || "Asia/Jakarta";
+            const timezone = config?.timezone || process.env.TZ || "America/Fortaleza";
 
             // Only log if we're actually processing things to reduce noise
             logger.info("Cron", `Found ${pendingMessages.length} messages to send`);
@@ -43,20 +45,22 @@ export function initScheduler() {
 
                 try {
                     logger.info("Cron", `Sending to ${msg.jid}`);
-                    
+
                     if (msg.mediaUrl) {
                         const type = msg.mediaType || "document";
+                        const media = msg.mediaUrl.startsWith("/api/media/") ? await readMediaFile(path.basename(msg.mediaUrl)) : { url: msg.mediaUrl };
+                        if (!media) throw new Error("Mídia do agendamento não encontrada");
                         let payload: any = {};
                         if (msg.content) payload.caption = msg.content;
-                        
+
                         if (type === "image") {
-                            payload.image = { url: msg.mediaUrl };
+                            payload.image = media;
                         } else if (type === "video") {
-                            payload.video = { url: msg.mediaUrl };
+                            payload.video = media;
                         } else if (type === "audio") {
-                            payload = { audio: { url: msg.mediaUrl } };
+                            payload = { audio: media };
                         } else {
-                            payload.document = { url: msg.mediaUrl };
+                            payload.document = media;
                             payload.mimetype = "application/octet-stream";
                             payload.fileName = msg.mediaUrl.split('/').pop() || "file";
                         }
@@ -101,6 +105,6 @@ export function initScheduler() {
             logger.error("Cron", "Scheduler error:", error);
         }
     }, { noOverlap: true });
-    
+
     logger.info("Cron", "Scheduler initialized");
 }

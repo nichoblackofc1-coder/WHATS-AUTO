@@ -11,7 +11,7 @@ export async function PATCH(
 
     // Only SUPERADMIN can update users
     if (!user || !isAdmin(user.role)) {
-        return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 403 });
+        return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 403 });
     }
 
     const { id } = await params;
@@ -49,7 +49,7 @@ export async function PATCH(
 
     } catch (error) {
         console.error("Update user error:", error);
-        return NextResponse.json({ status: false, message: "Failed to update user", error: "Failed to update user" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível atualizar usuário", error: "Não foi possível atualizar usuário" }, { status: 500 });
     }
 }
 
@@ -61,7 +61,7 @@ export async function DELETE(
 
     // Only SUPERADMIN can delete users
     if (!user || !isAdmin(user.role)) {
-        return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 403 });
+        return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 403 });
     }
 
     const { id } = await params;
@@ -75,6 +75,6 @@ export async function DELETE(
         return NextResponse.json({ status: true, message: "User deleted successfully" });
     } catch (error) {
         console.error("Delete user error:", error);
-        return NextResponse.json({ status: false, message: "Failed to delete user", error: "Failed to delete user" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível excluir usuário", error: "Não foi possível excluir usuário" }, { status: 500 });
     }
 }

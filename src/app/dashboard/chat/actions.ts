@@ -4,6 +4,18 @@ import { prisma } from "@/lib/prisma";
 import { ChatService } from "@/modules/whatsapp/chat.service";
 import { getAuthenticatedUserForAction } from "@/lib/server-action-auth";
 import { canAccessSession } from "@/lib/api-auth";
+import { headers } from "next/headers";
+import { forwardGateway, usesGatewayWorker } from "@/lib/gateway-queue";
+
+async function sendViaWorker(path: string, body: string | FormData) {
+    const incoming = await headers();
+    const requestHeaders = new Headers();
+    requestHeaders.set("cookie", incoming.get("cookie") || "");
+    if (typeof body === "string") requestHeaders.set("content-type", "application/json");
+    const response = await forwardGateway(new Request(`https://${incoming.get("host")}${path}`, { method: "POST", headers: requestHeaders, body }));
+    const result = await response.json();
+    return response.ok ? { success: true, error: undefined } : { success: false, error: result.error || result.message || "Não foi possível enviar a mensagem" };
+}
 
 const CHAT_PAGE_SIZE = parseInt(process.env.NEXT_PUBLIC_CHAT_PAGE_SIZE || "50", 10);
 
@@ -15,17 +27,17 @@ export async function getChatsStatus(
     search?: string
 ) {
     const user = await getAuthenticatedUserForAction();
-    if (!user) throw new Error("Unauthorized");
+    if (!user) throw new Error("Não autenticado");
 
     const canAccess = await canAccessSession(user.id, user.role, sessionId);
-    if (!canAccess) throw new Error("Forbidden");
+    if (!canAccess) throw new Error("Acesso negado");
 
     const session = await prisma.session.findUnique({
         where: { sessionId },
         select: { id: true }
     });
 
-    if (!session) throw new Error("Session not found");
+    if (!session) throw new Error("Sessão não encontrada");
 
     return await ChatService.getChatsList(session.id, limit, before, search);
 }
@@ -38,17 +50,17 @@ export async function getChatMessages(
     before?: string
 ) {
     const user = await getAuthenticatedUserForAction();
-    if (!user) throw new Error("Unauthorized");
+    if (!user) throw new Error("Não autenticado");
 
     const canAccess = await canAccessSession(user.id, user.role, sessionId);
-    if (!canAccess) throw new Error("Forbidden");
+    if (!canAccess) throw new Error("Acesso negado");
 
     const session = await prisma.session.findUnique({
         where: { sessionId },
         select: { id: true }
     });
 
-    if (!session) throw new Error("Session not found");
+    if (!session) throw new Error("Sessão não encontrada");
 
     const { messages, hasMore } = await ChatService.getMessages(session.id, jid, limit, before);
 
@@ -66,23 +78,24 @@ export async function getChatMessages(
 // Send a basic text message
 export async function sendChatMessage(sessionId: string, jid: string, text: string, quotedMessageId?: string) {
     const user = await getAuthenticatedUserForAction();
-    if (!user) throw new Error("Unauthorized");
+    if (!user) throw new Error("Não autenticado");
 
     const canAccess = await canAccessSession(user.id, user.role, sessionId);
-    if (!canAccess) throw new Error("Forbidden");
+    if (!canAccess) throw new Error("Acesso negado");
 
     try {
+        if (usesGatewayWorker()) return await sendViaWorker(`/api/messages/${encodeURIComponent(sessionId)}/${encodeURIComponent(jid)}/send`, JSON.stringify({ message: { text }, quotedMessageId }));
         await ChatService.sendTextMessage(sessionId, jid, { text }, undefined, quotedMessageId);
-        return { success: true };
+        return { success: true, error: undefined };
     } catch (error: any) {
-        throw new Error(`Failed to send message: ${error.message}`);
+        return { success: false, error: error.message || "Não foi possível enviar a mensagem" };
     }
 }
 
 // Upload and Send Media
 export async function sendMediaMessage(formData: FormData) {
     const user = await getAuthenticatedUserForAction();
-    if (!user) throw new Error("Unauthorized");
+    if (!user) throw new Error("Não autenticado");
 
     const sessionId = formData.get("sessionId") as string;
     const jid = formData.get("jid") as string;
@@ -91,13 +104,14 @@ export async function sendMediaMessage(formData: FormData) {
     const caption = formData.get("caption") as string || "";
 
     if (!sessionId || !jid || !file || !type) {
-        throw new Error("Missing required fields");
+        throw new Error("Preencha os campos obrigatórios");
     }
 
     const canAccess = await canAccessSession(user.id, user.role, sessionId);
-    if (!canAccess) throw new Error("Forbidden");
+    if (!canAccess) throw new Error("Acesso negado");
 
     try {
+        if (usesGatewayWorker()) return await sendViaWorker(`/api/messages/${encodeURIComponent(sessionId)}/${encodeURIComponent(jid)}/media`, formData);
         const buffer = Buffer.from(await file.arrayBuffer());
 
         await ChatService.sendMediaMessage(
@@ -110,9 +124,9 @@ export async function sendMediaMessage(formData: FormData) {
             caption
         );
 
-        return { success: true };
+        return { success: true, error: undefined };
     } catch (error: any) {
         console.error("Media send error:", error);
-        throw new Error(`Failed to send media: ${error.message}`);
+        return { success: false, error: error.message || "Não foi possível enviar a mídia" };
     }
 }

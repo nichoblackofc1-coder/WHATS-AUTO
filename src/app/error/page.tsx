@@ -18,36 +18,36 @@ const ERROR_CONFIGS: Record<string, ErrorConfig> = {
   '400': {
     icon: <AlertCircle className="size-12 animate-pulse" />,
     title: '400',
-    subtitle: 'Permintaan Tidak Valid',
-    description: 'Server tidak dapat memproses permintaan Anda karena format yang tidak valid.',
+    subtitle: "Solicitação inválida",
+    description: "O servidor não pôde processar a solicitação porque o formato é inválido.",
     colorTheme: 'amber',
   },
   '401': {
     icon: <Lock className="size-12 animate-pulse" />,
     title: '401',
-    subtitle: 'Akses Ditolak',
-    description: 'Anda harus masuk (login) terlebih dahulu untuk mengakses halaman ini.',
+    subtitle: "Acesso negado",
+    description: "Entre na sua conta para acessar esta página.",
     colorTheme: 'rose',
   },
   '403': {
     icon: <ShieldAlert className="size-12 animate-pulse" />,
     title: '403',
-    subtitle: 'Akses Terlarang',
-    description: 'Anda tidak memiliki izin yang cukup untuk mengakses halaman atau sumber daya ini.',
+    subtitle: "Acesso proibido",
+    description: "Você não tem permissão para acessar esta página ou recurso.",
     colorTheme: 'destructive',
   },
   '429': {
     icon: <Hourglass className="size-12 animate-pulse" />,
     title: '429',
-    subtitle: 'Terlalu Banyak Permintaan',
-    description: 'Batas permintaan terlampaui. Harap tunggu beberapa saat sebelum mencoba lagi.',
+    subtitle: "Muitas solicitações",
+    description: "Limite de solicitações atingido. Aguarde antes de tentar novamente.",
     colorTheme: 'indigo',
   },
   '500': {
     icon: <AlertCircle className="size-12 animate-pulse" />,
     title: '500',
-    subtitle: 'Kesalahan Server',
-    description: 'Terjadi kesalahan tak terduga pada server saat memproses permintaan Anda.',
+    subtitle: "Erro no servidor",
+    description: "Ocorreu um erro inesperado ao processar sua solicitação.",
     colorTheme: 'destructive',
   },
 };
@@ -66,8 +66,8 @@ function ErrorContent() {
   const config = ERROR_CONFIGS[code] || {
     icon: <HelpCircle className="size-12 animate-pulse" />,
     title: code,
-    subtitle: 'Terjadi Kesalahan',
-    description: customMessage || 'Terjadi kesalahan atau kendala tak terduga pada aplikasi.',
+    subtitle: "Ocorreu um erro",
+    description: customMessage || "Ocorreu um problema inesperado na aplicação.",
     colorTheme: 'primary',
   };
 
@@ -78,7 +78,7 @@ function ErrorContent() {
     indigo: { text: 'text-indigo-500', bg: 'bg-indigo-500', bgSoft: 'bg-indigo-500/10', border: 'border-indigo-500/20', borderDark: 'border-indigo-500', hoverBg: 'hover:bg-indigo-500/10', hoverText: 'hover:text-indigo-500', from: 'from-indigo-500/10', ring: 'ring-indigo-500/5', shadow: 'shadow-indigo-500/5', btnShadow: 'shadow-indigo-500/20' },
     primary: { text: 'text-primary', bg: 'bg-primary', bgSoft: 'bg-primary/10', border: 'border-primary/20', borderDark: 'border-primary', hoverBg: 'hover:bg-primary/10', hoverText: 'hover:text-primary', from: 'from-primary/10', ring: 'ring-primary/5', shadow: 'shadow-primary/5', btnShadow: 'shadow-primary/20' },
   };
-  
+
   const colorMap = COLOR_THEMES[config.colorTheme as keyof typeof COLOR_THEMES] || COLOR_THEMES['primary'];
 
   if (!mounted) {
@@ -94,7 +94,7 @@ function ErrorContent() {
       <div className={`w-full max-w-lg bg-background/50 dark:bg-background/20 backdrop-blur-3xl border ${colorMap.border} shadow-2xl ${colorMap.shadow} rounded-3xl p-8 sm:p-12 flex flex-col items-center relative overflow-hidden`} suppressHydrationWarning>
         {/* Glow Effect */}
         <div className={`absolute inset-0 bg-gradient-to-b ${colorMap.from} to-transparent pointer-events-none`} suppressHydrationWarning />
-        
+
         {/* Decorative Icon */}
         <div className={`relative w-24 h-24 ${colorMap.bgSoft} ${colorMap.text} rounded-full flex items-center justify-center mb-8 ring-8 ${colorMap.ring}`} suppressHydrationWarning>
           {config.icon}
@@ -121,7 +121,7 @@ function ErrorContent() {
             className={`w-full flex-1 flex items-center justify-center gap-2 h-12 ${colorMap.border} ${colorMap.hoverBg} ${colorMap.text} ${colorMap.hoverText} rounded-xl transition-all shadow-sm`}
           >
             <ArrowLeft className="size-4" />
-            <span>Kembali</span>
+            <span>Voltar</span>
           </Button>
           <Button
             asChild
@@ -129,7 +129,7 @@ function ErrorContent() {
           >
             <Link href="/dashboard">
               <Home className="size-4" />
-              <span>Beranda</span>
+              <span>Início</span>
             </Link>
           </Button>
         </div>

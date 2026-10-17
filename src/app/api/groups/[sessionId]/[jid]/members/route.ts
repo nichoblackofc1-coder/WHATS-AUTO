@@ -10,9 +10,9 @@ export async function PUT(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
-        
+
         const { sessionId, jid } = await params;
         const decodedJid = decodeURIComponent(jid);
         const body = await request.json();
@@ -24,8 +24,8 @@ export async function PUT(
 
         const validActions = ['add', 'remove', 'promote', 'demote'];
         if (!validActions.includes(action)) {
-            return NextResponse.json({ 
-                error: `Invalid action. Must be one of: ${validActions.join(', ')}` 
+            return NextResponse.json({
+                error: `Invalid action. Must be one of: ${validActions.join(', ')}`
             }, { status: 400 });
         }
 
@@ -36,7 +36,7 @@ export async function PUT(
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -51,7 +51,7 @@ export async function PUT(
             action as any
         );
 
-        return NextResponse.json({ 
+        return NextResponse.json({
             success: true,
             message: `Successfully ${action}ed participants`,
             result
@@ -59,15 +59,15 @@ export async function PUT(
 
     } catch (error: any) {
         console.error("Update group members error:", error);
-        
+
         if (error.message?.includes("not-admin") || error.message?.includes("forbidden")) {
             return NextResponse.json({ status: false, message: "Bot must be admin to update group members", error: "Bot must be admin to update group members" }, { status: 403 });
         }
-        
+
         if (error.message?.includes("not-authorized")) {
             return NextResponse.json({ status: false, message: "Not authorized to perform this action", error: "Not authorized to perform this action" }, { status: 403 });
         }
-        
+
         return NextResponse.json({ status: false, message: "Failed to update group members", error: "Failed to update group members" }, { status: 500 });
     }
 }

@@ -8,6 +8,7 @@ import { UpdateChecker } from "@/components/dashboard/update-checker";
 import { RegistrationWarning } from "@/components/dashboard/registration-warning";
 import { prisma } from "@/lib/prisma";
 import { Toaster } from "sonner";
+import { GatewayStatus } from "@/components/dashboard/gateway-status";
 import pkg from "../../../package.json";
 
 export default async function DashboardLayout({
@@ -57,6 +58,7 @@ export default async function DashboardLayout({
                     {/* Main Content */}
                     <div className="flex-1 flex flex-col overflow-hidden min-w-0 relative z-10" suppressHydrationWarning={true}>
                         <Navbar appName={appName} />
+                        <GatewayStatus />
                         <main className="flex-1 overflow-auto p-3 sm:p-4 lg:p-6 styled-scrollbar">
                             {children}
                         </main>

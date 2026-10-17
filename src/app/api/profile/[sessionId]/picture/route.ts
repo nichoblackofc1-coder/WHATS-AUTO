@@ -10,12 +10,12 @@ export async function PUT(
         const { sessionId } = await params;
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado" }, { status: 401 });
         }
 
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Acesso negado" }, { status: 403 });
         }
 
         const formData = await request.formData();
@@ -35,7 +35,7 @@ export async function PUT(
         // WhatsApp Baileys updates profile picture
         await instance.socket.updateProfilePicture(instance.socket.user?.id || "", buffer);
 
-        return NextResponse.json({ status: true, message: "Profile picture updated" });
+        return NextResponse.json({ status: true, message: "Foto do perfil atualizada" });
 
     } catch (error: any) {
         console.error("Update profile picture error:", error);
@@ -51,12 +51,12 @@ export async function DELETE(
         const { sessionId } = await params;
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado" }, { status: 401 });
         }
 
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Acesso negado" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -67,7 +67,7 @@ export async function DELETE(
         // WhatsApp Baileys removes profile picture
         await instance.socket.removeProfilePicture(instance.socket.user?.id || "");
 
-        return NextResponse.json({ status: true, message: "Profile picture removed" });
+        return NextResponse.json({ status: true, message: "Foto do perfil removida" });
 
     } catch (error: any) {
         console.error("Remove profile picture error:", error);

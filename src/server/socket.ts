@@ -14,13 +14,13 @@ export function setupSocket(io: Server) {
         secret: process.env.AUTH_SECRET!,
         secureCookie: (process.env.AUTH_URL || process.env.NEXTAUTH_URL || process.env.BASE_URL || "").startsWith("https://"),
       });
-      if (!token?.id || typeof token.id !== "string") return next(new Error("Unauthorized"));
+      if (!token?.id || typeof token.id !== "string") return next(new Error("Não autenticado"));
       const user = await prisma.user.findUnique({ where: { id: token.id }, select: { id: true, role: true } });
-      if (!user) return next(new Error("Unauthorized"));
+      if (!user) return next(new Error("Não autenticado"));
       socket.data.user = user;
       next();
     } catch {
-      next(new Error("Unauthorized"));
+      next(new Error("Não autenticado"));
     }
   });
   io.on("connection", (socket) => {

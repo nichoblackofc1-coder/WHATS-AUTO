@@ -2,6 +2,7 @@ import { prisma } from "./prisma";
 import crypto from "crypto";
 import { normalizeMessageContent, downloadMediaMessage, WAMessage } from "@whiskeysockets/baileys";
 import { writeFile, mkdir } from "fs/promises";
+import { saveMediaFile } from "./media-storage";
 import path from "path";
 import pino from "pino";
 import { resolveToPhoneJidBySessionId as resolveToPhoneJid, isLidJid } from "./jid-utils";
@@ -54,14 +55,14 @@ export async function dispatchWebhook(
             where: { sessionId: session.id },
             select: { userId: true }
         });
-        
+
         const superadmins = await prisma.user.findMany({
             where: { role: 'SUPERADMIN' },
             select: { id: true }
         });
-        
+
         const userIds = [
-            session.userId, 
+            session.userId,
             ...accesses.map(a => a.userId),
             ...superadmins.map(s => s.id)
         ];
@@ -374,18 +375,18 @@ export async function downloadAndSaveMedia(message: WAMessage, sessionId: string
     try {
         const messageContent = normalizeMessageContent(message.message);
         if (!messageContent) {
-            logger.debug("Media", "No content normalized");
+            logger.debug("Mídia", "No content normalized");
             return null;
         }
 
         const messageType = Object.keys(messageContent)[0];
 
         if (!['imageMessage', 'videoMessage', 'audioMessage', 'documentMessage', 'stickerMessage'].includes(messageType)) {
-            logger.debug("Media", `Message type ${messageType} is not a downloadable media.`);
+            logger.debug("Mídia", `Message type ${messageType} is not a downloadable media.`);
             return null;
         }
 
-        logger.info("Media", `Attempting to download ${messageType}...`);
+        logger.info("Mídia", `Attempting to download ${messageType}...`);
 
         let buffer: Buffer | null = null;
         const mediaObj = (messageContent as any)[messageType];
@@ -394,7 +395,7 @@ export async function downloadAndSaveMedia(message: WAMessage, sessionId: string
         const isNewsletterMedia = !mediaObj.mediaKey && (mediaObj.directPath || mediaObj.thumbnailDirectPath);
 
         if (isNewsletterMedia) {
-            logger.info("Media", "Downloading unencrypted media (newsletter) via direct fetch...");
+            logger.info("Mídia", "Downloading unencrypted media (newsletter) via direct fetch...");
 
             const dp = mediaObj.directPath || mediaObj.thumbnailDirectPath;
             const downloadUrl = dp.startsWith('http') ? dp : `https://mmg.whatsapp.net${dp}`;
@@ -406,14 +407,14 @@ export async function downloadAndSaveMedia(message: WAMessage, sessionId: string
                 });
 
                 if (!res.ok) {
-                    logger.error("Media", `Newsletter media HTTP ${res.status} ${res.statusText} for URL: ${downloadUrl}`);
+                    logger.error("Mídia", `Newsletter media HTTP ${res.status} ${res.statusText} for URL: ${downloadUrl}`);
                     return null;
                 }
 
                 buffer = Buffer.from(await res.arrayBuffer());
-                logger.success("Media", `Newsletter media downloaded: ${buffer.length} bytes`);
+                logger.success("Mídia", `Newsletter media downloaded: ${buffer.length} bytes`);
             } catch (e) {
-                logger.error("Media", "Failed to download newsletter media:", e);
+                logger.error("Mídia", "Failed to download newsletter media:", e);
                 return null;
             }
         } else {
@@ -425,17 +426,17 @@ export async function downloadAndSaveMedia(message: WAMessage, sessionId: string
                     {}
                 ) as Buffer;
             } catch (e) {
-                logger.error("Media", "Failed to download encrypted media:", e);
+                logger.error("Mídia", "Failed to download encrypted media:", e);
                 return null;
             }
         }
 
         if (!buffer) {
-            logger.warn("Media", "Buffer is empty/null");
+            logger.warn("Mídia", "Buffer is empty/null");
             return null;
         }
 
-        logger.success("Media", `Downloaded ${buffer.length} bytes.`);
+        logger.success("Mídia", `Downloaded ${buffer.length} bytes.`);
 
         // Generate filename
         const extMap: Record<string, string> = {
@@ -459,17 +460,15 @@ export async function downloadAndSaveMedia(message: WAMessage, sessionId: string
         const filePath = path.join(process.cwd(), "data", "media", filename);
 
         // Ensure directory exists (redundant if handled by OS, but safe)
-        await mkdir(path.dirname(filePath), { recursive: true });
-
-        await writeFile(filePath, buffer);
+        await saveMediaFile(filename, buffer);
 
         // Return URL path using API route for reliable serving
         const fileUrl = `/api/media/${filename}`;
-        logger.success("Media", `Success. URL: ${fileUrl}`);
+        logger.success("Mídia", `Success. URL: ${fileUrl}`);
         return fileUrl;
 
     } catch (e) {
-        logger.error("Media", "Failed to download media:", e);
+        logger.error("Mídia", "Failed to download media:", e);
         return null;
     }
 }
@@ -550,7 +549,7 @@ export async function onMessageReceived(sessionId: string, message: any, existin
         try {
             fileUrl = await downloadAndSaveMedia(message, sessionId);
         } catch (e) {
-            logger.error("Media", "Error handling media download", e);
+            logger.error("Mídia", "Error handling media download", e);
         }
     }
 
@@ -807,7 +806,7 @@ async function extractQuotedMessageAsync(msg: any, sessionId: string): Promise<a
                     }
                 }
             } catch (e) {
-                logger.error("Media", "Failed to lookup quoted media url", e);
+                logger.error("Mídia", "Failed to lookup quoted media url", e);
             }
         }
 
@@ -823,7 +822,7 @@ async function extractQuotedMessageAsync(msg: any, sessionId: string): Promise<a
             caption: normalized.caption,
             fileUrl: fileUrl, // <--- Added!
             // We don't download quoted media automatically unless it was already saved
-            // raw: quotedMsg 
+            // raw: quotedMsg
         };
     }
 

@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(req: Request) {
     const session = await auth();
-    if (!session?.user?.id) return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+    if (!session?.user?.id) return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
 
     try {
         const { ids } = await req.json(); // Array of notification IDs to mark as read
@@ -29,6 +29,6 @@ export async function PATCH(req: Request) {
         return NextResponse.json({ status: true, message: "Notifications marked as read" });
     } catch (e) {
         console.error(e);
-        return NextResponse.json({ status: false, message: "Error updating notifications", error: "Error updating notifications" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Erro ao atualizar notificações", error: "Erro ao atualizar notificações" }, { status: 500 });
     }
 }

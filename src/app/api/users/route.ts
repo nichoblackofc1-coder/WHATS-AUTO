@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 
     // Only SUPERADMIN can list users
     if (!user || !isAdmin(user.role)) {
-        return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 403 });
+        return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 403 });
     }
 
     try {
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 
         return NextResponse.json({ status: true, message: "Users fetched successfully", data: users });
     } catch (error) {
-        return NextResponse.json({ status: false, message: "Failed to fetch users", error: "Failed to fetch users" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível carregar usuários", error: "Não foi possível carregar usuários" }, { status: 500 });
     }
 }
 
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
 
     // Only SUPERADMIN can create users
     if (!user || !isAdmin(user.role)) {
-        return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 403 });
+        return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 403 });
     }
 
     try {
@@ -86,6 +86,6 @@ export async function POST(request: NextRequest) {
 
     } catch (error) {
         console.error("Create user error:", error);
-        return NextResponse.json({ status: false, message: "Failed to create user", error: "Failed to create user" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível criar usuário", error: "Não foi possível criar usuário" }, { status: 500 });
     }
 }

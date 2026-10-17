@@ -39,7 +39,7 @@ export function SidebarShell({ appName, userName, userEmail, version }: SidebarS
                         <h1 className="text-xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">
                             {appName}
                         </h1>
-                        <p className="text-[10px] text-muted-foreground mt-0.5 font-medium">WhatsApp Gateway</p>
+                        <p className="text-[10px] text-muted-foreground mt-0.5 font-medium">Central do WhatsApp</p>
                     </>
                 )}
             </div>
@@ -48,7 +48,7 @@ export function SidebarShell({ appName, userName, userEmail, version }: SidebarS
             <SidebarNav />
 
             {/* User Footer */}
-            <div 
+            <div
                 suppressHydrationWarning={true}
                 className={`border-t border-border/30 bg-background/40 transition-all duration-300 ${isCollapsed ? "p-2" : "p-4"}`}
             >
@@ -67,7 +67,7 @@ export function SidebarShell({ appName, userName, userEmail, version }: SidebarS
                 ) : (
                     <>
                         <div suppressHydrationWarning={true} className="flex items-center gap-2.5 mb-3">
-                            <div 
+                            <div
                                 suppressHydrationWarning={true}
                                 className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary/20 to-blue-500/20 flex items-center justify-center text-xs font-bold text-primary border border-primary/10"
                             >
@@ -84,7 +84,7 @@ export function SidebarShell({ appName, userName, userEmail, version }: SidebarS
                             className="w-full flex items-center justify-center gap-2 text-xs h-8 rounded-lg border-border/40 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 transition-colors"
                             onClick={() => signOut({ callbackUrl: "/auth/login" })}
                         >
-                            <LogOut size={14} /> Sign Out
+                            <LogOut size={14} /> Sair
                         </Button>
                         <p className="text-[9px] text-muted-foreground/50 text-center mt-2 font-mono">v{version}</p>
                     </>

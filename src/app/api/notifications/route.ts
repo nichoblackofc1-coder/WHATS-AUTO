@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
     const session = await auth();
-    if (!session?.user?.id) return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+    if (!session?.user?.id) return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
 
     try {
         const notifications = await prisma.notification.findMany({
@@ -15,19 +15,19 @@ export async function GET(req: Request) {
         });
         return NextResponse.json({ status: true, message: "Notifications fetched successfully", data: notifications });
     } catch (e) {
-        return NextResponse.json({ status: false, message: "Error fetching notifications", error: "Error fetching notifications" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Erro ao carregar notificações", error: "Erro ao carregar notificações" }, { status: 500 });
     }
 }
 
 export async function POST(req: Request) {
     const session = await auth();
-    if (!session?.user?.id) return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+    if (!session?.user?.id) return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
 
     // Only SUPERADMIN can send global notifications
     // But system might trigger it too. For now check role.
     const user = await prisma.user.findUnique({ where: { id: session.user.id } });
     if (user?.role !== "SUPERADMIN") {
-        return NextResponse.json({ status: false, message: "Forbidden: Only Superadmin can send notifications", error: "Forbidden" }, { status: 403 });
+        return NextResponse.json({ status: false, message: "Forbidden: Only Superadmin can send notifications", error: "Acesso negado" }, { status: 403 });
     }
 
     try {
@@ -97,6 +97,6 @@ export async function POST(req: Request) {
 
     } catch (e) {
         console.error(e);
-        return NextResponse.json({ status: false, message: "Error creating notification", error: "Error creating notification" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Erro ao criar notificação", error: "Erro ao criar notificação" }, { status: 500 });
     }
 }

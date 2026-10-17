@@ -10,7 +10,7 @@ export async function POST(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const resolvedParams = await params;
@@ -20,7 +20,7 @@ export async function POST(
         // Verify access
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         // Validate Action
@@ -64,7 +64,8 @@ export async function POST(
                 break;
         }
 
-        return NextResponse.json({ status: true, message: `Session ${action}ed successfully` });
+        const results: Record<string, string> = { start: "Sessão iniciada", stop: "Sessão parada", restart: "Sessão reiniciada", logout: "Sessão desconectada", pair: "Código de conexão gerado" };
+        return NextResponse.json({ status: true, message: results[action] });
 
     } catch (error) {
         console.error("Session action error:", error);

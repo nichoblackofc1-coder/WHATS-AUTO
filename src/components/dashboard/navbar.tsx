@@ -1,5 +1,6 @@
 "use client";
 
+import { createRealtimeSocket, usesPolling } from '@/lib/realtime-client';
 import { useState, useEffect } from "react";
 import { MobileNav } from "@/components/dashboard/mobile-nav";
 import { SessionSelector } from "@/components/dashboard/session-selector";
@@ -9,9 +10,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Bell, Inbox, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import { io, Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 
 interface NavbarProps {
     appName?: string;
@@ -45,17 +47,18 @@ export function Navbar({ appName }: NavbarProps) {
                 setUnreadCount(items.filter((n: Notification) => !n.read).length);
             }
         } catch (e) {
-            console.error("Failed to fetch notifications");
+            console.error("Não foi possível carregar notificações");
         }
     };
 
     useEffect(() => {
         // Initial fetch
         fetchNotifications();
+        const refreshTimer = setInterval(() => { if (!document.hidden) fetchNotifications(); }, 15000);
 
         // Setup Socket.IO connection
         if (session?.user?.id) {
-            const socketInstance = io({
+            const socketInstance = createRealtimeSocket({
                 path: "/api/socket/io",
             });
 
@@ -85,9 +88,11 @@ export function Navbar({ appName }: NavbarProps) {
             setSocket(socketInstance);
 
             return () => {
+                clearInterval(refreshTimer);
                 socketInstance.disconnect();
             };
         }
+        return () => clearInterval(refreshTimer);
     }, [session?.user?.id]);
 
     const markAsRead = async (id?: string) => {
@@ -108,7 +113,7 @@ export function Navbar({ appName }: NavbarProps) {
                 }
             }
         } catch (e) {
-            console.error("Failed to mark read");
+            console.error("Não foi possível marcar como lida");
         }
     };
 
@@ -123,11 +128,11 @@ export function Navbar({ appName }: NavbarProps) {
                     const notification = notifications.find(n => n.id === id);
                     return notification && !notification.read ? Math.max(0, prev - 1) : prev;
                 });
-                toast.success("Notification deleted");
+                toast.success("Notificação excluída");
             }
         } catch (e) {
-            console.error("Failed to delete notification");
-            toast.error("Failed to delete notification");
+            console.error("Não foi possível excluir notificação");
+            toast.error("Não foi possível excluir notificação");
         }
     };
 
@@ -160,18 +165,18 @@ export function Navbar({ appName }: NavbarProps) {
                     <PopoverContent className="w-80 p-0 rounded-2xl border border-border/50 shadow-2xl glass-panel" align="end">
                         <div className="p-4 border-b border-border/50 flex justify-between items-center bg-background/50">
                             <div>
-                                <h4 className="font-semibold leading-none text-foreground">Notifications</h4>
+                                <h4 className="font-semibold leading-none text-foreground">Notificações</h4>
                                 <p className="text-xs text-muted-foreground mt-1">
-                                    {unreadCount > 0 ? `You have ${unreadCount} unread updates.` : "No new notifications."}
+                                    {unreadCount > 0 ? `You have ${unreadCount} unread updates.` : "Nenhuma notificação nova."}
                                 </p>
                             </div>
                             <div className="flex items-center gap-1">
                                 <Button variant="ghost" size="sm" className="h-auto py-1 px-2 text-xs" onClick={() => { router.push("/dashboard/inbox"); setIsOpen(false); }}>
-                                    See all
+                                    Ver todos
                                 </Button>
                                 {unreadCount > 0 && (
                                     <Button variant="ghost" size="sm" onClick={() => markAsRead()} className="h-auto py-1 px-2 text-xs">
-                                        Mark all read
+                                        Marcar todas como lidas
                                     </Button>
                                 )}
                             </div>
@@ -182,8 +187,8 @@ export function Navbar({ appName }: NavbarProps) {
                                     <div className="bg-slate-100 p-3 rounded-full mb-3">
                                         <Inbox className="h-6 w-6 text-slate-400" />
                                     </div>
-                                    <p className="text-sm font-medium">No new notifications</p>
-                                    <p className="text-xs text-muted-foreground max-w-[180px]">We'll notify you when something important arrives.</p>
+                                    <p className="text-sm font-medium">Nenhuma notificação nova</p>
+                                    <p className="text-xs text-muted-foreground max-w-[180px]">Avisaremos quando houver uma atualização importante.</p>
                                 </div>
                             ) : (
                                 <div className="divide-y">
@@ -204,7 +209,7 @@ export function Navbar({ appName }: NavbarProps) {
                                                         {n.message}
                                                     </p>
                                                     <p className="text-[10px] text-slate-400">
-                                                        {formatDistanceToNow(new Date(n.createdAt), { addSuffix: true })}
+                                                        {formatDistanceToNow(new Date(n.createdAt), { addSuffix: true, locale: ptBR })}
                                                     </p>
                                                 </div>
                                                 <div className="flex items-center gap-2">

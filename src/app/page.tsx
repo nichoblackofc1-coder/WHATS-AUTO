@@ -5,17 +5,17 @@ import pkg from "../../package.json";
 
 export const metadata = {
   title: "WA-AKG | Premium WhatsApp Gateway",
-  description: "A powerful, self-hosted dashboard to manage your WhatsApp sessions, schedules, and auto-replies. Built for modern businesses.",
+  description: "Um painel para gerenciar suas sessões do WhatsApp, agendamentos e respostas automáticas.",
   openGraph: {
     title: "WA-AKG | Premium WhatsApp Gateway",
-    description: "Self-hosted WhatsApp Gateway with Multi-device support, Auto-replies, and API integration.",
+    description: "Central do WhatsApp com vários dispositivos, respostas automáticas e integração por API.",
     type: "website",
     url: process.env.NEXT_PUBLIC_APP_URL || "https://wa-akg.app",
   },
   twitter: {
     card: "summary_large_image",
     title: "WA-AKG | Premium WhatsApp Gateway",
-    description: "Self-hosted WhatsApp Gateway with Multi-device support, Auto-replies, and API integration.",
+    description: "Central do WhatsApp com vários dispositivos, respostas automáticas e integração por API.",
   },
 };
 
@@ -36,8 +36,8 @@ export default function Home() {
           </div>
 
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Features</Link>
-            <Link href="/docs" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">API & Docs</Link>
+            <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Recursos</Link>
+            <Link href="/docs" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">API e documentação</Link>
             <Link href="https://github.com/mrifqidaffaaditya/WA-AKG" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               <Github className="h-4 w-4" /> GitHub
             </Link>
@@ -46,12 +46,12 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <Link href="/auth/login">
               <Button size="sm" className="rounded-full px-6 bg-foreground text-background hover:bg-foreground/90 shadow-xl shadow-foreground/10 hidden sm:flex">
-                Sign In
+                Entrar
               </Button>
             </Link>
             <Link href="/dashboard" className="sm:hidden">
               <Button size="sm" variant="glass" className="rounded-full px-4">
-                Dashboard
+                Painel
               </Button>
             </Link>
           </div>
@@ -73,30 +73,30 @@ export default function Home() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                Release {version} is live
+                Versão {version} está disponível
                 <ChevronRight className="h-4 w-4 ml-1 opacity-50" />
               </div>
 
               <div className="space-y-6">
                 <h1 className="text-5xl font-extrabold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl w-full">
-                  <span className="block text-foreground pb-2">Next-Gen WhatsApp</span>
-                  <span className="text-gradient block pb-2">Gateway Engine.</span>
+                  <span className="block text-foreground pb-2">WhatsApp para o seu negócio</span>
+                  <span className="text-gradient block pb-2">Central de automação.</span>
                 </h1>
                 <p className="mx-auto max-w-[42rem] text-muted-foreground text-lg sm:text-xl leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-150">
-                  The complete open-source solution for managing WhatsApp sessions, orchestrating smart auto-replies, and integrating via a robust REST API.
+                  Uma solução de código aberto para gerenciar sessões do WhatsApp, automatizar respostas e integrar sistemas pela API REST.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-5 pt-4 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300 w-full sm:w-auto px-4">
                 <Link href="/dashboard" className="w-full sm:w-auto">
                   <Button size="lg" className="w-full h-14 px-8 rounded-full text-base sm:text-lg shadow-2xl shadow-primary/30 hover:shadow-primary/40 group">
-                    Enter Dashboard
+                    Entrar no painel
                     <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </Link>
                 <Link href="/docs" className="w-full sm:w-auto">
                   <Button size="lg" variant="glass" className="w-full h-14 px-8 rounded-full text-base sm:text-lg transition-all hover:bg-white/40 dark:hover:bg-white/10">
-                    Read Documentation
+                    Ler documentação
                   </Button>
                 </Link>
               </div>
@@ -110,42 +110,42 @@ export default function Home() {
           <div className="absolute inset-0 bg-slate-50/50 dark:bg-slate-900/30 border-y border-border" />
           <div className="container px-4 md:px-6 relative z-10">
             <div className="text-center mb-20">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-5xl mb-6 text-foreground">Engineered for Scale</h2>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-5xl mb-6 text-foreground">Preparado para crescer</h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Carefully crafted features packaged in a gorgeous, performant interface.
+                Recursos para o seu dia a dia em uma interface simples e rápida.
               </p>
             </div>
 
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
               <FeatureCard
                 icon={<Zap className="h-6 w-6 text-amber-500" />}
-                title="Instant API & Webhooks"
-                description="Send messages, media, and handle incoming events instantly via our robust REST API."
+                title="API e webhooks"
+                description="Envie mensagens e mídias e receba eventos pela API REST."
               />
               <FeatureCard
                 icon={<MessageSquare className="h-6 w-6 text-blue-500" />}
-                title="Smart Auto Replies"
-                description="Set up intelligent, keyword-based auto-replies to automate customer interactions 24/7."
+                title="Respostas automáticas"
+                description="Configure respostas por palavra-chave para automatizar o atendimento."
               />
               <FeatureCard
                 icon={<Clock className="h-6 w-6 text-purple-500" />}
-                title="Precision Scheduler"
-                description="Schedule targeted messages for future delivery. Perfect for campaigns and reminders."
+                title="Agendamentos precisos"
+                description="Agende mensagens para campanhas e lembretes."
               />
               <FeatureCard
                 icon={<Shield className="h-6 w-6 text-emerald-500" />}
-                title="Secure & Private"
-                description="Self-hosted architecture guarantees your data and sessions stay entirely under your control."
+                title="Segurança e privacidade"
+                description="Hospede o sistema e mantenha o controle dos seus dados e sessões."
               />
               <FeatureCard
                 icon={<Code className="h-6 w-6 text-rose-500" />}
-                title="Developer Experience"
-                description="Built on TypeScript with comprehensive Swagger documentation and strict typing."
+                title="Recursos para desenvolvedores"
+                description="Desenvolvido em TypeScript com documentação da API no Swagger."
               />
               <FeatureCard
                 icon={<Globe className="h-6 w-6 text-cyan-500" />}
-                title="Multi-Session Mastery"
-                description="Connect, monitor, and control multiple distinct WhatsApp numbers from one unified dashboard."
+                title="Várias sessões em um só lugar"
+                description="Conecte, acompanhe e gerencie vários números do WhatsApp em um único painel."
               />
             </div>
           </div>
@@ -154,7 +154,7 @@ export default function Home() {
         {/* Tech Stack */}
         <section className="py-24 relative overflow-hidden">
           <div className="container px-4 md:px-6 text-center">
-            <p className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-12">Built with Industry Standards</p>
+            <p className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-12">Tecnologias consolidadas</p>
             <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-60 hover:opacity-100 transition-opacity duration-500">
               <span className="text-xl md:text-2xl font-bold flex items-center gap-3 text-foreground tracking-tight"><div className="h-3 w-3 rounded-full bg-foreground shadow-[0_0_10px_currentColor]"></div>Next.js</span>
               <span className="text-xl md:text-2xl font-bold flex items-center gap-3 text-foreground tracking-tight"><div className="h-3 w-3 rounded-full bg-blue-500 shadow-[0_0_10px_currentColor]"></div>TypeScript</span>
@@ -175,12 +175,12 @@ export default function Home() {
               <span className="text-xl font-bold text-foreground">WA-AKG</span>
             </div>
             <div className="flex gap-8 text-sm font-medium">
-              <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
-              <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Terms</Link>
+              <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacidade</Link>
+              <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Termos</Link>
               <Link href="https://github.com/mrifqidaffaaditya/WA-AKG" className="text-muted-foreground hover:text-foreground transition-colors">GitHub</Link>
             </div>
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} WA-AKG. Released under MIT.
+              © {new Date().getFullYear()} WA-AKG. Distribuído sob a licença MIT.
             </p>
           </div>
         </div>

@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
     try {
         const auth = await getAuthenticatedUser(req);
         if (!auth) {
-            return NextResponse.json({ status: false, message: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado" }, { status: 401 });
         }
 
         // Global monitor needs SUPERADMIN

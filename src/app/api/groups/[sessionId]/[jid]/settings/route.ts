@@ -10,7 +10,7 @@ export async function PUT(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId, jid } = await params;
@@ -25,15 +25,15 @@ export async function PUT(
         // Valid settings: 'announcement' (only admins can send messages), 'locked' (only admins can edit group info), 'not_announcement', 'unlocked'
         const validSettings = ['announcement', 'not_announcement', 'locked', 'unlocked'];
         if (!validSettings.includes(setting)) {
-            return NextResponse.json({ 
-                error: `Invalid setting. Must be one of: ${validSettings.join(', ')}` 
+            return NextResponse.json({
+                error: `Invalid setting. Must be one of: ${validSettings.join(', ')}`
             }, { status: 400 });
         }
 
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -44,7 +44,7 @@ export async function PUT(
         // Update group setting
         await instance.socket.groupSettingUpdate(decodedJid, setting as any);
 
-        return NextResponse.json({ 
+        return NextResponse.json({
             success: true,
             message: `Group setting '${setting}' updated successfully`,
             setting
@@ -52,11 +52,11 @@ export async function PUT(
 
     } catch (error: any) {
         console.error("Update group settings error:", error);
-        
+
         if (error.message?.includes("not-admin") || error.message?.includes("forbidden")) {
             return NextResponse.json({ status: false, message: "Bot must be admin to update group settings", error: "Bot must be admin to update group settings" }, { status: 403 });
         }
-        
+
         return NextResponse.json({ status: false, message: "Failed to update group settings", error: "Failed to update group settings" }, { status: 500 });
     }
 }

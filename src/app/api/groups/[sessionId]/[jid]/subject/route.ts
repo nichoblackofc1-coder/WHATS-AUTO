@@ -10,7 +10,7 @@ export async function PUT(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId, jid } = await params;
@@ -29,7 +29,7 @@ export async function PUT(
         // Check if user can access this session
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -40,20 +40,20 @@ export async function PUT(
         // Update group subject
         await instance.socket.groupUpdateSubject(decodedJid, subject);
 
-        return NextResponse.json({ 
-            success: true, 
+        return NextResponse.json({
+            success: true,
             message: "Group subject updated successfully",
-            subject 
+            subject
         });
 
     } catch (error: any) {
         console.error("Update group subject error:", error);
-        
+
         // Handle specific errors
         if (error.message?.includes("not-admin") || error.message?.includes("forbidden")) {
             return NextResponse.json({ status: false, message: "Bot must be admin to update group subject", error: "Bot must be admin to update group subject" }, { status: 403 });
         }
-        
+
         return NextResponse.json({ status: false, message: "Failed to update group subject", error: "Failed to update group subject" }, { status: 500 });
     }
 }

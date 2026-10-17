@@ -33,7 +33,7 @@ export interface TocSection {
 }
 
 export default async function PublicDocsPage() {
-    const filePath = path.join(process.cwd(), 'docs', 'API_DOCUMENTATION.md');
+    const filePath = path.join(process.cwd(), 'docs', 'GUIA_PT_BR.md');
     const packagePath = path.join(process.cwd(), 'package.json');
     let content = '';
     let version = 'v1.0.0';
@@ -45,7 +45,7 @@ export default async function PublicDocsPage() {
         const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
         version = `v${packageJson.version}`;
     } catch (err) {
-        content = '# Error\n\nCould not load documentation file.';
+        content = '# Erro\n\nNão foi possível carregar a documentação.';
         console.error("Error loading docs:", err);
     }
 
@@ -106,7 +106,7 @@ export default async function PublicDocsPage() {
                             href="/dashboard"
                             className="text-sm font-medium px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-all shadow-md hover:shadow-lg"
                         >
-                            Dashboard
+                            Painel
                         </Link>
                     </div>
                 </div>

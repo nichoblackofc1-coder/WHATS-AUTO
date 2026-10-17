@@ -10,7 +10,7 @@ export async function GET(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId } = await params;
@@ -18,7 +18,7 @@ export async function GET(
         // Verify access
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden - Cannot access this session", error: "Forbidden - Cannot access this session" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Você não tem acesso a esta sessão", error: "Você não tem acesso a esta sessão" }, { status: 403 });
         }
 
         // Get internal ID
@@ -28,7 +28,7 @@ export async function GET(
         });
 
         if (!session) {
-            return NextResponse.json({ status: false, message: "Session not found", error: "Session not found" }, { status: 404 });
+            return NextResponse.json({ status: false, message: "Sessão não encontrada", error: "Sessão não encontrada" }, { status: 404 });
         }
 
         const groups = await prisma.group.findMany({
@@ -39,6 +39,6 @@ export async function GET(
         return NextResponse.json({ status: true, message: "Groups retrieved successfully", data: groups });
     } catch (error) {
         console.error("Get groups error:", error);
-        return NextResponse.json({ status: false, message: "Failed to fetch groups", error: "Failed to fetch groups" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível carregar grupos", error: "Não foi possível carregar grupos" }, { status: 500 });
     }
 }

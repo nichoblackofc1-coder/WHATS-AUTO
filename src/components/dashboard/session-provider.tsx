@@ -48,13 +48,17 @@ export function SessionProvider({ children }: { children: ReactNode }) {
                     const first = data[0].sessionId;
                     setSessionIdState(first);
                     setCookie("sessionId", first);
+                    router.refresh();
                 } else {
                     setSessionIdState("");
+                    if (cookieId) { setCookie("sessionId", "", -1); router.refresh(); }
                 }
+            } else {
+                throw new Error("Não foi possível carregar as sessões");
             }
         } catch (error) {
             console.error(error);
-            toast.error("Failed to fetch sessions");
+            toast.error("Não foi possível carregar sessões");
         } finally {
             setLoading(false);
         }

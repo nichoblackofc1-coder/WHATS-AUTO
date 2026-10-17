@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const APP_DESCRIPTION = "Self-hosted WhatsApp Gateway with Multi-device support, Auto-replies, API integration, and session management dashboard.";
+const APP_DESCRIPTION = "Central do WhatsApp com vários dispositivos, respostas automáticas, API e gerenciamento de sessões.";
 
 function getAppUrl(): URL {
   const rawUrl =
@@ -45,7 +45,7 @@ export const viewport: Viewport = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const appName = process.env.APP_NAME || "WA-AKG";
-  const appDefaultTitle = `${appName} | Premium WhatsApp Gateway`;
+  const appDefaultTitle = `${appName} | Central do WhatsApp`;
 
   return {
     metadataBase: appUrlObj,
@@ -79,7 +79,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       type: "website",
-      locale: "en_US",
+      locale: "pt_BR",
       siteName: appName,
       title: appDefaultTitle,
       description: APP_DESCRIPTION,
@@ -107,7 +107,7 @@ export default function RootLayout({
   const allowIndexing = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
 
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="pt-BR" suppressHydrationWarning className="scroll-smooth">
       <head>
         {/* Conditional robots meta (noindex for staging/dev) */}
         {!allowIndexing && <meta name="robots" content="noindex, nofollow" />}

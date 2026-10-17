@@ -18,7 +18,7 @@ export async function POST(
     try {
         const user = await getAuthenticatedUser(request);
         if (!user) {
-            return NextResponse.json({ status: false, message: "Unauthorized", error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({ status: false, message: "Não autenticado", error: "Não autenticado" }, { status: 401 });
         }
 
         const { sessionId } = await params;
@@ -33,7 +33,7 @@ export async function POST(
 
         const canAccess = await canAccessSession(user.id, user.role, sessionId);
         if (!canAccess) {
-            return NextResponse.json({ status: false, message: "Forbidden", error: "Forbidden" }, { status: 403 });
+            return NextResponse.json({ status: false, message: "Acesso negado", error: "Acesso negado" }, { status: 403 });
         }
 
         const instance = waManager.getInstance(sessionId);
@@ -96,13 +96,13 @@ export async function POST(
                     });
                 } catch (e: any) {
                     failed++;
-                    errors.push({ jid, error: e.message || "Unknown error" });
+                    errors.push({ jid, error: e.message || "Erro desconhecido" });
                     console.error(`Failed to send broadcast to ${jid}`, e);
 
                     // Update recipient error in DB
                     await prisma.broadcastRecipient.updateMany({
                         where: { broadcastLogId: broadcastId, jid },
-                        data: { status: "failed", error: e.message || "Unknown error" }
+                        data: { status: "failed", error: e.message || "Erro desconhecido" }
                     });
                 }
 
@@ -165,6 +165,6 @@ export async function POST(
 
     } catch (e) {
         console.error("Broadcast error", e);
-        return NextResponse.json({ status: false, message: "Failed to start broadcast", error: "Failed to start broadcast" }, { status: 500 });
+        return NextResponse.json({ status: false, message: "Não foi possível iniciar o disparo", error: "Não foi possível iniciar o disparo" }, { status: 500 });
     }
 }
