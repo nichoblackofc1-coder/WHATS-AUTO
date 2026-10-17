@@ -16,7 +16,23 @@ const geistMono = Geist_Mono({
 });
 
 const APP_DESCRIPTION = "Self-hosted WhatsApp Gateway with Multi-device support, Auto-replies, API integration, and session management dashboard.";
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://wa-akg.app";
+
+function getAppUrl(): URL {
+  const rawUrl =
+    process.env.NEXT_PUBLIC_APP_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://wa-akg.app");
+  try {
+    const formatted = rawUrl.startsWith("http://") || rawUrl.startsWith("https://")
+      ? rawUrl
+      : `https://${rawUrl}`;
+    return new URL(formatted);
+  } catch {
+    return new URL("https://wa-akg.app");
+  }
+}
+
+const appUrlObj = getAppUrl();
+const APP_URL = appUrlObj.toString();
 
 export const viewport: Viewport = {
   themeColor: [
@@ -28,19 +44,11 @@ export const viewport: Viewport = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  let appName = "WA-AKG";
-  try {
-    // @ts-ignore
-    const config = await prisma.systemConfig.findUnique({ where: { id: "default" } });
-    if (config?.appName) appName = config.appName;
-  } catch (e) {
-    console.error("Failed to fetch system config for metadata:", e);
-  }
-
+  const appName = process.env.APP_NAME || "WA-AKG";
   const appDefaultTitle = `${appName} | Premium WhatsApp Gateway`;
 
   return {
-    metadataBase: new URL(APP_URL),
+    metadataBase: appUrlObj,
     title: {
       default: appDefaultTitle,
       template: `%s | ${appName}`,

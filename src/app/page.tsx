@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Bot, Github, Zap, Shield, Globe, MessageSquare, Clock, Code, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import fs from "fs";
-import path from "path";
+import pkg from "../../package.json";
 
 export const metadata = {
   title: "WA-AKG | Premium WhatsApp Gateway",
@@ -21,14 +20,7 @@ export const metadata = {
 };
 
 export default function Home() {
-  const packagePath = path.join(process.cwd(), "package.json");
-  let version = "v1.2.0";
-  try {
-    const packageJson = JSON.parse(fs.readFileSync(packagePath, "utf8"));
-    version = `v${packageJson.version}`;
-  } catch (error) {
-    console.error("Failed to read package.json", error);
-  }
+  const version = pkg?.version ? `v${pkg.version}` : "v1.6.4";
 
   return (
     <div className="flex min-h-screen flex-col overflow-hidden selection:bg-primary/30 selection:text-primary-foreground">

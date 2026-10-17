@@ -36,5 +36,6 @@ export const authConfig = {
     session: {
         strategy: 'jwt'
     },
+    secret: process.env.AUTH_SECRET || "yxxogJBzWHtO2HgabR5JAb02jt7lB6YJtmu+0w8FfGw=",
     trustHost: true,
 } satisfies NextAuthConfig;
