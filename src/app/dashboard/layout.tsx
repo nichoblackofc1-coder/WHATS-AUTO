@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { Navbar } from "@/components/dashboard/navbar";
 import { SessionProvider } from "@/components/dashboard/session-provider";
 import { SidebarProvider } from "@/components/dashboard/sidebar-context";
@@ -9,17 +10,26 @@ import { prisma } from "@/lib/prisma";
 import { Toaster } from "sonner";
 import pkg from "../../../package.json";
 
-
 export default async function DashboardLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
     const session = await auth();
-    // @ts-ignore
-    const systemConfig = await prisma.systemConfig.findUnique({ where: { id: "default" } });
-    const appName = systemConfig?.appName || "WA-AKG";
-    const registrationEnabled = systemConfig?.enableRegistration ?? true;
+    if (!session?.user) {
+        redirect("/auth/login");
+    }
+
+    let appName = process.env.APP_NAME || "WA-AKG";
+    let registrationEnabled = true;
+    try {
+        // @ts-ignore
+        const systemConfig = await prisma.systemConfig.findUnique({ where: { id: "default" } });
+        if (systemConfig?.appName) appName = systemConfig.appName;
+        if (typeof systemConfig?.enableRegistration === "boolean") registrationEnabled = systemConfig.enableRegistration;
+    } catch {
+        // fallback to default
+    }
 
     return (
         <SessionProvider>
