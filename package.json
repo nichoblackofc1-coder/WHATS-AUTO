@@ -5,13 +5,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "npx tsx src/server/index.ts",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "NODE_ENV=production npx tsx src/server/index.ts",
     "lint": "eslint",
     "db:push": "prisma db push && prisma generate",
     "db:studio": "prisma studio",
     "make-admin": "node scripts/setup-admin.js",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package && prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
