@@ -51,10 +51,16 @@ app.prepare().then(() => {
 
   // Initialize WhatsApp Manager
   waManager.setup(io);
-  waManager.loadSessions();
+  waManager.loadSessions().catch(err => {
+    logger.warn("Manager", "Database offline, skipping session preloading: " + (err?.message || err));
+  });
 
   // Start Scheduler
-  import("../modules/whatsapp/scheduler").then(m => m.startScheduler());
+  import("../modules/whatsapp/scheduler")
+    .then(m => m.startScheduler())
+    .catch(err => {
+      logger.warn("Scheduler", "Database offline, skipping scheduler startup: " + (err?.message || err));
+    });
 
   // Cloudflare 520 Fix: increase keep-alive timeout so Node doesn't kill idle connections that Cloudflare expects to reuse
   // See: https://github.com/vercel/next.js/issues/48962
